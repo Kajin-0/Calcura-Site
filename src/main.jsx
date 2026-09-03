@@ -270,10 +270,10 @@ const featureCards = [
 ];
 
 const plans = [
-  { name: 'Tutor', seats: '10 seats', price: '$39', period: '/mo', text: 'For independent tutors and very small groups.' },
-  { name: 'Small Team', seats: '30 seats', price: '$79', period: '/mo', text: 'For tutoring centers and compact programs.', featured: true },
-  { name: 'Classroom', seats: '100 seats', price: '$199', period: '/mo', text: 'For course sections and larger programs.' },
-  { name: 'Institution', seats: '300–1,000+', price: 'Custom', period: '', text: 'Annual plans for departments, campuses, and larger deployments.' },
+  { name: 'Tutor', seats: '10 seats', price: '$39', period: '/ month', text: 'For independent tutors and very small groups.' },
+  { name: 'Small Team', seats: '30 seats', price: '$79', period: '/ month', text: 'For tutoring centers and compact programs.', featured: true },
+  { name: 'Classroom', seats: '100 seats', price: '$199', period: '/ month', text: 'For course sections and larger programs.' },
+  { name: 'Institution', seats: '300–1,000+ seats', price: 'Custom', period: '', text: 'Annual plans for departments, campuses, and larger deployments.' },
 ];
 
 function App() {
@@ -441,30 +441,37 @@ function App() {
           </div>
         </section>
 
-        <section className="pricing-compact" id="pricing">
+        <section className="section pricing-section" id="pricing">
           <div className="shell">
-            <div className="pricing-compact-head">
-              <div className="eyebrow">PILOT PRICING</div>
-              <h2>Simple seat plans.</h2>
+            <div className="section-heading centered pricing-heading">
+              <div className="eyebrow">EARLY-ACCESS CLASSROOM PRICING</div>
+              <h2>Simple seat tiers. Free app for everyone else.</h2>
+              <p>These are proposed founding-pilot tiers and can be adjusted before payments are connected.</p>
             </div>
-
-            <div className="pricing-compact-grid">
+            <div className="pricing-grid">
               {plans.map((plan) => (
-                <article className={`pricing-plan ${plan.featured ? 'featured' : ''}`} key={plan.name}>
+                <article className={`price-card ${plan.featured ? 'featured' : ''}`} key={plan.name}>
+                  {plan.featured && <span className="price-badge">GOOD FOR SMALL CENTERS</span>}
                   <div>
-                    <span className="pricing-plan-name">{plan.name}</span>
-                    <strong className="pricing-plan-seats">{plan.seats}</strong>
+                    <span className="plan-name">{plan.name}</span>
+                    <strong className="seat-count">{plan.seats}</strong>
                   </div>
-                  <div className="pricing-plan-price">
-                    <strong>{plan.price}</strong>
-                    {plan.period && <span>{plan.period}</span>}
+                  <div className="price"><strong>{plan.price}</strong><span>{plan.period}</span></div>
+                  <p>{plan.text}</p>
+                  <div className="price-features">
+                    <span><Check /> Instructor web portal</span>
+                    <span><Check /> Managed classroom seats</span>
+                    <span><Check /> Shared progress analytics</span>
                   </div>
-                  <a href="#pilot">Pilot interest <Arrow /></a>
+                  <a href="#pilot" className={`button ${plan.featured ? '' : 'button-secondary'} full-width`}>
+                    Request pilot <Arrow />
+                  </a>
                 </article>
               ))}
             </div>
-
-            <p className="pricing-compact-note">Need 300, 500, 1,000, or unlimited seats? Quote the deployment.</p>
+            <p className="pricing-footnote">
+              Need 300, 500, 1,000, or unlimited seats? Institutional plans can be quoted around the deployment instead of forcing a fixed public tier.
+            </p>
           </div>
         </section>
 
