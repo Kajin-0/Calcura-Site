@@ -50,47 +50,17 @@ const Logo = () => (
 
 function AppPreview() {
   return (
-    <div className="hero-visual" aria-label="Illustration of the Calcura app">
+    <div className="hero-visual" aria-label="Calcura Free Play">
       <div className="preview-orbit preview-orbit-one" />
       <div className="preview-orbit preview-orbit-two" />
 
-      <div className="phone-shell">
+      <div className="phone-shell phone-shell-real">
         <div className="phone-camera" />
-        <div className="phone-screen">
-          <div className="app-topbar">
-            <div>
-              <span className="eyebrow-mini">FREE PLAY</span>
-              <strong>Integration by Parts</strong>
-            </div>
-            <div className="app-actions">
-              <span>▤</span><span>⌁</span><span>↻</span>
-            </div>
-          </div>
-
-          <div className="app-label">EXPRESSION</div>
-          <div className="math-card">
-            <span className="math-large">∫</span>
-            <span className="math-expression"><sup>1</sup>⁄<sub>4</sub> x sin(x) dx</span>
-          </div>
-
-          <div className="app-graph-card">
-            <div className="graph-title-row">
-              <div>
-                <strong>Integrand graph</strong>
-                <span>Original problem integrand</span>
-              </div>
-              <span>×</span>
-            </div>
-            <div className="mini-equation">¼ x sin(x)</div>
-            <div className="mini-graph">
-              <span className="axis axis-x" />
-              <span className="axis axis-y" />
-              <svg viewBox="0 0 320 130" preserveAspectRatio="none" aria-hidden="true">
-                <path d="M0,90 C25,22 47,105 72,76 C94,49 110,91 134,70 C155,52 178,88 198,66 C221,39 236,110 259,75 C279,40 296,21 320,94" fill="none" stroke="currentColor" strokeWidth="2.5"/>
-              </svg>
-            </div>
-          </div>
-        </div>
+        <img
+          className="phone-screen-image"
+          src="./screens/freeplay.webp"
+          alt="Calcura Free Play integration problem"
+        />
       </div>
 
       <div className="floating-progress">
@@ -106,7 +76,7 @@ function AppPreview() {
           <div><span>Practice</span><strong>8 days</strong></div>
         </div>
         <div className="progress-bar"><span /></div>
-        <small>Private progress stays on the device unless a student joins a class.</small>
+        <small>Progress stays private on the device.</small>
       </div>
     </div>
   );
@@ -114,39 +84,22 @@ function AppPreview() {
 
 function GuidedPreview() {
   return (
-    <div className="product-preview guided-preview">
-      <div className="guided-head">
-        <div><span>LINEAR U-SUB</span><strong>Step 1 <em>/ 5</em></strong></div>
-        <span>▤ &nbsp; ↻ &nbsp; ×</span>
-      </div>
-      <div className="guided-progress"><span /></div>
-      <div className="guided-equation">∫ e<sup>4x − 1</sup> dx</div>
-      <div className="guided-instruction">Find the inner function <i>u</i>.</div>
-      <div className="guided-answer">Enter your answer…</div>
-      <div className="keyboard-row">
-        <span>x</span><span>f(x)</span><span>u</span><span>dx</span><span>du</span>
-      </div>
+    <div className="product-preview real-shot-preview">
+      <img
+        src="./screens/guided.webp"
+        alt="Calcura Guided Mode showing a linear u-substitution step"
+      />
     </div>
   );
 }
 
 function GraphPreview() {
   return (
-    <div className="product-preview graph-preview">
-      <div className="modal-title">
-        <div><strong>Integrand graph</strong><span>Original problem integrand</span></div>
-        <b>×</b>
-      </div>
-      <div className="formula-chip">¼ x sin(x)</div>
-      <div className="large-graph">
-        <span className="grid-lines" />
-        <span className="axis axis-x" />
-        <span className="axis axis-y" />
-        <svg viewBox="0 0 400 230" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M0,153 C28,31 60,190 95,137 C124,96 153,159 184,127 C216,95 242,170 270,124 C304,69 333,41 400,157" fill="none" stroke="currentColor" strokeWidth="3"/>
-        </svg>
-      </div>
-      <span className="graph-help">Drag to pan. Pinch or scroll to zoom.</span>
+    <div className="product-preview real-shot-preview graph-shot-preview">
+      <img
+        src="./screens/graph.webp"
+        alt="Calcura integrand graph modal"
+      />
     </div>
   );
 }
@@ -245,29 +198,6 @@ function ClassroomPreview() {
   );
 }
 
-const featureCards = [
-  {
-    icon: <StepsIcon />,
-    title: 'Guided solutions',
-    text: 'Work through integration techniques one decision at a time instead of jumping straight to a final answer.',
-  },
-  {
-    icon: <GraphIcon />,
-    title: 'Visualize integrands',
-    text: 'Open an interactive graph directly from a generated problem to connect symbolic work with function behavior.',
-  },
-  {
-    icon: <BookIcon />,
-    title: 'Reference built in',
-    text: 'Keep identities, unit-circle values, logarithms, exponentials, and other essentials available while you practice.',
-  },
-  {
-    icon: <ProgressIcon />,
-    title: 'Meaningful progress',
-    text: 'See completion, first-attempt success, practice consistency, time, attempts, strengths, and recommended focus areas.',
-  },
-];
-
 const plans = [
   { name: 'Tutor', seats: '10 seats', price: '$39', period: '/ month', text: 'For independent tutors and very small groups.' },
   { name: 'Small Team', seats: '30 seats', price: '$79', period: '/ month', text: 'For tutoring centers and compact programs.', featured: true },
@@ -300,8 +230,7 @@ function App() {
             <div className="eyebrow">FREE CALCULUS PRACTICE</div>
             <h1>Practice integrals.<br /><span>Understand every step.</span></h1>
             <p>
-              Calcura is a free calculus practice app built around guided problem solving, varied integral practice,
-              interactive graphs, and private learning progress.
+              Free calculus practice with guided steps, varied integrals, interactive graphs, and private progress tracking.
             </p>
             <div className="hero-actions">
               <a className="button" href="#download">Get Calcura free <Arrow /></a>
@@ -328,8 +257,8 @@ function App() {
         <section className="section shell" id="features">
           <div className="section-heading narrow">
             <div className="eyebrow">BUILT FOR ACTIVE PRACTICE</div>
-            <h2>Everything needed to work the problem—not just look up the answer.</h2>
-            <p>Calcura keeps the learning loop focused: recognize the technique, do the mathematics, check the result, and understand what to practice next.</p>
+            <h2>Work the problem—not just the answer.</h2>
+            <p>Recognize the technique, do the mathematics, check the result, and keep moving.</p>
           </div>
 
           <div className="feature-list">
@@ -337,7 +266,7 @@ function App() {
               <div className="feature-copy">
                 <span className="feature-number">01</span>
                 <h3>Learn the technique step by step.</h3>
-                <p>Guided Mode breaks a solution into explicit mathematical decisions. Students practice the structure of a method instead of memorizing a completed solution.</p>
+                <p>Guided Mode turns a method into a sequence of mathematical decisions.</p>
                 <div className="feature-tag"><StepsIcon /> Guided Mode</div>
               </div>
               <GuidedPreview />
@@ -347,7 +276,7 @@ function App() {
               <div className="feature-copy">
                 <span className="feature-number">02</span>
                 <h3>See what the integrand is doing.</h3>
-                <p>Open an integrand graph from the problem workspace, then pan and zoom without leaving the practice flow.</p>
+                <p>Open the integrand graph, then pan and zoom without leaving the problem.</p>
                 <div className="feature-tag"><GraphIcon /> Interactive graphing</div>
               </div>
               <GraphPreview />
@@ -357,7 +286,7 @@ function App() {
               <div className="feature-copy">
                 <span className="feature-number">03</span>
                 <h3>Keep the right reference close.</h3>
-                <p>Use built-in identities and definitions when needed. The goal is to reduce context switching without turning practice into answer lookup.</p>
+                <p>Keep identities and definitions close without leaving the practice flow.</p>
                 <div className="feature-tag"><BookIcon /> Reference toolkit</div>
               </div>
               <ReferencePreview />
@@ -367,29 +296,11 @@ function App() {
               <div className="feature-copy">
                 <span className="feature-number">04</span>
                 <h3>Track improvement with real practice signals.</h3>
-                <p>Completion rate alone is not enough. Calcura also tracks first-attempt success, answer reveals, attempts, time, practice consistency, and skill-level evidence.</p>
+                <p>Track completion, first-attempt success, attempts, time, consistency, and skill-level evidence.</p>
                 <div className="feature-tag"><ProgressIcon /> Learning Progress</div>
               </div>
               <ProgressPreview />
             </article>
-          </div>
-        </section>
-
-        <section className="section feature-summary">
-          <div className="shell">
-            <div className="section-heading centered">
-              <div className="eyebrow">ONE FOCUSED CALCULUS WORKSPACE</div>
-              <h2>Designed around how integral practice actually happens.</h2>
-            </div>
-            <div className="feature-card-grid">
-              {featureCards.map((feature) => (
-                <article className="feature-card" key={feature.title}>
-                  <span className="feature-card-icon">{feature.icon}</span>
-                  <h3>{feature.title}</h3>
-                  <p>{feature.text}</p>
-                </article>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -401,8 +312,7 @@ function App() {
             </div>
             <div className="free-copy">
               <p>
-                Students can use Calcura independently without buying a subscription or joining an institution.
-                Schools and tutoring organizations pay only when they want managed classes, shared progress, seat controls, and instructor visibility.
+                Students use Calcura free. Schools and tutoring organizations pay only for managed classes, shared progress, seats, and instructor visibility.
               </p>
               <div className="free-points">
                 <span><Check /> Personal practice remains free</span>
@@ -418,23 +328,22 @@ function App() {
             <div className="classroom-top">
               <div className="section-heading classroom-heading">
                 <div className="eyebrow">CALCURA CLASSROOM</div>
-                <h2>A browser-based instructor layer for the free Calcura app.</h2>
+                <h2>A web dashboard for instructors.</h2>
                 <p>
-                  The planned pilot keeps administration on the web. Instructors manage classes and seats from a laptop;
-                  students keep practicing in Calcura and optionally join with a class code.
+                  Instructors manage classes and seats in the browser. Students keep practicing in Calcura and join with a class code.
                 </p>
               </div>
               <div className="pilot-note">
                 <span>PILOT STATUS</span>
                 <strong>Front-end preview</strong>
-                <p>Authentication, cloud sync, billing, and the production instructor backend are the next implementation layer.</p>
+                <p>Authentication, sync, billing, and the production backend come next.</p>
               </div>
             </div>
 
             <div className="classroom-flow">
-              <div><span>1</span><strong>Create a class</strong><p>Instructor signs in on the web and receives a join code.</p></div>
-              <div><span>2</span><strong>Students join</strong><p>Students enter the code in Calcura. One active student uses one seat.</p></div>
-              <div><span>3</span><strong>Progress syncs</strong><p>Instructor sees roster-level and class-level learning metrics.</p></div>
+              <div><span>1</span><strong>Create a class</strong><p>Create a class and get a join code.</p></div>
+              <div><span>2</span><strong>Students join</strong><p>Students enter the code in Calcura.</p></div>
+              <div><span>3</span><strong>Progress syncs</strong><p>See roster and class-level progress.</p></div>
             </div>
 
             <ClassroomPreview />
@@ -455,7 +364,7 @@ function App() {
             <div className="section-heading centered pricing-heading">
               <div className="eyebrow">EARLY-ACCESS CLASSROOM PRICING</div>
               <h2>Simple seat tiers. Free app for everyone else.</h2>
-              <p>These are proposed founding-pilot tiers and can be adjusted before payments are connected.</p>
+              <p>Proposed founding-pilot tiers.</p>
             </div>
             <div className="pricing-grid">
               {plans.map((plan) => (
@@ -490,40 +399,12 @@ function App() {
               <div className="eyebrow light">FOUNDING PILOT</div>
               <h2>Ready for the first instructor and tutoring-center pilots.</h2>
               <p>
-                The public site and classroom product direction are now scaffolded. Before accepting payments, connect a sales email,
-                production authentication, a small backend, and the payment link.
+                Next: connect instructor accounts, sync, billing, and the pilot contact flow.
               </p>
             </div>
             <div className="pilot-actions">
               <a className="button button-white" href="https://github.com/Kajin-0/Calcura" target="_blank" rel="noreferrer">View Calcura on GitHub <Arrow /></a>
               <a className="button button-ghost-light" href="#top">Back to top</a>
-            </div>
-          </div>
-        </section>
-
-        <section className="section faq-section">
-          <div className="shell faq-layout">
-            <div className="section-heading">
-              <div className="eyebrow">FAQ</div>
-              <h2>The model in one page.</h2>
-            </div>
-            <div className="faq-list">
-              <details open>
-                <summary>Does a student have to pay for Calcura?</summary>
-                <p>No. The intended model keeps the personal student app free. Institutional fees apply to managed classroom access and instructor services.</p>
-              </details>
-              <details>
-                <summary>What does a classroom seat represent?</summary>
-                <p>One active student participating in an organization’s managed Calcura environment. A seat is not the same thing as a download or device installation.</p>
-              </details>
-              <details>
-                <summary>Does Calcura stop working if a class license ends?</summary>
-                <p>No. The student keeps the free app and local practice. Only the organization-linked classroom services would end.</p>
-              </details>
-              <details>
-                <summary>Is the instructor portal live?</summary>
-                <p>Not yet. This site includes the front-end product direction and dashboard preview. Authentication, cloud synchronization, billing, and the production backend are intentionally still separate work.</p>
-              </details>
             </div>
           </div>
         </section>
@@ -534,7 +415,7 @@ function App() {
             <div>
               <span className="eyebrow">CALCURA FOR STUDENTS</span>
               <h2>Practice first. Paywalls never.</h2>
-              <p>The download destination can be connected here as soon as the production distribution link is finalized.</p>
+              <p>Production download link will connect here.</p>
             </div>
             <span className="download-status">DOWNLOAD LINK TO CONNECT</span>
           </div>
