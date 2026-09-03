@@ -24,6 +24,20 @@
       .classroom-flow strong {
         margin-top: 0 !important;
       }
+
+      /* Keep the header focused on the two actions that matter. */
+      .site-header nav {
+        display: none !important;
+      }
+
+      .site-header .nav-actions {
+        margin-left: auto;
+        gap: 10px;
+      }
+
+      .site-header .nav-actions .button {
+        white-space: nowrap;
+      }
     </style>
   </head>
   <body>
@@ -43,6 +57,15 @@
               cell.textContent = previewNames[index] ?? 'Student';
             }
           });
+
+        const navActions = document.querySelector('.site-header .nav-actions');
+        if (navActions && navActions.dataset.simplified !== 'true') {
+          navActions.innerHTML = `
+            <a class="button button-secondary button-small" href="#download">Download Calcura</a>
+            <a class="button button-small" href="#pilot">Teacher sign up</a>
+          `;
+          navActions.dataset.simplified = 'true';
+        }
       };
 
       new MutationObserver(cleanProductPage).observe(document.body, {
