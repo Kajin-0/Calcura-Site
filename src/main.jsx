@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
+import './refinements.css';
 
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true">
@@ -201,10 +202,10 @@ function ProgressPreview() {
 
 function ClassroomPreview() {
   const rows = [
-    ['Student 01', '42', '83%', '76%', 'Today'],
-    ['Student 02', '31', '68%', '51%', 'Today'],
-    ['Student 03', '58', '91%', '84%', 'Yesterday'],
-    ['Student 04', '26', '73%', '62%', '2 days ago'],
+    ['M. Chen', '42', '83%', '76%', 'Today'],
+    ['J. Rivera', '31', '68%', '51%', 'Today'],
+    ['A. Patel', '58', '91%', '84%', 'Yesterday'],
+    ['S. Brooks', '26', '73%', '62%', '2 days ago'],
   ];
 
   return (
@@ -269,10 +270,10 @@ const featureCards = [
 ];
 
 const plans = [
-  { name: 'Tutor', seats: '10 seats', price: '$39', period: '/ month', text: 'For independent tutors and very small groups.' },
-  { name: 'Small Team', seats: '30 seats', price: '$79', period: '/ month', text: 'For tutoring centers and compact programs.', featured: true },
-  { name: 'Classroom', seats: '100 seats', price: '$199', period: '/ month', text: 'For course sections and larger programs.' },
-  { name: 'Institution', seats: '300–1,000+ seats', price: 'Custom', period: '', text: 'Annual plans for departments, campuses, and larger deployments.' },
+  { name: 'Tutor', seats: '10 seats', price: '$39', period: '/mo', text: 'For independent tutors and very small groups.' },
+  { name: 'Small Team', seats: '30 seats', price: '$79', period: '/mo', text: 'For tutoring centers and compact programs.', featured: true },
+  { name: 'Classroom', seats: '100 seats', price: '$199', period: '/mo', text: 'For course sections and larger programs.' },
+  { name: 'Institution', seats: '300–1,000+', price: 'Custom', period: '', text: 'Annual plans for departments, campuses, and larger deployments.' },
 ];
 
 function App() {
@@ -281,15 +282,9 @@ function App() {
       <header className="site-header">
         <div className="shell nav-shell">
           <Logo />
-          <nav aria-label="Primary navigation">
-            <a href="#features">Features</a>
-            <a href="#free">Free for students</a>
-            <a href="#classroom">Classroom</a>
-            <a href="#pricing">Pricing</a>
-          </nav>
           <div className="nav-actions">
-            <a className="text-link" href="#classroom">Instructor portal</a>
-            <a className="button button-small" href="#download">Get Calcura free <Arrow /></a>
+            <a className="button button-secondary button-small" href="#download">Download Calcura</a>
+            <a className="button button-small" href="#pilot">Instructor Sign In</a>
           </div>
         </div>
       </header>
@@ -335,7 +330,6 @@ function App() {
           <div className="feature-list">
             <article className="feature-row">
               <div className="feature-copy">
-                <span className="feature-number">01</span>
                 <h3>Learn the technique step by step.</h3>
                 <p>Guided Mode breaks a solution into explicit mathematical decisions. Students practice the structure of a method instead of memorizing a completed solution.</p>
                 <div className="feature-tag"><StepsIcon /> Guided Mode</div>
@@ -345,7 +339,6 @@ function App() {
 
             <article className="feature-row reverse">
               <div className="feature-copy">
-                <span className="feature-number">02</span>
                 <h3>See what the integrand is doing.</h3>
                 <p>Open an integrand graph from the problem workspace, then pan and zoom without leaving the practice flow.</p>
                 <div className="feature-tag"><GraphIcon /> Interactive graphing</div>
@@ -355,7 +348,6 @@ function App() {
 
             <article className="feature-row">
               <div className="feature-copy">
-                <span className="feature-number">03</span>
                 <h3>Keep the right reference close.</h3>
                 <p>Use built-in identities and definitions when needed. The goal is to reduce context switching without turning practice into answer lookup.</p>
                 <div className="feature-tag"><BookIcon /> Reference toolkit</div>
@@ -365,7 +357,6 @@ function App() {
 
             <article className="feature-row reverse">
               <div className="feature-copy">
-                <span className="feature-number">04</span>
                 <h3>Track improvement with real practice signals.</h3>
                 <p>Completion rate alone is not enough. Calcura also tracks first-attempt success, answer reveals, attempts, time, practice consistency, and skill-level evidence.</p>
                 <div className="feature-tag"><ProgressIcon /> Learning Progress</div>
@@ -432,9 +423,9 @@ function App() {
             </div>
 
             <div className="classroom-flow">
-              <div><span>1</span><strong>Create a class</strong><p>Instructor signs in on the web and receives a join code.</p></div>
-              <div><span>2</span><strong>Students join</strong><p>Students enter the code in Calcura. One active student uses one seat.</p></div>
-              <div><span>3</span><strong>Progress syncs</strong><p>Instructor sees roster-level and class-level learning metrics.</p></div>
+              <div><strong>Create a class</strong><p>Instructor signs in on the web and receives a join code.</p></div>
+              <div><strong>Students join</strong><p>Students enter the code in Calcura. One active student uses one seat.</p></div>
+              <div><strong>Progress syncs</strong><p>Instructor sees roster-level and class-level learning metrics.</p></div>
             </div>
 
             <ClassroomPreview />
@@ -450,37 +441,30 @@ function App() {
           </div>
         </section>
 
-        <section className="section pricing-section" id="pricing">
+        <section className="pricing-compact" id="pricing">
           <div className="shell">
-            <div className="section-heading centered pricing-heading">
-              <div className="eyebrow">EARLY-ACCESS CLASSROOM PRICING</div>
-              <h2>Simple seat tiers. Free app for everyone else.</h2>
-              <p>These are proposed founding-pilot tiers and can be adjusted before payments are connected.</p>
+            <div className="pricing-compact-head">
+              <div className="eyebrow">PILOT PRICING</div>
+              <h2>Simple seat plans.</h2>
             </div>
-            <div className="pricing-grid">
+
+            <div className="pricing-compact-grid">
               {plans.map((plan) => (
-                <article className={`price-card ${plan.featured ? 'featured' : ''}`} key={plan.name}>
-                  {plan.featured && <span className="price-badge">GOOD FOR SMALL CENTERS</span>}
+                <article className={`pricing-plan ${plan.featured ? 'featured' : ''}`} key={plan.name}>
                   <div>
-                    <span className="plan-name">{plan.name}</span>
-                    <strong className="seat-count">{plan.seats}</strong>
+                    <span className="pricing-plan-name">{plan.name}</span>
+                    <strong className="pricing-plan-seats">{plan.seats}</strong>
                   </div>
-                  <div className="price"><strong>{plan.price}</strong><span>{plan.period}</span></div>
-                  <p>{plan.text}</p>
-                  <div className="price-features">
-                    <span><Check /> Instructor web portal</span>
-                    <span><Check /> Managed classroom seats</span>
-                    <span><Check /> Shared progress analytics</span>
+                  <div className="pricing-plan-price">
+                    <strong>{plan.price}</strong>
+                    {plan.period && <span>{plan.period}</span>}
                   </div>
-                  <a href="#pilot" className={`button ${plan.featured ? '' : 'button-secondary'} full-width`}>
-                    Request pilot <Arrow />
-                  </a>
+                  <a href="#pilot">Pilot interest <Arrow /></a>
                 </article>
               ))}
             </div>
-            <p className="pricing-footnote">
-              Need 300, 500, 1,000, or unlimited seats? Institutional plans can be quoted around the deployment instead of forcing a fixed public tier.
-            </p>
+
+            <p className="pricing-compact-note">Need 300, 500, 1,000, or unlimited seats? Quote the deployment.</p>
           </div>
         </section>
 
@@ -495,7 +479,6 @@ function App() {
               </p>
             </div>
             <div className="pilot-actions">
-              <a className="button button-white" href="https://github.com/Kajin-0/Calcura" target="_blank" rel="noreferrer">View Calcura on GitHub <Arrow /></a>
               <a className="button button-ghost-light" href="#top">Back to top</a>
             </div>
           </div>
@@ -548,7 +531,6 @@ function App() {
           <div>
             <a href="#features">Features</a>
             <a href="#classroom">Classroom</a>
-            <a href="https://github.com/Kajin-0/Calcura" target="_blank" rel="noreferrer">GitHub</a>
           </div>
         </div>
       </footer>
