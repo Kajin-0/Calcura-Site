@@ -30,6 +30,8 @@ npm run build
 npm run preview
 ```
 
+Pull requests run the same production build with a 10-minute timeout.
+
 ## Deployment
 
 `.github/workflows/deploy-pages.yml` builds and deploys `dist/` to GitHub Pages after changes land on `main`.
