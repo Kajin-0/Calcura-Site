@@ -30,18 +30,27 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <script>
-      const removeRepositoryLinks = () => {
+      const cleanProductPage = () => {
         document
           .querySelectorAll('a[href="https://github.com/Kajin-0/Calcura"]')
           .forEach((link) => link.remove());
+
+        const previewNames = ['M. Chen', 'J. Rivera', 'A. Patel', 'S. Brooks'];
+        document
+          .querySelectorAll('.student-table-row span:first-child')
+          .forEach((cell, index) => {
+            if (/^Student\s+\d+$/i.test(cell.textContent.trim())) {
+              cell.textContent = previewNames[index] ?? 'Student';
+            }
+          });
       };
 
-      new MutationObserver(removeRepositoryLinks).observe(document.body, {
+      new MutationObserver(cleanProductPage).observe(document.body, {
         childList: true,
         subtree: true,
       });
 
-      removeRepositoryLinks();
+      cleanProductPage();
     </script>
   </body>
 </html>
