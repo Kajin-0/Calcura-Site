@@ -225,7 +225,7 @@ function ClassroomPreview() {
       </div>
       <div className="dashboard-main">
         <div className="dashboard-title-row">
-          <div><span>CALCURA CLASSROOM</span><h3>Calculus II — Section A</h3></div>
+          <div><span>CALCURA CLASSROOM</span><h3>Calculus II: Section A</h3></div>
           <span className="preview-badge">PORTAL PREVIEW</span>
         </div>
         <div className="dashboard-cards">
@@ -323,7 +323,7 @@ function App() {
         <section className="section shell" id="features">
           <div className="section-heading narrow">
             <div className="eyebrow">BUILT FOR ACTIVE PRACTICE</div>
-            <h2>Everything needed to work the problem—not just look up the answer.</h2>
+            <h2>Everything needed to work the problem, not just look up the answer.</h2>
             <p>Calcura keeps the learning loop focused: recognize the technique, do the mathematics, check the result, and understand what to practice next.</p>
           </div>
 
