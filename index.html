@@ -18,5 +18,19 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      const removeRepositoryLinks = () => {
+        document
+          .querySelectorAll('a[href="https://github.com/Kajin-0/Calcura"]')
+          .forEach((link) => link.remove());
+      };
+
+      new MutationObserver(removeRepositoryLinks).observe(document.body, {
+        childList: true,
+        subtree: true,
+      });
+
+      removeRepositoryLinks();
+    </script>
   </body>
 </html>
