@@ -42,13 +42,12 @@ If GitHub Pages is not already configured for the repository, set **Settings →
 
 The front end intentionally does **not** pretend that infrastructure exists yet. Before the site can accept real instructor customers, connect:
 
-1. a production Calcura download destination;
-2. a sales/pilot contact destination;
-3. instructor authentication;
-4. organization/class/seat backend;
-5. student progress synchronization from Calcura;
-6. payment/billing;
-7. production instructor portal data.
+1. a sales/pilot contact destination;
+2. instructor authentication;
+3. organization/class/seat backend;
+4. student progress synchronization from Calcura;
+5. payment/billing;
+6. production instructor portal data.
 
 The dashboard shown on the marketing page uses clearly labeled demo data.
 

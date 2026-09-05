@@ -3,6 +3,9 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 import './refinements.css';
 
+const ANDROID_DOWNLOAD_URL =
+  'https://github.com/Kajin-0/Calcura-Site/releases/latest/download/Calcura.apk';
+
 const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true">
     <path d="M4 10h11M11 6l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -283,7 +286,7 @@ function App() {
         <div className="shell nav-shell">
           <Logo />
           <div className="nav-actions">
-            <a className="button button-secondary button-small" href="#download">Download Calcura</a>
+            <a className="button button-secondary button-small" href={ANDROID_DOWNLOAD_URL}>Download Calcura</a>
             <a className="button button-small" href="#pilot">Instructor Sign In</a>
           </div>
         </div>
@@ -299,13 +302,13 @@ function App() {
               interactive graphs, and private learning progress.
             </p>
             <div className="hero-actions">
-              <a className="button" href="#download">Get Calcura free <Arrow /></a>
+              <a className="button" href={ANDROID_DOWNLOAD_URL}>Get Calcura free <Arrow /></a>
               <a className="button button-secondary" href="#classroom">Explore Calcura Classroom</a>
             </div>
             <div className="hero-notes">
               <span><Check /> Free for students</span>
               <span><Check /> Offline-first</span>
-              <span><Check /> No account required for personal use</span>
+              <span><Check /> Simple email sign-in</span>
             </div>
           </div>
           <AppPreview />
@@ -524,9 +527,12 @@ function App() {
             <div>
               <span className="eyebrow">CALCURA FOR STUDENTS</span>
               <h2>Practice first. Paywalls never.</h2>
-              <p>The download destination can be connected here as soon as the production distribution link is finalized.</p>
+              <p>Download Calcura for Android directly to your device.</p>
             </div>
-            <span className="download-status">DOWNLOAD LINK TO CONNECT</span>
+            <div>
+              <a className="button" href={ANDROID_DOWNLOAD_URL}>Download for Android</a>
+              <p>Android may ask you to allow installation from your browser.</p>
+            </div>
           </div>
         </section>
       </main>
