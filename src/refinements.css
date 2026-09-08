@@ -7,6 +7,41 @@
   white-space: nowrap;
 }
 
+.install-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 14px;
+  max-width: 540px;
+  margin: 16px 0 0;
+  color: #74869b;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.install-note a {
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.hero-copy > .install-note {
+  margin-top: 16px;
+}
+
+.download-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.download-actions .install-note {
+  max-width: 280px;
+  margin: 4px 0 0;
+}
+
 /* Restore the first tightened pricing design from commit 8ed8c04e. */
 .pricing-section {
   padding: 100px 0 !important;
@@ -183,6 +218,28 @@
   .nav-actions .button-small {
     padding: 0 11px;
     font-size: 12px;
+  }
+
+  .hero-copy > .install-note {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .download-actions {
+    width: 100%;
+    align-items: center;
+  }
+
+  .download-actions .button {
+    width: min(100%, 280px);
+  }
+
+  .download-actions .install-note {
+    max-width: 320px;
+    text-align: center;
+    justify-content: center;
   }
 
   .pricing-section {
