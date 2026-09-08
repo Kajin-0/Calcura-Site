@@ -7,27 +7,87 @@
   white-space: nowrap;
 }
 
-.install-note {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px 14px;
-  max-width: 540px;
-  margin: 16px 0 0;
-  color: #74869b;
-  font-size: 13px;
-  line-height: 1.55;
+.download-chooser {
+  position: relative;
+  display: inline-flex;
 }
 
-.install-note a {
+.download-chooser-panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 40;
+  width: min(300px, calc(100vw - 32px));
+  padding: 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 14px 34px rgba(11, 23, 48, 0.12);
+}
+
+.download-chooser-title {
+  margin: 0 0 10px;
+  color: #5f7696;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.download-chooser-options {
+  display: grid;
+  gap: 8px;
+}
+
+.download-chooser-option {
+  display: block;
+  padding: 12px 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
   color: var(--ink);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: none;
+  transition: background 0.18s ease, border-color 0.18s ease;
 }
 
-.hero-copy > .install-note {
-  margin-top: 16px;
+.download-chooser-option:hover {
+  background: var(--surface-2);
+  border-color: var(--line-strong);
+}
+
+.download-chooser-option strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.download-chooser-option span {
+  display: block;
+  margin-top: 3px;
+  color: #74869b;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.download-chooser-ios-note {
+  margin: 10px 0 0;
+  color: #74869b;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.hero-actions-secondary {
+  margin-top: 10px;
+}
+
+.nav-actions .download-chooser-panel {
+  right: 0;
+  left: auto;
+}
+
+.hero-actions .download-chooser-panel {
+  right: auto;
+  left: 0;
 }
 
 .download-actions {
@@ -35,11 +95,6 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-}
-
-.download-actions .install-note {
-  max-width: 280px;
-  margin: 4px 0 0;
 }
 
 /* Restore the first tightened pricing design from commit 8ed8c04e. */
@@ -220,11 +275,18 @@
     font-size: 12px;
   }
 
-  .hero-copy > .install-note {
+  .hero-actions .download-chooser-panel {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+  }
+
+  .hero-actions-secondary {
     justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+  }
+
+  .hero-actions-secondary .button {
+    width: 100%;
   }
 
   .download-actions {
@@ -234,12 +296,6 @@
 
   .download-actions .button {
     width: min(100%, 280px);
-  }
-
-  .download-actions .install-note {
-    max-width: 320px;
-    text-align: center;
-    justify-content: center;
   }
 
   .pricing-section {

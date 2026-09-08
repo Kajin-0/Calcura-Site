@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 import './refinements.css';
@@ -52,6 +52,76 @@ const Logo = () => (
     <span>calcura</span>
   </a>
 );
+
+function DownloadChooser({ className = '', size = '', variant = 'secondary' }) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
+  const panelId = useId();
+  const triggerId = useId();
+  const variantClass = variant === 'primary' ? 'button' : 'button button-secondary';
+  const sizeClass = size === 'small' ? ' button-small' : '';
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    const handlePointerDown = (event) => {
+      if (rootRef.current && !rootRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('mousedown', handlePointerDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('mousedown', handlePointerDown);
+    };
+  }, [open]);
+
+  return (
+    <div className={`download-chooser${className ? ` ${className}` : ''}`} ref={rootRef}>
+      <button
+        type="button"
+        id={triggerId}
+        className={`${variantClass}${sizeClass}`}
+        aria-expanded={open}
+        aria-controls={panelId}
+        aria-haspopup="dialog"
+        onClick={() => setOpen((value) => !value)}
+      >
+        Download Calcura{variant === 'primary' ? <Arrow /> : null}
+      </button>
+      {open ? (
+        <div
+          id={panelId}
+          role="dialog"
+          aria-labelledby={`${panelId}-title`}
+          className="download-chooser-panel"
+        >
+          <p id={`${panelId}-title`} className="download-chooser-title">Get Calcura</p>
+          <div className="download-chooser-options">
+            <a className="download-chooser-option" href={WEB_APP_URL} onClick={() => setOpen(false)}>
+              <strong>Install Web App</strong>
+              <span>Desktop, iPhone, iPad, Android</span>
+            </a>
+            <a
+              className="download-chooser-option"
+              href={ANDROID_DOWNLOAD_URL}
+              onClick={() => setOpen(false)}
+            >
+              <strong>Download Android APK</strong>
+              <span>Native Android package</span>
+            </a>
+          </div>
+          <p className="download-chooser-ios-note">
+            On iPhone or iPad, open in Safari and choose Add to Home Screen.
+          </p>
+        </div>
+      ) : null}
+    </div>
+  );
+}
 
 function AppPreview() {
   return (
@@ -287,8 +357,8 @@ function App() {
         <div className="shell nav-shell">
           <Logo />
           <div className="nav-actions">
-            <a className="button button-small" href={WEB_APP_URL}>Open Calcura</a>
-            <a className="text-link" href={ANDROID_DOWNLOAD_URL}>Android</a>
+            <a className="button button-small" href={WEB_APP_URL}>Login to Calcura</a>
+            <DownloadChooser size="small" />
             <a className="button button-secondary button-small" href="#pilot">Instructor Sign In</a>
           </div>
         </div>
@@ -304,13 +374,12 @@ function App() {
               interactive graphs, and private learning progress.
             </p>
             <div className="hero-actions">
-              <a className="button" href={WEB_APP_URL}>Open Calcura free <Arrow /></a>
+              <DownloadChooser variant="primary" />
+              <a className="button button-secondary" href={WEB_APP_URL}>Login to Calcura</a>
+            </div>
+            <div className="hero-actions hero-actions-secondary">
               <a className="button button-secondary" href="#classroom">Explore Calcura Classroom</a>
             </div>
-            <p className="install-note">
-              <a href={ANDROID_DOWNLOAD_URL}>Download for Android</a>
-              <span>Install from your browser for an app-like experience.</span>
-            </p>
             <div className="hero-notes">
               <span><Check /> Free for students</span>
               <span><Check /> Offline-first</span>
@@ -533,15 +602,11 @@ function App() {
             <div>
               <span className="eyebrow">CALCURA FOR STUDENTS</span>
               <h2>Practice first. Paywalls never.</h2>
-              <p>Open Calcura in your browser on desktop, Android, iPhone, or iPad.</p>
+              <p>Free calculus practice on desktop, phone, and tablet.</p>
             </div>
             <div className="download-actions">
-              <a className="button" href={WEB_APP_URL}>Open Calcura</a>
-              <a className="button button-secondary" href={ANDROID_DOWNLOAD_URL}>Download for Android</a>
-              <p className="install-note">
-                Install from your browser for an app-like experience.
-                On iPhone or iPad, open Calcura in Safari and choose Add to Home Screen.
-              </p>
+              <DownloadChooser />
+              <a className="button button-secondary" href={WEB_APP_URL}>Login to Calcura</a>
             </div>
           </div>
         </section>
