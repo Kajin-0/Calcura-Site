@@ -53,6 +53,65 @@ const Logo = () => (
   </a>
 );
 
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+function clearLocationHash() {
+  if (!window.location.hash) return;
+  window.history.replaceState(
+    window.history.state,
+    '',
+    `${window.location.pathname}${window.location.search}`,
+  );
+}
+
+function scrollToSection(sectionId) {
+  const target = document.getElementById(sectionId);
+  if (!target) return false;
+  target.scrollIntoView({
+    behavior: prefersReducedMotion() ? 'auto' : 'smooth',
+    block: 'start',
+  });
+  clearLocationHash();
+  return true;
+}
+
+function onSamePageNavClick(event) {
+  if (event.defaultPrevented || event.button !== 0) return;
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const anchor = event.target.closest('a[href^="#"]');
+  if (!anchor) return;
+  const href = anchor.getAttribute('href');
+  if (!href || href === '#') return;
+  const sectionId = decodeURIComponent(href.slice(1));
+  if (!sectionId || !document.getElementById(sectionId)) return;
+  event.preventDefault();
+  scrollToSection(sectionId);
+}
+
+function useSamePageNavigation() {
+  useEffect(() => {
+    document.addEventListener('click', onSamePageNavClick);
+
+    const rawHash = window.location.hash;
+    let frameId = 0;
+    if (rawHash.length > 1) {
+      const sectionId = decodeURIComponent(rawHash.slice(1));
+      frameId = window.requestAnimationFrame(() => {
+        if (!scrollToSection(sectionId)) {
+          clearLocationHash();
+        }
+      });
+    }
+
+    return () => {
+      document.removeEventListener('click', onSamePageNavClick);
+      if (frameId) window.cancelAnimationFrame(frameId);
+    };
+  }, []);
+}
+
 function DownloadChooser({ className = '', size = '', variant = 'secondary', shortLabel = '' }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef(null);
@@ -382,6 +441,8 @@ const plans = [
 ];
 
 function App() {
+  useSamePageNavigation();
+
   return (
     <div id="top">
       <header className="site-header">
