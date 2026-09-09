@@ -73,9 +73,11 @@ function DownloadChooser({ className = '', size = '', variant = 'secondary' }) {
     };
     document.addEventListener('keydown', handleKeyDown);
     document.addEventListener('mousedown', handlePointerDown);
+    document.addEventListener('touchstart', handlePointerDown, { passive: true });
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.removeEventListener('mousedown', handlePointerDown);
+      document.removeEventListener('touchstart', handlePointerDown);
     };
   }, [open]);
 
@@ -357,10 +359,14 @@ function App() {
         <div className="shell nav-shell">
           <Logo />
           <div className="nav-actions">
-            <a className="button button-small" href={WEB_APP_URL}>Login to Calcura</a>
+            <a className="button button-small nav-login" href={WEB_APP_URL}>Login to Calcura</a>
             <DownloadChooser size="small" />
-            <a className="button button-secondary button-small" href="#pilot">Instructor Sign In</a>
+            <a className="button button-secondary button-small nav-instructor" href="#pilot">Instructor Sign In</a>
           </div>
+        </div>
+        <div className="shell mobile-nav-secondary">
+          <a href={WEB_APP_URL}>Login to Calcura</a>
+          <a href="#pilot">Instructor Sign In</a>
         </div>
       </header>
 

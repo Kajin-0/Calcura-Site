@@ -259,54 +259,385 @@
   font-size: 10px;
 }
 
+.mobile-nav-secondary {
+  display: none;
+}
+
+.hero-visual {
+  overflow: hidden;
+}
+
 @media (max-width: 980px) {
   .pricing-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
+@media (max-width: 850px) {
+  .site-header {
+    position: sticky;
+  }
+
+  .hero-visual {
+    overflow: hidden;
+    min-height: min(620px, 92vw);
+  }
+
+  .phone-shell {
+    width: min(360px, 86%);
+  }
+
+  .floating-progress {
+    right: max(4px, 2%);
+    width: min(245px, 72%);
+  }
+}
+
 @media (max-width: 600px) {
+  .nav-shell {
+    min-height: 60px;
+    gap: 12px;
+  }
+
+  .nav-login,
+  .nav-instructor {
+    display: none;
+  }
+
+  .mobile-nav-secondary {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: 8px;
+    padding-bottom: 10px;
+  }
+
+  .mobile-nav-secondary a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 0 10px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    color: #344d6c;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
   .nav-actions {
-    gap: 7px;
+    gap: 8px;
   }
 
-  .nav-actions .button-small {
-    padding: 0 11px;
-    font-size: 12px;
+  .nav-actions .download-chooser .button {
+    min-height: 44px;
+    padding: 0 14px;
+    font-size: 13px;
   }
 
-  .hero-actions .download-chooser-panel {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
+  .download-chooser-panel {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    top: auto;
+    bottom: 16px;
+    width: auto;
+    max-width: none;
+    transform: none;
+    z-index: 200;
+  }
+
+  .hero {
+    padding-top: 36px;
+    padding-bottom: 40px;
+    gap: 28px;
+  }
+
+  .hero h1 {
+    font-size: clamp(34px, 10.4vw, 48px);
+    line-height: 1.04;
+  }
+
+  .hero-copy > p {
+    max-width: 34em;
+    font-size: 15px;
+  }
+
+  .hero-actions {
+    margin-top: 22px;
+    gap: 10px;
+  }
+
+  .hero-actions .button {
+    min-height: 48px;
+    width: 100%;
   }
 
   .hero-actions-secondary {
-    justify-content: center;
+    margin-top: 8px;
   }
 
   .hero-actions-secondary .button {
     width: 100%;
+    min-height: 44px;
   }
 
-  .download-actions {
-    width: 100%;
-    align-items: center;
+  .hero-notes {
+    margin-top: 18px;
+    gap: 10px 16px;
   }
 
-  .download-actions .button {
-    width: min(100%, 280px);
+  .hero-visual {
+    min-height: 0;
+    margin-top: 4px;
+    padding: 8px 0 18px;
+    overflow: hidden;
+  }
+
+  .preview-orbit-one,
+  .preview-orbit-two {
+    width: min(92%, 340px);
+    height: min(48vw, 240px);
+  }
+
+  .phone-shell {
+    width: min(78%, 286px);
+    transform: none;
+  }
+
+  .floating-progress {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: min(100%, 286px);
+    margin: 14px auto 0;
+    padding: 14px;
+  }
+
+  .proof-grid > div {
+    padding: 18px 16px;
+  }
+
+  .section,
+  .free-section {
+    padding: 64px 0;
+  }
+
+  .feature-list {
+    gap: 64px;
+    margin-top: 36px;
+  }
+
+  .feature-copy h3 {
+    font-size: clamp(26px, 8vw, 32px);
+  }
+
+  .guided-preview,
+  .graph-preview,
+  .reference-preview,
+  .progress-preview {
+    min-height: 0;
+    padding: 18px;
+  }
+
+  .guided-equation,
+  .identity-line,
+  .formula-chip {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .guided-equation {
+    margin: 28px auto 24px;
+    font-size: clamp(26px, 8.4vw, 36px);
+  }
+
+  .keyboard-row span {
+    min-height: 44px;
+  }
+
+  .large-graph {
+    height: 210px;
+  }
+
+  .reference-tabs,
+  .range-tabs {
+    flex-wrap: wrap;
+  }
+
+  .unit-circle {
+    width: min(170px, 58vw);
+    height: min(170px, 58vw);
+  }
+
+  .circle-axis.horizontal {
+    left: 0;
+    right: 0;
+  }
+
+  .circle-axis.vertical {
+    top: 0;
+    bottom: 0;
+  }
+
+  .a1 { right: 8px; }
+  .a3 { left: 8px; }
+
+  .identity-line {
+    font-size: clamp(13px, 3.8vw, 16px);
+  }
+
+  .outcome-row {
+    flex-wrap: wrap;
+    overflow: visible;
+    justify-content: space-between;
+  }
+
+  .outcome-row span {
+    white-space: normal;
+  }
+
+  .student-table {
+    overflow: visible;
+  }
+
+  .student-table-head {
+    display: none;
+  }
+
+  .student-table-head span:last-child,
+  .student-table-row span:last-child {
+    display: none;
+  }
+
+  .student-table-row {
+    min-width: 0;
+    grid-template-columns: 1fr auto auto;
+    gap: 8px;
+    padding: 12px 14px;
+  }
+
+  .student-table-row span:nth-child(n+4) {
+    display: none;
   }
 
   .pricing-section {
-    padding: 80px 0 !important;
+    padding: 64px 0 !important;
   }
 
   .pricing-grid {
     grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 28px;
   }
 
   .price-card {
-    min-height: 230px;
+    min-height: 0;
+    padding: 18px 20px;
+  }
+
+  .price {
+    margin-top: 16px;
+  }
+
+  .download-actions {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .download-actions .button,
+  .download-actions .download-chooser,
+  .download-actions .download-chooser .button {
+    width: 100%;
+  }
+
+  .download-section {
+    padding-bottom: 56px;
+  }
+
+  .download-panel {
+    gap: 18px;
+    padding: 24px 20px;
+  }
+
+  .pilot-section {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+
+  .pilot-panel {
+    width: 100%;
+    min-height: 0;
+    padding: 28px 22px;
+  }
+}
+
+@media (max-width: 420px) {
+  .nav-actions .download-chooser .button {
+    font-size: 0;
+    gap: 0;
+  }
+
+  .nav-actions .download-chooser .button::after {
+    content: 'Download';
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .hero-copy > p {
+    font-size: 14px;
+  }
+
+  .proof-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .proof-grid > div {
+    border-left: 0;
+    border-right: 0;
+    border-top: 1px solid var(--line);
+    padding: 16px 4px;
+    text-align: center;
+  }
+
+  .proof-grid > div:first-child {
+    border-top: 0;
+  }
+
+  .proof-grid > div:nth-child(3),
+  .proof-grid > div:nth-child(4) {
+    border-top: 1px solid var(--line);
+    border-right: 0;
+  }
+
+  .metric-grid > div {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .shell {
+    width: min(100% - 20px, 520px);
+  }
+
+  .brand {
+    font-size: 19px;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 10vw, 38px);
+  }
+
+  .phone-shell {
+    width: min(86%, 260px);
+  }
+
+  .guided-preview,
+  .graph-preview,
+  .reference-preview,
+  .progress-preview {
+    padding: 14px;
   }
 }
