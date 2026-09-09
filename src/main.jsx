@@ -53,13 +53,21 @@ const Logo = () => (
   </a>
 );
 
-function DownloadChooser({ className = '', size = '', variant = 'secondary' }) {
+function DownloadChooser({ className = '', size = '', variant = 'secondary', shortLabel = '' }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef(null);
   const panelId = useId();
   const triggerId = useId();
   const variantClass = variant === 'primary' ? 'button' : 'button button-secondary';
   const sizeClass = size === 'small' ? ' button-small' : '';
+  const label = shortLabel ? (
+    <>
+      <span className="chooser-label-full">Download Calcura</span>
+      <span className="chooser-label-short">{shortLabel}</span>
+    </>
+  ) : (
+    <>Download Calcura{variant === 'primary' ? <Arrow /> : null}</>
+  );
 
   useEffect(() => {
     if (!open) return undefined;
@@ -92,7 +100,7 @@ function DownloadChooser({ className = '', size = '', variant = 'secondary' }) {
         aria-haspopup="dialog"
         onClick={() => setOpen((value) => !value)}
       >
-        Download Calcura{variant === 'primary' ? <Arrow /> : null}
+        {label}
       </button>
       {open ? (
         <div
@@ -247,7 +255,7 @@ function ReferencePreview() {
         <b className="angle a4">3π/2</b>
       </div>
       <div className="identity-line">
-        sin(a ± b) = sin(a) cos(b) ± cos(a) sin(b)
+        sin(a ± b) = <span>sin(a) cos(b) ± cos(a) sin(b)</span>
       </div>
       <div className="reference-values">
         {angles.map((angle) => <span key={angle}>{angle}</span>)}
@@ -285,40 +293,61 @@ function ClassroomPreview() {
   ];
 
   return (
-    <div className="dashboard-shell">
-      <div className="dashboard-sidebar">
-        <Logo />
-        <span className="dash-section-label">CLASSROOM</span>
-        <strong>Overview</strong>
-        <span>Students</span>
-        <span>Progress</span>
-        <span>Exports</span>
-        <div className="seat-card">
-          <span>Seats</span>
-          <strong>24 / 30</strong>
-          <div><i /></div>
+    <>
+      <div className="dashboard-shell">
+        <div className="dashboard-sidebar">
+          <Logo />
+          <span className="dash-section-label">CLASSROOM</span>
+          <strong>Overview</strong>
+          <span>Students</span>
+          <span>Progress</span>
+          <span>Exports</span>
+          <div className="seat-card">
+            <span>Seats</span>
+            <strong>24 / 30</strong>
+            <div><i /></div>
+          </div>
+        </div>
+        <div className="dashboard-main">
+          <div className="dashboard-title-row">
+            <div><span>CALCURA CLASSROOM</span><h3>Calculus II: Section A</h3></div>
+            <span className="preview-badge">PORTAL PREVIEW</span>
+          </div>
+          <div className="dashboard-cards">
+            <div><span>Active students</span><strong>24</strong></div>
+            <div><span>Problems completed</span><strong>486</strong></div>
+            <div><span>Independent solve rate</span><strong>71%</strong></div>
+          </div>
+          <div className="student-table">
+            <div className="student-table-head"><span>Student</span><span>Problems</span><span>Completion</span><span>Independent</span><span>Last active</span></div>
+            {rows.map((row) => (
+              <div className="student-table-row" key={row[0]}>
+                {row.map((cell, i) => <span key={i}>{cell}</span>)}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="dashboard-main">
-        <div className="dashboard-title-row">
-          <div><span>CALCURA CLASSROOM</span><h3>Calculus II: Section A</h3></div>
-          <span className="preview-badge">PORTAL PREVIEW</span>
+      <div className="classroom-mobile">
+        <div className="classroom-mobile-head">
+          <span>CALCURA CLASSROOM</span>
+          <strong>Calculus II: Section A</strong>
         </div>
-        <div className="dashboard-cards">
-          <div><span>Active students</span><strong>24</strong></div>
-          <div><span>Problems completed</span><strong>486</strong></div>
-          <div><span>Independent solve rate</span><strong>71%</strong></div>
+        <div className="classroom-mobile-stats">
+          <div><strong>24</strong><span>students</span></div>
+          <div><strong>486</strong><span>problems</span></div>
+          <div><strong>71%</strong><span>independent</span></div>
         </div>
-        <div className="student-table">
-          <div className="student-table-head"><span>Student</span><span>Problems</span><span>Completion</span><span>Independent</span><span>Last active</span></div>
-          {rows.map((row) => (
-            <div className="student-table-row" key={row[0]}>
-              {row.map((cell, i) => <span key={i}>{cell}</span>)}
+        <div className="classroom-mobile-roster">
+          {rows.slice(0, 3).map((row) => (
+            <div className="classroom-mobile-row" key={row[0]}>
+              <span>{row[0]}</span>
+              <strong>{row[2]}</strong>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -359,14 +388,13 @@ function App() {
         <div className="shell nav-shell">
           <Logo />
           <div className="nav-actions">
-            <a className="button button-small nav-login" href={WEB_APP_URL}>Login to Calcura</a>
-            <DownloadChooser size="small" />
+            <a className="button button-small nav-login" href={WEB_APP_URL}>
+              <span className="nav-login-full">Login to Calcura</span>
+              <span className="nav-login-short">Login</span>
+            </a>
+            <DownloadChooser size="small" shortLabel="Download" />
             <a className="button button-secondary button-small nav-instructor" href="#pilot">Instructor Sign In</a>
           </div>
-        </div>
-        <div className="shell mobile-nav-secondary">
-          <a href={WEB_APP_URL}>Login to Calcura</a>
-          <a href="#pilot">Instructor Sign In</a>
         </div>
       </header>
 
@@ -384,7 +412,7 @@ function App() {
               <a className="button button-secondary" href={WEB_APP_URL}>Login to Calcura</a>
             </div>
             <div className="hero-actions hero-actions-secondary">
-              <a className="button button-secondary" href="#classroom">Explore Calcura Classroom</a>
+              <a className="hero-classroom-link" href="#classroom">Explore Calcura Classroom</a>
             </div>
             <div className="hero-notes">
               <span><Check /> Free for students</span>
@@ -625,6 +653,7 @@ function App() {
           <div>
             <a href="#features">Features</a>
             <a href="#classroom">Classroom</a>
+            <a href="#pilot">Instructor Sign In</a>
           </div>
         </div>
       </footer>
