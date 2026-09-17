@@ -2,9 +2,15 @@
  * Unit-circle label alignment delta.
  *
  * Keep the existing circle, axes, points, typography, and responsive sizing.
- * Only replace hand-tuned label offsets with geometry-centered anchors so the
+ * Replace hand-tuned label offsets with geometry-centered anchors so the
  * radian labels remain aligned as the circle scales across viewports.
+ * Reserve enough flow space below the circle for the bottom label so it never
+ * crowds the identity banner.
  */
+.reference-preview .unit-circle {
+  margin-bottom: 48px;
+}
+
 .reference-preview .unit-circle .angle {
   line-height: 1;
   white-space: nowrap;
@@ -40,4 +46,10 @@
   bottom: auto;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@media (max-width: 600px) {
+  .reference-preview .unit-circle {
+    margin-bottom: 44px;
+  }
 }
