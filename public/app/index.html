@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Capacitor keeps this WebView CSP. The web/PWA build replaces it in vite.config.ts. Keep it early in head. -->
+    <meta id="calcura-csp" http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://qsuacjqcrpswognhhikv.supabase.co wss://qsuacjqcrpswognhhikv.supabase.co; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; frame-src 'none'; form-action 'self'; upgrade-insecure-requests;">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     
     <!-- PWA / iOS home-screen metadata. Web-app manifest is injected only by the web Vite target. -->
     <meta name="theme-color" content="#ffffff" />
@@ -10,9 +13,6 @@
     <meta name="apple-mobile-web-app-title" content="Calcura" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="apple-touch-icon" href="./pwa/apple-touch-icon.png" />
-    
-    <!-- Content Security Policy for Android WebView -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';">
     
   <!-- Copyright (c) 2026 Calcura. All Rights Reserved. See LICENSE. -->
     <title>Calcura</title>
@@ -39,7 +39,7 @@
         }
       }
     </style>
-    <script type="module" crossorigin src="./assets/index-Bf29xKa_.js"></script>
+    <script type="module" crossorigin src="./assets/index-ByJYVNrn.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-JRKc55fy.css">
   <link rel="manifest" href="./manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="./registerSW.js"></script></head>
   <body class="bg-white text-slate-900 antialiased overflow-hidden fixed inset-0 font-sans selection:bg-slate-200 selection:text-slate-900">
