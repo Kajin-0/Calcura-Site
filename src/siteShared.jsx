@@ -1,0 +1,121 @@
+import React, { useEffect, useId, useRef, useState } from 'react';
+
+export const ANDROID_DOWNLOAD_URL =
+  'https://github.com/Kajin-0/Calcura-Site/releases/latest/download/Calcura.apk';
+export const WEB_APP_URL = '/app/';
+
+export const Arrow = () => (
+  <svg viewBox="0 0 20 20" aria-hidden="true">
+    <path d="M4 10h11M11 6l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export const Check = () => (
+  <svg viewBox="0 0 20 20" aria-hidden="true">
+    <path d="m4.5 10.4 3.2 3.1 7.8-7.4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+export function Logo({ homeHref = '/' }) {
+  return (
+    <a className="brand" href={homeHref} aria-label="Calcura home">
+      <span className="brand-mark">∫</span>
+      <span>calcura</span>
+    </a>
+  );
+}
+
+export function DownloadChooser({ className = '', size = '', variant = 'secondary', shortLabel = '' }) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef(null);
+  const panelId = useId();
+  const variantClass = variant === 'primary' ? 'button' : 'button button-secondary';
+  const sizeClass = size === 'small' ? ' button-small' : '';
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const closeOnEscape = (event) => event.key === 'Escape' && setOpen(false);
+    const closeOutside = (event) => {
+      if (rootRef.current && !rootRef.current.contains(event.target)) setOpen(false);
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    document.addEventListener('pointerdown', closeOutside);
+    return () => {
+      document.removeEventListener('keydown', closeOnEscape);
+      document.removeEventListener('pointerdown', closeOutside);
+    };
+  }, [open]);
+
+  return (
+    <div className={`download-chooser${className ? ` ${className}` : ''}`} ref={rootRef}>
+      <button
+        type="button"
+        className={`${variantClass}${sizeClass}`}
+        aria-expanded={open}
+        aria-controls={panelId}
+        aria-haspopup="dialog"
+        onClick={() => setOpen((value) => !value)}
+      >
+        {shortLabel ? (
+          <>
+            <span className="chooser-label-full">Download Calcura</span>
+            <span className="chooser-label-short">{shortLabel}</span>
+          </>
+        ) : (
+          <>Download Calcura{variant === 'primary' ? <Arrow /> : null}</>
+        )}
+      </button>
+      {open ? (
+        <div id={panelId} role="dialog" aria-label="Get Calcura" className="download-chooser-panel">
+          <p className="download-chooser-title">Get Calcura</p>
+          <div className="download-chooser-options">
+            <a className="download-chooser-option" href={WEB_APP_URL} onClick={() => setOpen(false)}>
+              <strong>Install Web App</strong>
+              <span>Desktop, iPhone, iPad, Android</span>
+            </a>
+            <a className="download-chooser-option" href={ANDROID_DOWNLOAD_URL} onClick={() => setOpen(false)}>
+              <strong>Download Android APK</strong>
+              <span>Native Android package</span>
+            </a>
+          </div>
+          <p className="download-chooser-ios-note">On iPhone or iPad, open in Safari and choose Add to Home Screen.</p>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+export function SiteHeader({ active = 'home' }) {
+  return (
+    <header className="site-header">
+      <div className="shell nav-shell multipage-nav-shell">
+        <Logo />
+        <nav className="multipage-nav" aria-label="Primary navigation">
+          <a className={active === 'home' ? 'active' : ''} href="/">Students</a>
+          <a className={active === 'classroom' ? 'active' : ''} href="/classroom/">Classroom</a>
+          <a className={active === 'contact' ? 'active' : ''} href="/contact/">Contact</a>
+        </nav>
+        <div className="nav-actions">
+          <a className="button button-small nav-login" href={WEB_APP_URL}>Login</a>
+          <DownloadChooser size="small" shortLabel="Download" />
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export function SiteFooter() {
+  return (
+    <footer>
+      <div className="shell footer-inner">
+        <Logo />
+        <p>Free calculus practice for students. Classroom tools for educators.</p>
+        <div>
+          <a href="/">Students</a>
+          <a href="/classroom/">Classroom</a>
+          <a href="/contact/">Contact</a>
+        </div>
+      </div>
+    </footer>
+  );
+}
