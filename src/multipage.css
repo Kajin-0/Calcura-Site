@@ -111,6 +111,7 @@
 .classroom-page .classroom-section { padding-top: 100px; }
 .classroom-page .pricing-section { border-top: 1px solid var(--line); }
 .classroom-page .pilot-section { background: #fff; }
+.classroom-page .pilot-panel h2 { color: #fff; }
 
 .classroom-hero-proof {
   display: grid;
