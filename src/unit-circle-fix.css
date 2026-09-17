@@ -1,0 +1,43 @@
+/*
+ * Unit-circle label alignment delta.
+ *
+ * Keep the existing circle, axes, points, typography, and responsive sizing.
+ * Only replace hand-tuned label offsets with geometry-centered anchors so the
+ * radian labels remain aligned as the circle scales across viewports.
+ */
+.reference-preview .unit-circle .angle {
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.reference-preview .unit-circle .angle.a1 {
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  left: calc(100% + 27px);
+  transform: translate(-50%, -50%);
+}
+
+.reference-preview .unit-circle .angle.a2 {
+  top: -27px;
+  right: auto;
+  bottom: auto;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.reference-preview .unit-circle .angle.a3 {
+  top: 50%;
+  right: auto;
+  bottom: auto;
+  left: -27px;
+  transform: translate(-50%, -50%);
+}
+
+.reference-preview .unit-circle .angle.a4 {
+  top: calc(100% + 27px);
+  right: auto;
+  bottom: auto;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
