@@ -1,9 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import '../styles.css';
-import '../refinements.css';
-import '../pages.css';
-import { Arrow, Check, ClassroomPreview, SiteFooter, SiteHeader } from '../site-shell.jsx';
+import './styles.css';
+import './refinements.css';
+import './pages.css';
+import { Arrow, Check, ClassroomPreview, SiteFooter, SiteHeader } from './site-shell.jsx';
 
 const plans = [
   { name: 'Tutor', seats: '10 seats', price: '$39', period: '/ month', text: 'For independent tutors and very small groups.' },
