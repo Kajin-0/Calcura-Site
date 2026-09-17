@@ -2,6 +2,7 @@
 
 .multipage-nav {
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   gap: 28px;
@@ -25,9 +26,7 @@
   background: linear-gradient(180deg, #f8fbff 0%, #fff 100%);
 }
 
-.page-hero-inner {
-  max-width: 860px;
-}
+.page-hero-inner { max-width: 860px; }
 
 .page-hero h1 {
   margin: 0;
@@ -109,13 +108,9 @@
 .home-classroom-card-grid strong { margin-top: 8px; font-size: 24px; }
 
 .home-short-faq { padding: 95px 0; }
-
 .classroom-page .classroom-section { padding-top: 100px; }
 .classroom-page .pricing-section { border-top: 1px solid var(--line); }
-
-.classroom-page .pilot-section {
-  background: #fff;
-}
+.classroom-page .pilot-section { background: #fff; }
 
 .classroom-hero-proof {
   display: grid;
@@ -142,10 +137,11 @@
   min-height: calc(100vh - 196px);
 }
 
-.page-footer-spacer { min-height: 35px; }
+@media (max-width: 1100px) {
+  .multipage-nav { display: none; }
+}
 
 @media (max-width: 850px) {
-  .multipage-nav { display: none; }
   .home-classroom-grid { grid-template-columns: 1fr; gap: 36px; }
   .classroom-hero-proof { grid-template-columns: 1fr; }
 }
