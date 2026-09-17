@@ -11,12 +11,6 @@ const TOPICS = [
   'Other',
 ];
 
-function getFormspreeError(payload) {
-  if (!payload || !Array.isArray(payload.errors) || payload.errors.length === 0) return null;
-  const firstError = payload.errors.find((error) => typeof error?.message === 'string');
-  return firstError?.message || null;
-}
-
 export default function ContactSection() {
   const [status, setStatus] = useState('idle');
   const [statusMessage, setStatusMessage] = useState('');
@@ -47,13 +41,6 @@ export default function ContactSection() {
         },
       });
 
-      let payload = null;
-      try {
-        payload = await response.json();
-      } catch {
-        // Formspree can return an empty/non-JSON body for some intermediary failures.
-      }
-
       if (response.ok) {
         form.reset();
         announceStatus('success', "Message sent. We'll get back to you soon.");
@@ -65,10 +52,7 @@ export default function ContactSection() {
         return;
       }
 
-      announceStatus(
-        'error',
-        getFormspreeError(payload) || 'We could not send your message. Please check the form and try again.',
-      );
+      announceStatus('error', 'We could not send your message. Please check the form and try again.');
     } catch {
       announceStatus('error', 'We could not reach the message service. Check your connection and try again.');
     }
@@ -87,11 +71,16 @@ export default function ContactSection() {
           </p>
           <div className="contact-note">
             <strong>What happens next</strong>
-            <span>Your message is delivered directly to the Calcura contact inbox.</span>
+            <span>Your message is delivered to the Calcura contact inbox for a direct response.</span>
           </div>
         </div>
 
-        <form className="contact-form" onSubmit={handleSubmit} noValidate={false}>
+        <form
+          className="contact-form"
+          action={FORM_ENDPOINT}
+          method="POST"
+          onSubmit={handleSubmit}
+        >
           <div className="contact-field-grid">
             <div className="contact-field">
               <label htmlFor="contact-name">Name</label>
@@ -158,7 +147,7 @@ export default function ContactSection() {
             <button className="button contact-submit" type="submit" disabled={isSubmitting}>
               <span>{isSubmitting ? 'Sending…' : 'Send Inquiry'}</span>
             </button>
-            <p className="contact-privacy-note">Your details are used only to respond to this inquiry.</p>
+            <p className="contact-privacy-note">Your details are submitted so Calcura can respond to your inquiry.</p>
           </div>
 
           <div
