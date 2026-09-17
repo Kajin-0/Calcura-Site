@@ -10,18 +10,7 @@ function ContactPage() {
   return (
     <div className="contact-page">
       <SiteHeader active="contact" />
-      <main>
-        <section className="page-hero">
-          <div className="shell page-hero-inner">
-            <div className="eyebrow">CONTACT CALCURA</div>
-            <h1>Questions, support, or classroom inquiries.</h1>
-            <p>
-              Use the form below for product questions, technical support, educator pilots, classroom licensing, or partnerships.
-            </p>
-          </div>
-        </section>
-        <ContactSection />
-      </main>
+      <main><ContactSection /></main>
       <SiteFooter />
     </div>
   );
