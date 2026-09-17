@@ -1,0 +1,7 @@
+/* Pilot-panel contrast delta.
+ * Keep the approved panel layout and typography; guarantee the primary heading
+ * remains white on the dark pilot background regardless of later cascade rules.
+ */
+.pilot-panel h2 {
+  color: #fff !important;
+}
