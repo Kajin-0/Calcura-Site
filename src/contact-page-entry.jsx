@@ -1,10 +1,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import '../styles.css';
-import '../refinements.css';
-import '../pages.css';
-import ContactSection from '../ContactSection.jsx';
-import { SiteFooter, SiteHeader } from '../site-shell.jsx';
+import './styles.css';
+import './refinements.css';
+import './pages.css';
+import ContactSection from './ContactSection.jsx';
+import { SiteFooter, SiteHeader } from './site-shell.jsx';
 
 function ContactPage() {
   return (
