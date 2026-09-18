@@ -71,9 +71,24 @@
 
 .download-chooser-ios-note {
   margin: 10px 0 0;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
   color: #74869b;
   font-size: 11px;
   line-height: 1.45;
+}
+
+.download-chooser-ios-note strong,
+.download-chooser-ios-note span {
+  display: block;
+}
+
+.download-chooser-ios-note strong {
+  margin-bottom: 3px;
+  color: var(--ink);
+  font-size: 12px;
 }
 
 .hero-actions-secondary {
@@ -361,17 +376,41 @@
     font-size: 13px;
   }
 
+  .download-chooser {
+    z-index: 250;
+  }
+
   .download-chooser-panel {
-    position: fixed;
-    left: 16px;
-    right: 16px;
-    top: auto;
-    bottom: 16px;
-    width: auto;
+    position: absolute;
+    top: calc(100% + 8px);
+    bottom: auto;
+    width: min(320px, calc(100vw - 24px));
     max-width: none;
+    max-height: min(70vh, 420px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     transform: none;
-    z-index: 200;
+    z-index: 300;
     padding: 16px;
+  }
+
+  .nav-actions .download-chooser-panel {
+    left: auto;
+    right: 0;
+  }
+
+  .hero-actions .download-chooser-panel {
+    left: 0;
+    right: auto;
+    width: min(100%, 320px);
+  }
+
+  .download-actions .download-chooser-panel {
+    top: auto;
+    bottom: calc(100% + 8px);
+    left: 0;
+    right: auto;
+    width: min(100%, 320px);
   }
 
   .hero {
