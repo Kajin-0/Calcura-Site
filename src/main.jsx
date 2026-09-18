@@ -476,7 +476,7 @@ function App() {
           <div className="shell free-layout">
             <div>
               <div className="eyebrow light">THE STUDENT APP STAYS FREE</div>
-              <h2>Calcura is free.<br />The classroom layer is the product.</h2>
+              <h2>Calcura is free.</h2>
             </div>
             <div className="free-copy">
               <p>
