@@ -119,6 +119,12 @@ function DownloadChooser({ className = '', size = '', variant = 'secondary', sho
   const triggerId = useId();
   const variantClass = variant === 'primary' ? 'button' : 'button button-secondary';
   const sizeClass = size === 'small' ? ' button-small' : '';
+  const userAgent = typeof navigator === 'undefined' ? '' : navigator.userAgent;
+  const isIOS = typeof navigator !== 'undefined' && (
+    /iPad|iPhone|iPod/i.test(userAgent)
+    || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+  );
+  const isAndroid = /Android/i.test(userAgent);
   const label = shortLabel ? (
     <>
       <span className="chooser-label-full">Download Calcura</span>
@@ -170,22 +176,46 @@ function DownloadChooser({ className = '', size = '', variant = 'secondary', sho
         >
           <p id={`${panelId}-title`} className="download-chooser-title">Get Calcura</p>
           <div className="download-chooser-options">
-            <a className="download-chooser-option" href={WEB_APP_URL} onClick={() => setOpen(false)}>
-              <strong>Install Web App</strong>
-              <span>Desktop, iPhone, iPad, Android</span>
-            </a>
-            <a
-              className="download-chooser-option"
-              href={ANDROID_DOWNLOAD_URL}
-              onClick={() => setOpen(false)}
-            >
-              <strong>Download Android APK</strong>
-              <span>Native Android package</span>
-            </a>
+            {isAndroid ? (
+              <>
+                <a
+                  className="download-chooser-option"
+                  href={ANDROID_DOWNLOAD_URL}
+                  onClick={() => setOpen(false)}
+                >
+                  <strong>Download Android APK</strong>
+                  <span>Native Android package</span>
+                </a>
+                <a className="download-chooser-option" href={WEB_APP_URL} onClick={() => setOpen(false)}>
+                  <strong>Open Web App</strong>
+                  <span>Use Calcura in your browser</span>
+                </a>
+              </>
+            ) : (
+              <>
+                <a className="download-chooser-option" href={WEB_APP_URL} onClick={() => setOpen(false)}>
+                  <strong>{isIOS ? 'Open Calcura Web App' : 'Open Web App'}</strong>
+                  <span>{isIOS ? 'Then install from Safari' : 'Desktop, phone, and tablet'}</span>
+                </a>
+                {!isIOS ? (
+                  <a
+                    className="download-chooser-option"
+                    href={ANDROID_DOWNLOAD_URL}
+                    onClick={() => setOpen(false)}
+                  >
+                    <strong>Download Android APK</strong>
+                    <span>Native Android package</span>
+                  </a>
+                ) : null}
+              </>
+            )}
           </div>
-          <p className="download-chooser-ios-note">
-            On iPhone or iPad, open in Safari and choose Add to Home Screen.
-          </p>
+          {isIOS ? (
+            <div className="download-chooser-ios-note">
+              <strong>Install on iPhone or iPad</strong>
+              <span>Open Calcura in Safari, tap Share, then choose Add to Home Screen.</span>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </div>
