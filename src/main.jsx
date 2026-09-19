@@ -165,6 +165,10 @@ function DownloadChooser({ className = '', size = '', variant = 'secondary', sho
           <div className="download-chooser-options">
             {isAndroid ? (
               <>
+                <a className="download-chooser-option" href={PWA_INSTALL_URL} onClick={() => closeChooser({ restoreFocus: false })}>
+                  <strong>Install web app</strong>
+                  <span>Add Calcura to your device</span>
+                </a>
                 <a
                   className="download-chooser-option"
                   href={ANDROID_DOWNLOAD_URL}
@@ -173,15 +177,11 @@ function DownloadChooser({ className = '', size = '', variant = 'secondary', sho
                   <strong>Download Android APK</strong>
                   <span>Native Android package</span>
                 </a>
-                <a className="download-chooser-option" href={PWA_INSTALL_URL} onClick={() => closeChooser({ restoreFocus: false })}>
-                  <strong>Install / Open Calcura</strong>
-                  <span>Use Calcura in your browser</span>
-                </a>
               </>
             ) : (
               <>
                 <a className="download-chooser-option" href={PWA_INSTALL_URL} onClick={() => closeChooser({ restoreFocus: false })}>
-                  <strong>Install / Open Calcura</strong>
+                  <strong>Install web app</strong>
                   <span>{isIOS ? 'Then install from Safari' : 'Desktop, phone, and tablet'}</span>
                 </a>
                 {!isIOS ? (
