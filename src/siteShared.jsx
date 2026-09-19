@@ -4,6 +4,7 @@ import { useDownloadChooserLifecycle } from './useDownloadChooserLifecycle';
 export const ANDROID_DOWNLOAD_URL =
   'https://github.com/Kajin-0/Calcura-Site/releases/latest/download/Calcura.apk';
 export const WEB_APP_URL = '/app/';
+export const PWA_INSTALL_URL = '/app/?install=1';
 
 export const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true">
@@ -78,15 +79,15 @@ export function DownloadChooser({ className = '', size = '', variant = 'secondar
                   <strong>Download Android APK</strong>
                   <span>Native Android package</span>
                 </a>
-                <a className="download-chooser-option" href={WEB_APP_URL} onClick={() => closeChooser({ restoreFocus: false })}>
-                  <strong>Open Web App</strong>
+                <a className="download-chooser-option" href={PWA_INSTALL_URL} onClick={() => closeChooser({ restoreFocus: false })}>
+                  <strong>Install / Open Calcura</strong>
                   <span>Use Calcura in your browser</span>
                 </a>
               </>
             ) : (
               <>
-                <a className="download-chooser-option" href={WEB_APP_URL} onClick={() => closeChooser({ restoreFocus: false })}>
-                  <strong>{isIOS ? 'Open Calcura Web App' : 'Open Web App'}</strong>
+                <a className="download-chooser-option" href={PWA_INSTALL_URL} onClick={() => closeChooser({ restoreFocus: false })}>
+                  <strong>Install / Open Calcura</strong>
                   <span>{isIOS ? 'Then install from Safari' : 'Desktop, phone, and tablet'}</span>
                 </a>
                 {!isIOS ? (
