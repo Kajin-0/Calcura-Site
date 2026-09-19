@@ -2,6 +2,7 @@ import React, { useEffect, useId, useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 import './refinements.css';
+import { useDownloadChooserLifecycle } from './useDownloadChooserLifecycle';
 
 const ANDROID_DOWNLOAD_URL =
   'https://github.com/Kajin-0/Calcura-Site/releases/latest/download/Calcura.apk';
@@ -115,6 +116,7 @@ function useSamePageNavigation() {
 function DownloadChooser({ className = '', size = '', variant = 'secondary', shortLabel = '' }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef(null);
+  const triggerRef = useRef(null);
   const panelId = useId();
   const triggerId = useId();
   const variantClass = variant === 'primary' ? 'button' : 'button button-secondary';
@@ -134,36 +136,19 @@ function DownloadChooser({ className = '', size = '', variant = 'secondary', sho
     <>Download Calcura{variant === 'primary' ? <Arrow /> : null}</>
   );
 
-  useEffect(() => {
-    if (!open) return undefined;
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') setOpen(false);
-    };
-    const handlePointerDown = (event) => {
-      if (rootRef.current && !rootRef.current.contains(event.target)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('mousedown', handlePointerDown);
-    document.addEventListener('touchstart', handlePointerDown, { passive: true });
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('mousedown', handlePointerDown);
-      document.removeEventListener('touchstart', handlePointerDown);
-    };
-  }, [open]);
+  const closeChooser = useDownloadChooserLifecycle({ open, setOpen, rootRef, triggerRef });
 
   return (
     <div className={`download-chooser${className ? ` ${className}` : ''}`} ref={rootRef}>
       <button
         type="button"
         id={triggerId}
+        ref={triggerRef}
         className={`${variantClass}${sizeClass}`}
         aria-expanded={open}
         aria-controls={panelId}
         aria-haspopup="dialog"
-        onClick={() => setOpen((value) => !value)}
+        onClick={() => (open ? closeChooser() : setOpen(true))}
       >
         {label}
       </button>
@@ -171,6 +156,7 @@ function DownloadChooser({ className = '', size = '', variant = 'secondary', sho
         <div
           id={panelId}
           role="dialog"
+          aria-modal="true"
           aria-labelledby={`${panelId}-title`}
           className="download-chooser-panel"
         >
@@ -181,19 +167,19 @@ function DownloadChooser({ className = '', size = '', variant = 'secondary', sho
                 <a
                   className="download-chooser-option"
                   href={ANDROID_DOWNLOAD_URL}
-                  onClick={() => setOpen(false)}
+                  onClick={() => closeChooser({ restoreFocus: false })}
                 >
                   <strong>Download Android APK</strong>
                   <span>Native Android package</span>
                 </a>
-                <a className="download-chooser-option" href={WEB_APP_URL} onClick={() => setOpen(false)}>
+                <a className="download-chooser-option" href={WEB_APP_URL} onClick={() => closeChooser({ restoreFocus: false })}>
                   <strong>Open Web App</strong>
                   <span>Use Calcura in your browser</span>
                 </a>
               </>
             ) : (
               <>
-                <a className="download-chooser-option" href={WEB_APP_URL} onClick={() => setOpen(false)}>
+                <a className="download-chooser-option" href={WEB_APP_URL} onClick={() => closeChooser({ restoreFocus: false })}>
                   <strong>{isIOS ? 'Open Calcura Web App' : 'Open Web App'}</strong>
                   <span>{isIOS ? 'Then install from Safari' : 'Desktop, phone, and tablet'}</span>
                 </a>
@@ -201,7 +187,7 @@ function DownloadChooser({ className = '', size = '', variant = 'secondary', sho
                   <a
                     className="download-chooser-option"
                     href={ANDROID_DOWNLOAD_URL}
-                    onClick={() => setOpen(false)}
+                    onClick={() => closeChooser({ restoreFocus: false })}
                   >
                     <strong>Download Android APK</strong>
                     <span>Native Android package</span>
