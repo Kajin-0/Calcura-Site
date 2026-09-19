@@ -46,7 +46,10 @@ export function useDownloadChooserLifecycle({ open, setOpen, rootRef, triggerRef
       }
       const firstFocusable = current[0];
       const lastFocusable = current[current.length - 1];
-      if (event.shiftKey && document.activeElement === firstFocusable) {
+      if (!panel?.contains(document.activeElement)) {
+        event.preventDefault();
+        (event.shiftKey ? lastFocusable : firstFocusable).focus();
+      } else if (event.shiftKey && document.activeElement === firstFocusable) {
         event.preventDefault();
         lastFocusable.focus();
       } else if (!event.shiftKey && document.activeElement === lastFocusable) {
