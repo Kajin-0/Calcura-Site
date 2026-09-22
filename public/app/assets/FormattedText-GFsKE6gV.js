@@ -1,1 +1,0 @@
-import{j as t}from"./index-D7KURQhq.js";import{M as n}from"./MathDisplay-CCXv3iS4.js";const p=({text:a,className:e=""})=>{if(!a)return null;const l=a.split(/\$([^\$]+)\$/g);return t.jsx("span",{className:e,children:l.map((r,s)=>s%2===1?t.jsx(n,{latex:r,className:"text-slate-900 font-medium px-0.5 align-baseline",displayMode:!1},s):t.jsx("span",{children:r},s))})};export{p as F};
