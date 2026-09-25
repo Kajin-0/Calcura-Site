@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <!-- Capacitor keeps this WebView CSP. The web/PWA build replaces it in vite.config.ts. Keep it early in head. -->
-    <meta id="calcura-csp" http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' https://qsuacjqcrpswognhhikv.supabase.co wss://qsuacjqcrpswognhhikv.supabase.co; worker-src 'self' blob:; manifest-src 'self'; object-src 'none'; base-uri 'self'; frame-src 'none'; form-action 'self'; upgrade-insecure-requests;">
+    <meta id="calcura-csp" http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     
@@ -39,9 +39,9 @@
         }
       }
     </style>
-    <script type="module" crossorigin src="./assets/index-B30l0qL6.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-D7npsBjF.css">
-  <link rel="manifest" href="./manifest.webmanifest"></head>
+    <script type="module" crossorigin src="./assets/index-BsxxlN_b.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CGYL2opS.css">
+  </head>
   <body class="bg-white text-slate-900 antialiased overflow-hidden fixed inset-0 font-sans selection:bg-slate-200 selection:text-slate-900">
     <div id="root" class="h-full w-full"></div>
     <noscript>
