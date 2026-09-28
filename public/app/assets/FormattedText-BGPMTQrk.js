@@ -1,0 +1,1 @@
+import{j as t,M as n}from"./index-Ptpq58dF.js";const p=({text:a,className:r=""})=>{if(!a)return null;const l=a.split(/\$([^\$]+)\$/g);return t.jsx("span",{className:r,children:l.map((e,s)=>s%2===1?t.jsx(n,{latex:e,className:"text-slate-900 font-medium px-0.5 align-baseline",displayMode:!1},s):t.jsx("span",{children:e},s))})};export{p as F};
