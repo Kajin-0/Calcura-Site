@@ -67,7 +67,7 @@ export default function ContactSection() {
           <div className="eyebrow">CONTACT CALCURA</div>
           <h2>Questions, support, or classroom inquiries.</h2>
           <p>
-            Send a message about Calcura, technical support, educator pilots, classroom licensing, or partnerships.
+            Send a message about Calcura, technical support, institutional Classroom requirements, or partnerships.
           </p>
           <div className="contact-note">
             <strong>What happens next</strong>

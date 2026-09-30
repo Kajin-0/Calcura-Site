@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 import './refinements.css';
 import { useDownloadChooserLifecycle } from './useDownloadChooserLifecycle';
+import { TEACHER_SIGN_IN_URL } from './siteShared.jsx';
 
 const ANDROID_DOWNLOAD_URL =
   'https://github.com/Kajin-0/Calcura-Site/releases/latest/download/Calcura.apk';
@@ -374,7 +375,7 @@ function App() {
               <span className="nav-login-short">Login</span>
             </a>
             <DownloadChooser size="small" shortLabel="Download" />
-            <a className="button button-secondary button-small nav-instructor" href="/classroom/">Instructor Sign In</a>
+            <a className="button button-secondary button-small nav-instructor" href={TEACHER_SIGN_IN_URL}>Teacher sign in</a>
           </div>
         </div>
       </header>
@@ -468,11 +469,11 @@ function App() {
             <div className="free-copy">
               <p>
                 Students can use Calcura independently without buying a subscription or joining an institution.
-                Schools and tutoring organizations pay only when they want managed classes, shared progress, seat controls, and instructor visibility.
+                Teachers can start with free Classroom tools and upgrade to Pro for problem-level assignment controls.
               </p>
               <div className="free-points">
                 <span><Check /> Personal practice remains free</span>
-                <span><Check /> Institutional seats apply only to managed classroom access</span>
+                <span><Check /> Paid upgrades support teacher tools, not student access</span>
                 <span><Check /> Leaving a class never removes the free student app</span>
               </div>
             </div>
@@ -485,8 +486,8 @@ function App() {
               <div className="eyebrow light">CALCURA CLASSROOM</div>
               <h2>Instructor tools now have their own space.</h2>
               <p>
-                Explore managed classes, seat plans, shared progress analytics, the instructor dashboard preview,
-                pilot details, and classroom pricing on the dedicated Classroom page.
+                Create classes, publish assignments, and see student progress in the live teacher workspace.
+                Explore Teacher, Pro, and the organizational roadmap on the Classroom page.
               </p>
             </div>
             <div className="pilot-actions">
@@ -519,6 +520,7 @@ function App() {
           <div>
             <a href="#features">Features</a>
             <a href="/classroom/">Classroom</a>
+            <a href={TEACHER_SIGN_IN_URL}>Teacher sign in</a>
             <a href="/contact/">Contact</a>
           </div>
         </div>

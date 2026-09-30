@@ -27,3 +27,6 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Classroom entry and navigation checks
+        run: npm run test:classroom-entry && npm run test:download-chooser-a11y

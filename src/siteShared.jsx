@@ -5,6 +5,7 @@ export const ANDROID_DOWNLOAD_URL =
   'https://github.com/Kajin-0/Calcura-Site/releases/latest/download/Calcura.apk';
 export const WEB_APP_URL = '/app/';
 export const PWA_INSTALL_URL = '/app/?install=1';
+export const TEACHER_SIGN_IN_URL = 'https://classroom.calcura.study/signin';
 
 export const Arrow = () => (
   <svg viewBox="0 0 20 20" aria-hidden="true">
@@ -126,7 +127,7 @@ export function SiteHeader({ active = 'home' }) {
           <a className={active === 'contact' ? 'active' : ''} href="/contact/">Contact</a>
         </nav>
         <div className="nav-actions">
-          <a className="button button-small nav-login" href={WEB_APP_URL}>Login</a>
+          <a className="button button-small nav-login" href={active === 'classroom' ? TEACHER_SIGN_IN_URL : WEB_APP_URL}>{active === 'classroom' ? 'Teacher sign in' : 'Login'}</a>
           <DownloadChooser size="small" shortLabel="Download" />
         </div>
       </div>
@@ -143,6 +144,7 @@ export function SiteFooter() {
         <div>
           <a href="/">Students</a>
           <a href="/classroom/">Classroom</a>
+          <a href={TEACHER_SIGN_IN_URL}>Teacher sign in</a>
           <a href="/contact/">Contact</a>
         </div>
       </div>

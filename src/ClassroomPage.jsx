@@ -3,147 +3,112 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 import './refinements.css';
 import './multipage.css';
-import { Arrow, Check, SiteFooter, SiteHeader } from './siteShared.jsx';
-
-const plans = [
-  { name: 'Tutor', seats: '10 seats', price: '$39', period: '/mo' },
-  { name: 'Small Team', seats: '30 seats', price: '$79', period: '/mo', featured: true },
-  { name: 'Classroom', seats: '100 seats', price: '$199', period: '/mo' },
-  { name: 'Institution', seats: '300–1,000+', price: 'Custom', period: '' },
-];
-
-function DashboardPreview() {
-  const rows = [
-    ['M. Chen', '42', '83%', '76%', 'Today'],
-    ['J. Rivera', '31', '68%', '51%', 'Today'],
-    ['A. Patel', '58', '91%', '84%', 'Yesterday'],
-    ['S. Brooks', '26', '73%', '62%', '2 days ago'],
-  ];
-
-  return (
-    <div className="dashboard-shell">
-      <div className="dashboard-sidebar">
-        <span className="dash-section-label">CLASSROOM</span>
-        <strong>Overview</strong>
-        <span>Students</span>
-        <span>Progress</span>
-        <span>Exports</span>
-        <div className="seat-card">
-          <span>Seats</span><strong>24 / 30</strong><div><i /></div>
-        </div>
-      </div>
-      <div className="dashboard-main">
-        <div className="dashboard-title-row">
-          <div><span>CALCURA CLASSROOM</span><h3>Calculus II: Section A</h3></div>
-          <span className="preview-badge">PORTAL PREVIEW</span>
-        </div>
-        <div className="dashboard-cards">
-          <div><span>Active students</span><strong>24</strong></div>
-          <div><span>Problems completed</span><strong>486</strong></div>
-          <div><span>Independent solve rate</span><strong>71%</strong></div>
-        </div>
-        <div className="student-table">
-          <div className="student-table-head"><span>Student</span><span>Problems</span><span>Completion</span><span>Independent</span><span>Last active</span></div>
-          {rows.map((row) => (
-            <div className="student-table-row" key={row[0]}>
-              {row.map((cell, index) => <span key={index}>{cell}</span>)}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+import { Arrow, SiteFooter, SiteHeader, TEACHER_SIGN_IN_URL, WEB_APP_URL } from './siteShared.jsx';
 
 function ClassroomPage() {
   return (
     <div className="classroom-page">
       <SiteHeader active="classroom" />
-      <main>
-        <section className="page-hero">
+      <main id="classroom-content">
+        <section className="page-hero" aria-labelledby="classroom-title">
           <div className="shell page-hero-inner">
-            <div className="eyebrow">CALCURA CLASSROOM</div>
-            <h1>See how your students are actually practicing.</h1>
-            <p>
-              Calcura Classroom adds a browser-based instructor layer to the free student app: managed classes, seat controls, shared progress, and practice analytics without putting student practice behind a paywall.
-            </p>
+            <div className="classroom-overline"><span>CALCURA CLASSROOM</span><span className="classroom-status">Live now</span></div>
+            <h1 id="classroom-title">Calcura Classroom</h1>
+            <p className="classroom-hero-lead">Your classes. Their practice. A clearer view.</p>
+            <p>Create classes, publish calculus assignments, and see progress from the same free Calcura app your students already use.</p>
             <div className="page-hero-actions">
-              <a className="button" href="/contact/">Request a pilot <Arrow /></a>
-              <a className="button button-secondary" href="/">View student app</a>
+              <a className="button" href={TEACHER_SIGN_IN_URL}>Start teaching <Arrow /></a>
+              <a className="button button-secondary" href={TEACHER_SIGN_IN_URL}>Teacher sign in</a>
             </div>
-            <div className="classroom-hero-proof">
-              <div><strong>Class codes</strong><span>Students opt into a managed class without losing independent practice.</span></div>
-              <div><strong>Learning signals</strong><span>See completion, attempts, first-try success, and practice consistency.</span></div>
-              <div><strong>Seat controls</strong><span>License the managed classroom layer rather than charging every student.</span></div>
-            </div>
+            <p className="classroom-account-note">Sign in with your email and a six-digit code. New teachers create their account on first sign-in.</p>
+            <a className="classroom-text-link" href={WEB_APP_URL}>Here to practice? Open the free student app →</a>
           </div>
         </section>
 
-        <section className="section classroom-section">
+        <section className="section classroom-section" aria-labelledby="classroom-flow-title">
           <div className="shell">
             <div className="section-heading classroom-heading">
               <div className="eyebrow">HOW IT WORKS</div>
-              <h2>A simple classroom layer around the same student app.</h2>
-              <p>Administration stays on the web. Students keep practicing in Calcura and join a class only when they want their progress shared with an instructor.</p>
+              <h2 id="classroom-flow-title">From class setup to student progress.</h2>
+              <p>The teacher workspace and student app work together. No separate student Classroom account is needed.</p>
             </div>
-            <div className="classroom-flow">
-              <div><strong>Create a class</strong><p>Instructor signs in on the web and receives a join code.</p></div>
-              <div><strong>Students join</strong><p>Students enter the code in Calcura. One active student uses one seat.</p></div>
-              <div><strong>Progress syncs</strong><p>Instructor sees roster-level and class-level learning metrics.</p></div>
-            </div>
-            <DashboardPreview />
-            <div className="classroom-capabilities">
-              <span>Class codes</span><span>Seat management</span><span>Student rosters</span><span>Progress sync</span><span>Class analytics</span><span>CSV export</span>
-            </div>
+            <ol className="classroom-live-flow">
+              <li><span className="classroom-step" aria-hidden="true">01</span><h3>Create a class</h3><p>Sign in to your personal teacher workspace, create a class, and share its join code.</p></li>
+              <li><span className="classroom-step" aria-hidden="true">02</span><h3>Students join with a code</h3><p>Students sign in to Calcura, open Classroom assignments, and enter your class code.</p></li>
+              <li><span className="classroom-step" aria-hidden="true">03</span><h3>Assign practice. See progress.</h3><p>Publish an assignment. Students work in Calcura, and recorded results appear in your dashboard and assignment analytics.</p></li>
+            </ol>
           </div>
         </section>
 
-        <section className="section pricing-section" id="pricing">
+        <section className="section classroom-tools-section" aria-labelledby="classroom-tools-title">
+          <div className="shell classroom-tools-layout">
+            <div className="section-heading">
+              <div className="eyebrow">IN YOUR TEACHER WORKSPACE</div>
+              <h2 id="classroom-tools-title">Tools for the work of teaching.</h2>
+              <p>Classroom handles the organization. Calcura remains the calculus practice engine.</p>
+            </div>
+            <dl className="classroom-tools">
+              <div><dt>Classes and rosters</dt><dd>Create classes, share student join codes, and view enrolled students in one place.</dd></div>
+              <div><dt>Assignment authoring</dt><dd>Choose practice families, problem counts, and difficulty. Edit drafts, publish assignments, duplicate them, or archive them when finished.</dd></div>
+              <div><dt>Dashboard and analytics</dt><dd>See completion, accuracy, and attempts from recorded assignment results. Look across classes or into an individual assignment.</dd></div>
+              <div><dt>Problem-level controls <span className="classroom-status">Pro</span></dt><dd>In draft assignments, regenerate individual problems, lock the ones you want to keep, and reorder them before publishing.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section className="section classroom-tiers-section" id="pricing" aria-labelledby="classroom-tiers-title">
           <div className="shell">
-            <div className="section-heading centered pricing-heading">
-              <div className="eyebrow">PILOT PRICING</div>
-              <h2>Simple seat plans.</h2>
-              <p>Founding-pilot pricing for tutors, centers, classrooms, and institutions.</p>
+            <div className="section-heading classroom-heading">
+              <div className="eyebrow">PRODUCT TIERS</div>
+              <h2 id="classroom-tiers-title">Start teaching. Add control when you need it.</h2>
+              <p>Teacher and Pro are available now. Organizational tiers are part of the roadmap, not self-service checkout products.</p>
             </div>
-            <div className="pricing-grid">
-              {plans.map((plan) => (
-                <article className={`price-card ${plan.featured ? 'featured' : ''}`} key={plan.name}>
-                  <div><span className="plan-name">{plan.name}</span><strong className="seat-count">{plan.seats}</strong></div>
-                  <div className="price"><strong>{plan.price}</strong><span>{plan.period}</span></div>
-                  <div className="price-features">
-                    <span><Check /> Instructor web portal</span>
-                    <span><Check /> Managed classroom seats</span>
-                    <span><Check /> Shared progress analytics</span>
-                  </div>
-                  <a href="/contact/" className={`button ${plan.featured ? '' : 'button-secondary'} full-width`}>Request pilot <Arrow /></a>
-                </article>
-              ))}
+            <div className="classroom-current-tiers">
+              <article className="classroom-tier" data-tier="Teacher" aria-labelledby="teacher-tier-title">
+                <div className="classroom-tier-heading"><h3 id="teacher-tier-title">Teacher</h3><span className="classroom-status">Available now</span></div>
+                <p className="classroom-tier-price">Free</p>
+                <p>Your current entry tier: classes, join codes, assignment creation and publication, student progress, and basic analytics.</p>
+                <a className="button button-secondary" href={TEACHER_SIGN_IN_URL}>Start with Teacher</a>
+              </article>
+              <article className="classroom-tier" data-tier="Pro" aria-labelledby="pro-tier-title">
+                <div className="classroom-tier-heading"><h3 id="pro-tier-title">Pro</h3><span className="classroom-status">Available now</span></div>
+                <p className="classroom-tier-price">$19<span> / month</span><span className="classroom-annual-price">or $149 / year · USD</span></p>
+                <p>Everything in Teacher, plus problem-level assignment editing: regenerate, lock, and reorder problems before publishing.</p>
+                <a className="button" href={TEACHER_SIGN_IN_URL}>Explore Pro in your workspace <Arrow /></a>
+              </article>
             </div>
-            <p className="pricing-footnote">Need 300, 500, 1,000, or unlimited seats? Institutional plans can be quoted around the deployment.</p>
+            <div className="classroom-future-tiers" aria-label="Planned organizational tiers">
+              <article data-tier="Team"><div><h3>Team</h3><span className="classroom-status">Planned</span></div><p>For future multi-instructor use. Pricing and availability are not announced.</p></article>
+              <article data-tier="School"><div><h3>School</h3><span className="classroom-status">Planned</span></div><p>For future school and department deployments. Pricing and availability are not announced.</p></article>
+              <article data-tier="University"><div><h3>University</h3><span className="classroom-status">Quote-only · planned</span></div><p>For institutional requirements. Discuss a future deployment through an individual inquiry.</p></article>
+            </div>
+            <p className="classroom-tier-note">Pro is the current self-service paid upgrade. Team, School, and University are not available to purchase online. <a className="classroom-text-link" href="/contact/">Discuss institutional requirements →</a></p>
           </div>
         </section>
 
-        <section className="section pilot-section">
-          <div className="shell pilot-panel">
-            <div>
-              <div className="eyebrow light">FOUNDING PILOT</div>
-              <h2>Built for the first instructor and tutoring-center pilots.</h2>
-              <p>Use the pilot to validate class setup, student joining, roster visibility, progress metrics, and the operational workflow before a broader rollout.</p>
-            </div>
-            <div className="pilot-actions">
-              <a className="button button-white" href="/contact/">Request a pilot</a>
-            </div>
+        <section className="section classroom-students-section" aria-labelledby="classroom-students-title">
+          <div className="shell classroom-students-layout">
+            <div className="section-heading"><div className="eyebrow">THE STUDENT PRINCIPLE</div><h2 id="classroom-students-title">Calcura stays free for students.</h2></div>
+            <div><p>Students can practice independently and join a class without buying Pro. Paid Classroom plans support teacher and organizational tools, not a paywall around student calculus practice.</p><a className="classroom-text-link" href={WEB_APP_URL}>Open the free student app →</a></div>
           </div>
         </section>
 
-        <section className="section faq-section">
+        <section className="section faq-section" aria-labelledby="classroom-faq-title">
           <div className="shell faq-layout">
-            <div className="section-heading"><div className="eyebrow">CLASSROOM FAQ</div><h2>The commercial model.</h2></div>
+            <div className="section-heading"><div className="eyebrow">CLASSROOM FAQ</div><h2 id="classroom-faq-title">A few practical details.</h2></div>
             <div className="faq-list">
-              <details open><summary>What does a classroom seat represent?</summary><p>One active student participating in an organization’s managed Calcura environment. A seat is not the same thing as a download or device installation.</p></details>
-              <details><summary>Does Calcura stop working if a class license ends?</summary><p>No. The student keeps the free app and local practice. Only the organization-linked classroom services end.</p></details>
-              <details><summary>Is the instructor portal fully live?</summary><p>The front-end product direction is in place. Production authentication, cloud synchronization, billing, and backend services remain the implementation layer for the pilot.</p></details>
+              <details open><summary>How do I create a teacher account?</summary><p>Choose Start teaching, enter your email, and verify the six-digit code sent to you. Your account is created during your first sign-in, and your personal teacher workspace is ready to use. Returning teachers use the same sign-in page.</p></details>
+              <details><summary>Do I need Pro to start teaching?</summary><p>No. Teacher includes classes, join codes, assignments, student progress, and basic analytics. You can upgrade to Pro from Billing in your teacher workspace for problem-level assignment controls.</p></details>
+              <details><summary>What does the progress view measure?</summary><p>Dashboard and assignment analytics summarize recorded assignment results. They are not a live activity tracker and do not report every independent practice session.</p></details>
+              <details><summary>Can a school or university purchase online?</summary><p>Not yet. Team and School are planned organizational tiers; University is quote-only and planned. Contact us to discuss requirements. No institutional pricing or seat allocation is currently advertised.</p></details>
             </div>
+          </div>
+        </section>
+
+        <section className="section classroom-start-section" aria-labelledby="classroom-start-title">
+          <div className="shell classroom-start-panel">
+            <div><div className="eyebrow light">CALCURA CLASSROOM</div><h2 id="classroom-start-title">Your next class starts here.</h2><p>Start with Teacher. Create your account at first sign-in.</p></div>
+            <div className="classroom-start-actions"><a className="button button-white" href={TEACHER_SIGN_IN_URL}>Start teaching <Arrow /></a><a className="classroom-signin-light" href={TEACHER_SIGN_IN_URL}>Teacher sign in →</a></div>
           </div>
         </section>
       </main>
