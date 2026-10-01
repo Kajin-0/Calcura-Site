@@ -15,11 +15,12 @@ function check(condition, message) { checks++; assert.ok(condition, message); }
 
 check(shared.includes("TEACHER_SIGN_IN_URL = 'https://classroom.calcura.study/signin'"), 'Teacher entry must use the real OTP sign-in endpoint');
 check(page.includes('TEACHER_SIGN_IN_URL, WEB_APP_URL'), 'Classroom page must use the shared teacher/student destinations');
-check((page.match(/href={TEACHER_SIGN_IN_URL}/g) || []).length === 6, 'Hero, current tiers, and final teacher CTAs must use the actual sign-in flow');
+check((page.match(/href={TEACHER_SIGN_UP_URL}/g) || []).length >= 3, 'Hero, Teacher tier, and final CTA must expose teacher signup');
+check((page.match(/href={TEACHER_SIGN_IN_URL}/g) || []).length >= 3, 'Hero, Pro, and final CTA must retain teacher sign-in');
 check((page.match(/href={WEB_APP_URL}/g) || []).length === 2, 'Students must have direct routes to the free app');
 check(shared.includes("WEB_APP_URL = '/app/'"), 'Free student app must retain its correct mount path');
 check(page.includes('Live now'), 'The page must identify the current live product');
-check(/six-digit code/.test(page) && /account on first sign-in/.test(page), 'New teachers must understand the existing email-code account flow');
+check(/six-digit code/.test(page) && /created when you verify the code/.test(page), 'New teachers must understand the existing email-code account creation flow');
 check(shared.includes("TEACHER_SIGN_UP_URL = 'https://classroom.calcura.study/signup'"), 'Teacher signup must use the real production signup endpoint');
 const homeHeader = home.match(/<header\b[\s\S]*?<\/header>/)?.[0] || '';
 const homePromo = home.match(/<section className="section pilot-section">[\s\S]*?<\/section>/)?.[0] || '';
