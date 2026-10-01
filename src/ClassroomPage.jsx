@@ -5,6 +5,8 @@ import './refinements.css';
 import './multipage.css';
 import { Arrow, SiteFooter, SiteHeader, TEACHER_SIGN_IN_URL, WEB_APP_URL } from './siteShared.jsx';
 
+const TEACHER_SIGN_UP_URL = 'https://classroom.calcura.study/signup';
+
 function ClassroomPage() {
   return (
     <div className="classroom-page">
@@ -17,10 +19,10 @@ function ClassroomPage() {
             <p className="classroom-hero-lead">Your classes. Their practice. A clearer view.</p>
             <p>Create classes, publish calculus assignments, and see progress from the same free Calcura app your students already use.</p>
             <div className="page-hero-actions">
-              <a className="button" href={TEACHER_SIGN_IN_URL}>Start teaching <Arrow /></a>
+              <a className="button" href={TEACHER_SIGN_UP_URL}>Create free teacher account <Arrow /></a>
               <a className="button button-secondary" href={TEACHER_SIGN_IN_URL}>Teacher sign in</a>
             </div>
-            <p className="classroom-account-note">Sign in with your email and a six-digit code. New teachers create their account on first sign-in.</p>
+            <p className="classroom-account-note">Teacher is free. No credit card required. Create your account with your email and a six-digit code.</p>
             <a className="classroom-text-link" href={WEB_APP_URL}>Here to practice? Open the free student app →</a>
           </div>
         </section>
@@ -33,7 +35,7 @@ function ClassroomPage() {
               <p>The teacher workspace and student app work together. No separate student Classroom account is needed.</p>
             </div>
             <ol className="classroom-live-flow">
-              <li><span className="classroom-step" aria-hidden="true">01</span><h3>Create a class</h3><p>Sign in to your personal teacher workspace, create a class, and share its join code.</p></li>
+              <li><span className="classroom-step" aria-hidden="true">01</span><h3>Create a class</h3><p>Create your free teacher account, open your workspace, create a class, and share its join code.</p></li>
               <li><span className="classroom-step" aria-hidden="true">02</span><h3>Students join with a code</h3><p>Students sign in to Calcura, open Classroom assignments, and enter your class code.</p></li>
               <li><span className="classroom-step" aria-hidden="true">03</span><h3>Assign practice. See progress.</h3><p>Publish an assignment. Students work in Calcura, and recorded results appear in your dashboard and assignment analytics.</p></li>
             </ol>
@@ -67,8 +69,8 @@ function ClassroomPage() {
               <article className="classroom-tier" data-tier="Teacher" aria-labelledby="teacher-tier-title">
                 <div className="classroom-tier-heading"><h3 id="teacher-tier-title">Teacher</h3><span className="classroom-status">Available now</span></div>
                 <p className="classroom-tier-price">Free</p>
-                <p>Your current entry tier: classes, join codes, assignment creation and publication, student progress, and basic analytics.</p>
-                <a className="button button-secondary" href={TEACHER_SIGN_IN_URL}>Start with Teacher</a>
+                <p>Classes, join codes, assignment creation and publication, student progress, and basic analytics.</p>
+                <a className="button button-secondary" href={TEACHER_SIGN_UP_URL}>Create free teacher account</a>
               </article>
               <article className="classroom-tier" data-tier="Pro" aria-labelledby="pro-tier-title">
                 <div className="classroom-tier-heading"><h3 id="pro-tier-title">Pro</h3><span className="classroom-status">Available now</span></div>
@@ -97,7 +99,7 @@ function ClassroomPage() {
           <div className="shell faq-layout">
             <div className="section-heading"><div className="eyebrow">CLASSROOM FAQ</div><h2 id="classroom-faq-title">A few practical details.</h2></div>
             <div className="faq-list">
-              <details open><summary>How do I create a teacher account?</summary><p>Choose Start teaching, enter your email, and verify the six-digit code sent to you. Your account is created during your first sign-in, and your personal teacher workspace is ready to use. Returning teachers use the same sign-in page.</p></details>
+              <details open><summary>How do I create a teacher account?</summary><p>Choose Create free teacher account, enter your email, and verify the six-digit code sent to you. Your free Teacher workspace is created when you verify the code.</p></details>
               <details><summary>Do I need Pro to start teaching?</summary><p>No. Teacher includes classes, join codes, assignments, student progress, and basic analytics. You can upgrade to Pro from Billing in your teacher workspace for problem-level assignment controls.</p></details>
               <details><summary>What does the progress view measure?</summary><p>Dashboard and assignment analytics summarize recorded assignment results. They are not a live activity tracker and do not report every independent practice session.</p></details>
               <details><summary>Can a school or university purchase online?</summary><p>Not yet. Team and School are planned organizational tiers; University is quote-only and planned. Contact us to discuss requirements. No institutional pricing or seat allocation is currently advertised.</p></details>
@@ -107,8 +109,8 @@ function ClassroomPage() {
 
         <section className="section classroom-start-section" aria-labelledby="classroom-start-title">
           <div className="shell classroom-start-panel">
-            <div><div className="eyebrow light">CALCURA CLASSROOM</div><h2 id="classroom-start-title">Your next class starts here.</h2><p>Start with Teacher. Create your account at first sign-in.</p></div>
-            <div className="classroom-start-actions"><a className="button button-white" href={TEACHER_SIGN_IN_URL}>Start teaching <Arrow /></a><a className="classroom-signin-light" href={TEACHER_SIGN_IN_URL}>Teacher sign in →</a></div>
+            <div><div className="eyebrow light">CALCURA CLASSROOM</div><h2 id="classroom-start-title">Your next class starts here.</h2><p>Create your free Teacher workspace. No credit card required.</p></div>
+            <div className="classroom-start-actions"><a className="button button-white" href={TEACHER_SIGN_UP_URL}>Create free teacher account <Arrow /></a><a className="classroom-signin-light" href={TEACHER_SIGN_IN_URL}>Teacher sign in →</a></div>
           </div>
         </section>
       </main>
