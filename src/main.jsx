@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './styles.css';
 import './refinements.css';
 import { useDownloadChooserLifecycle } from './useDownloadChooserLifecycle';
-import { TEACHER_SIGN_IN_URL } from './siteShared.jsx';
+import { TEACHER_SIGN_IN_URL, TEACHER_SIGN_UP_URL } from './siteShared.jsx';
 
 const ANDROID_DOWNLOAD_URL =
   'https://github.com/Kajin-0/Calcura-Site/releases/latest/download/Calcura.apk';
@@ -367,7 +367,7 @@ function App() {
   return (
     <div id="top">
       <header className="site-header">
-        <div className="shell nav-shell">
+        <div className="shell nav-shell home-nav-shell">
           <Logo />
           <div className="nav-actions">
             <a className="button button-small nav-login" href={WEB_APP_URL}>
@@ -375,7 +375,10 @@ function App() {
               <span className="nav-login-short">Login</span>
             </a>
             <DownloadChooser size="small" shortLabel="Download" />
-            <a className="button button-secondary button-small nav-instructor" href={TEACHER_SIGN_IN_URL}>Teacher sign in</a>
+            <div className="nav-teacher-actions">
+              <a className="button button-secondary button-small" href={TEACHER_SIGN_UP_URL}>Create free teacher account</a>
+              <a className="nav-teacher-signin" href={TEACHER_SIGN_IN_URL}>Teacher sign in</a>
+            </div>
           </div>
         </div>
       </header>
@@ -491,8 +494,8 @@ function App() {
               </p>
             </div>
             <div className="pilot-actions">
-              <a className="button button-white" href="/classroom/">Explore Classroom</a>
-              <a className="button button-ghost-light" href="/contact/">Contact Calcura</a>
+              <a className="button button-white" href={TEACHER_SIGN_UP_URL}>Create free teacher account</a>
+              <a className="button button-ghost-light" href={TEACHER_SIGN_IN_URL}>Teacher sign in</a>
             </div>
           </div>
         </section>
@@ -514,12 +517,13 @@ function App() {
       </main>
 
       <footer>
-        <div className="shell footer-inner">
+        <div className="shell footer-inner home-footer-inner">
           <Logo />
           <p>Free calculus practice for students. Classroom tools for educators.</p>
           <div>
             <a href="#features">Features</a>
             <a href="/classroom/">Classroom</a>
+            <a href={TEACHER_SIGN_UP_URL}>Create free teacher account</a>
             <a href={TEACHER_SIGN_IN_URL}>Teacher sign in</a>
             <a href="/contact/">Contact</a>
           </div>
