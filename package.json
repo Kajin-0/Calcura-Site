@@ -8,6 +8,7 @@
     "build": "vite build",
     "test:download-chooser-a11y": "node tests/download-chooser-a11y-regression.cjs && node tests/pwa-install-entry-regression.cjs",
     "test:classroom-entry": "node tests/classroom-production-entry-regression.cjs",
+    "test:deployment-gates": "node tests/deployment-gates-regression.cjs",
     "preview": "vite preview"
   },
   "dependencies": {

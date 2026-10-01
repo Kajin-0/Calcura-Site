@@ -20,13 +20,14 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
+          cache: npm
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
         run: npm run build
 
       - name: Classroom entry and navigation checks
-        run: npm run test:classroom-entry && npm run test:download-chooser-a11y
+        run: npm run test:classroom-entry && npm run test:download-chooser-a11y && npm run test:deployment-gates
