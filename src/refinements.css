@@ -7,30 +7,6 @@
   white-space: nowrap;
 }
 
-.nav-teacher-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-}
-
-.nav-teacher-signin {
-  display: inline-flex;
-  align-items: center;
-  min-height: 24px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-  text-underline-offset: 3px;
-}
-
-.nav-teacher-signin:hover,
-.nav-teacher-signin:focus-visible {
-  color: var(--ink);
-  text-decoration: underline;
-}
-
 .home-footer-inner > div {
   flex-wrap: wrap;
 }
@@ -187,32 +163,6 @@
     position: sticky;
   }
 
-  .nav-shell.home-nav-shell {
-    flex-wrap: wrap;
-    gap: 8px;
-    padding-block: 10px;
-  }
-
-  .home-nav-shell .nav-actions {
-    display: contents;
-  }
-
-  .home-nav-shell .nav-login {
-    margin-left: auto;
-  }
-
-  .home-nav-shell .nav-teacher-actions {
-    flex-basis: 100%;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
-  }
-
-  .home-nav-shell .nav-teacher-signin {
-    min-height: 44px;
-  }
-
   .hero-visual {
     overflow: hidden;
     min-height: min(620px, 92vw);
@@ -237,12 +187,6 @@
 
   .nav-instructor {
     display: none;
-  }
-
-  .home-nav-shell .nav-teacher-actions .button {
-    min-height: 44px;
-    padding-inline: 10px;
-    font-size: 12px;
   }
 
   .nav-actions {
@@ -272,10 +216,19 @@
     display: inline;
   }
 
+  .nav-actions {
+    gap: 4px;
+  }
+
+  .nav-actions > a.button.button-secondary,
   .nav-actions .download-chooser .button {
     min-height: 44px;
-    padding: 0 14px;
-    font-size: 13px;
+    padding: 0 8px;
+    font-size: 12px;
+  }
+
+  .nav-actions > a.button.button-secondary {
+    padding-inline: 4px;
   }
 
   .download-chooser {

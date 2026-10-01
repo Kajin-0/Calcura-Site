@@ -21,16 +21,20 @@ check((page.match(/href={WEB_APP_URL}/g) || []).length === 2, 'Students must hav
 check(shared.includes("WEB_APP_URL = '/app/'"), 'Free student app must retain its correct mount path');
 check(page.includes('Live now'), 'The page must identify the current live product');
 check(/six-digit code/.test(page) && /created when you verify the code/.test(page), 'New teachers must understand the existing email-code account creation flow');
-check(shared.includes("TEACHER_SIGN_UP_URL = 'https://classroom.calcura.study/signup'"), 'Teacher signup must use the real production signup endpoint');
+check(page.includes("TEACHER_SIGN_UP_URL = 'https://classroom.calcura.study/signup'"), 'Classroom page signup must use the real production signup endpoint');
 const homeHeader = home.match(/<header\b[\s\S]*?<\/header>/)?.[0] || '';
 const homePromo = home.match(/<section className="section pilot-section">[\s\S]*?<\/section>/)?.[0] || '';
 const homeFooter = home.match(/<footer>[\s\S]*?<\/footer>/)?.[0] || '';
-check(homeHeader.includes('href={TEACHER_SIGN_UP_URL}>Create free teacher account'), 'Root navigation must expose direct free teacher signup');
-check(homeHeader.includes('href={TEACHER_SIGN_IN_URL}>Teacher sign in'), 'Root navigation must retain teacher sign-in');
-check(homePromo.includes('className="button button-white" href={TEACHER_SIGN_UP_URL}>Create free teacher account'), 'Root Classroom promotion must make free teacher signup its primary CTA');
-check(homePromo.includes('className="button button-ghost-light" href={TEACHER_SIGN_IN_URL}>Teacher sign in'), 'Root Classroom promotion must make teacher sign-in its secondary CTA');
+const homeTeacherAuth = homeHeader.match(/href={TEACHER_SIGN_IN_URL}>Teacher access/g) || [];
+check(homeTeacherAuth.length === 1, 'Root navigation must expose exactly one teacher auth entry');
+check(homeHeader.includes('className="button button-secondary button-small" href={TEACHER_SIGN_IN_URL}>Teacher access'), 'Root teacher entry must be one secondary Teacher access button');
+check(!homeHeader.includes('Create free teacher account') && !homeHeader.includes('Teacher sign in'), 'Root navigation must not offer competing teacher signup and sign-in actions');
+check(homePromo.includes('className="button button-white" href={TEACHER_SIGN_IN_URL}>Teacher access'), 'Root Classroom promotion primary CTA must be Teacher access');
+check(homePromo.includes('className="button button-ghost-light" href="/classroom/">Explore Classroom'), 'Root Classroom promotion secondary CTA must explore Classroom');
+check(!homePromo.includes('Create free teacher account') && !homePromo.includes('Teacher sign in'), 'Root Classroom promotion must not offer competing auth actions');
 check(home.includes('href="/classroom/">Explore Calcura Classroom'), 'Root homepage must preserve Classroom product discovery');
-check(homeFooter.includes('href={TEACHER_SIGN_UP_URL}>Create free teacher account') && homeFooter.includes('href={TEACHER_SIGN_IN_URL}>Teacher sign in') && homeFooter.includes('href="/classroom/">Classroom'), 'Root footer must keep signup, sign-in and Classroom discoverable');
+check(homeFooter.includes('href={TEACHER_SIGN_IN_URL}>Teacher access') && homeFooter.includes('href="/classroom/">Classroom'), 'Root footer must keep Teacher access and Classroom discoverable');
+check(!homeFooter.includes('Create free teacher account') && !homeFooter.includes('Teacher sign in'), 'Root footer must not split teacher signup and sign-in');
 for (const obsolete of [/request (?:a )?pilot/i, /founding[- ]pilot/i, /pilot pricing/i, /Small Team/, /\$(?:39|79|199)\b/, /production authentication.*remain/i, /seat controls/i, /CSV export/i]) {
   check(!obsolete.test(page + metadata + home + refinements + read('contact/index.html')), `Obsolete or unsupported claim must not return: ${obsolete}`);
 }
@@ -49,6 +53,7 @@ check(/data-tier="Teacher"[\s\S]*?classroom-tier-price">Free/.test(page), 'Teach
 check(page.includes('Calcura stays free for students.') && page.includes('without buying Pro'), 'Student practice and class participation must remain described as free');
 check(!/founding/i.test(page), 'Do not advertise an unimplemented Founding Pro promotion');
 check(!/checkout\.stripe\.com|price_[a-z0-9]+|buy\.stripe\.com/i.test(page), 'Public copy must not invent billing checkout authority');
-check(shared.includes('href={TEACHER_SIGN_IN_URL}>Teacher sign in') && home.includes('href={TEACHER_SIGN_IN_URL}>Teacher sign in'), 'Teacher sign-in must be discoverable in site navigation');
+check(shared.includes('href={TEACHER_SIGN_IN_URL}>Teacher sign in'), 'Classroom navigation must keep teacher sign-in');
+check(!/Create free teacher account|Teacher sign in/.test(homeHeader + homePromo + homeFooter), 'Root homepage must not present signup and sign-in as separate teacher actions');
 check(metadata.includes('href="https://calcura.study/classroom/"') && metadata.includes('Calcura Classroom is live.'), 'Canonical and metadata must reflect the real Classroom page');
 console.log(`classroom-production-entry-regression passed (${checks} assertions)`);
