@@ -20,7 +20,16 @@ check((page.match(/href={WEB_APP_URL}/g) || []).length === 2, 'Students must hav
 check(shared.includes("WEB_APP_URL = '/app/'"), 'Free student app must retain its correct mount path');
 check(page.includes('Live now'), 'The page must identify the current live product');
 check(/six-digit code/.test(page) && /account on first sign-in/.test(page), 'New teachers must understand the existing email-code account flow');
-check(!/\/signup\b/.test(page + shared + home), 'Do not invent a signup route');
+check(shared.includes("TEACHER_SIGN_UP_URL = 'https://classroom.calcura.study/signup'"), 'Teacher signup must use the real production signup endpoint');
+const homeHeader = home.match(/<header\b[\s\S]*?<\/header>/)?.[0] || '';
+const homePromo = home.match(/<section className="section pilot-section">[\s\S]*?<\/section>/)?.[0] || '';
+const homeFooter = home.match(/<footer>[\s\S]*?<\/footer>/)?.[0] || '';
+check(homeHeader.includes('href={TEACHER_SIGN_UP_URL}>Create free teacher account'), 'Root navigation must expose direct free teacher signup');
+check(homeHeader.includes('href={TEACHER_SIGN_IN_URL}>Teacher sign in'), 'Root navigation must retain teacher sign-in');
+check(homePromo.includes('className="button button-white" href={TEACHER_SIGN_UP_URL}>Create free teacher account'), 'Root Classroom promotion must make free teacher signup its primary CTA');
+check(homePromo.includes('className="button button-ghost-light" href={TEACHER_SIGN_IN_URL}>Teacher sign in'), 'Root Classroom promotion must make teacher sign-in its secondary CTA');
+check(home.includes('href="/classroom/">Explore Calcura Classroom'), 'Root homepage must preserve Classroom product discovery');
+check(homeFooter.includes('href={TEACHER_SIGN_UP_URL}>Create free teacher account') && homeFooter.includes('href={TEACHER_SIGN_IN_URL}>Teacher sign in') && homeFooter.includes('href="/classroom/">Classroom'), 'Root footer must keep signup, sign-in and Classroom discoverable');
 for (const obsolete of [/request (?:a )?pilot/i, /founding[- ]pilot/i, /pilot pricing/i, /Small Team/, /\$(?:39|79|199)\b/, /production authentication.*remain/i, /seat controls/i, /CSV export/i]) {
   check(!obsolete.test(page + metadata + home + refinements + read('contact/index.html')), `Obsolete or unsupported claim must not return: ${obsolete}`);
 }
