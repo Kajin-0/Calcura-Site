@@ -29,5 +29,8 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Classroom entry and navigation checks
-        run: npm run test:classroom-entry && npm run test:download-chooser-a11y && npm run test:deployment-gates
+      - name: Source regression gates
+        run: npm run test:classroom-entry && npm run test:download-chooser-a11y && npm run test:site-quality && npm run test:deployment-gates
+
+      - name: Built artifact gate
+        run: npm run test:built-site

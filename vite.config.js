@@ -1,8 +1,5 @@
-import { resolve } from 'node:path';
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-
-const root = process.cwd();
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react()],
@@ -10,9 +7,10 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        home: resolve(root, 'index.html'),
-        classroom: resolve(root, 'classroom/index.html'),
-        contact: resolve(root, 'contact/index.html'),
+        home: 'index.html',
+        classroom: 'classroom/index.html',
+        contact: 'contact/index.html',
+        notFound: '404.html',
       },
     },
   },

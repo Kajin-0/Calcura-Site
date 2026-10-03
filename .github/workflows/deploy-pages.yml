@@ -33,10 +33,13 @@ jobs:
         run: npm ci
 
       - name: Production regression gates
-        run: npm run test:classroom-entry && npm run test:download-chooser-a11y && npm run test:deployment-gates
+        run: npm run test:classroom-entry && npm run test:download-chooser-a11y && npm run test:site-quality && npm run test:deployment-gates
 
       - name: Build
         run: npm run build
+
+      - name: Built artifact gate
+        run: npm run test:built-site
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

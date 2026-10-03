@@ -1,56 +1,81 @@
 # Calcura Site
 
-Public marketing site and educator-facing product scaffold for **Calcura**.
+The public site for **Calcura**, served at [calcura.study](https://calcura.study).
 
-## Current scope
+| Route | Page |
+|-------|------|
+| `/` | Free student app: what it does, how to get it |
+| `/classroom/` | Calcura Classroom for teachers (Teacher free, Pro $19/month or $149/year USD; Team, School, University planned) |
+| `/contact/` | Contact form (Formspree) |
+| `/404.html` | Not-found page (served by GitHub Pages at any depth) |
+| `/app/` | The student web app (PWA build artifact, copied in; not edited here) |
 
-The site currently includes:
+The Classroom product itself lives at `classroom.calcura.study`; this site only links to its sign-in and sign-up.
 
-- product marketing for the free Calcura student app;
-- guided practice, graphing, reference, and learning-progress previews;
-- a Calcura Classroom product section;
-- a browser-based instructor dashboard concept;
-- seat-based early-access pricing;
-- responsive desktop/mobile layouts;
-- GitHub Pages deployment workflow.
+## Develop
 
-The student app remains free in the proposed commercial model. Paid seats apply only to the managed **Calcura Classroom** layer.
-
-## Local development
+Node 22 (see `.nvmrc`).
 
 ```bash
-npm install
-npm run dev
+npm ci
+npm run dev        # Vite dev server
+npm run build      # client build + SSR build + prerender into dist/
+npm run preview    # serve dist/ exactly as built
 ```
 
-Production build:
+`npm run build` prerenders every page to static HTML (`scripts/prerender.mjs`), so visitors, crawlers and link-preview bots get real content before any JavaScript runs. The client then hydrates that markup.
+
+## Structure
+
+```
+index.html, classroom/, contact/, 404.html   Vite entry documents (heads, social cards, structured data)
+src/
+  entries/        one client entry per page + shared hydrate-or-create mount
+  entry-server.jsx  server renderer used by prerendering and by the tests
+  pages/          HomePage, ClassroomPage, ContactPage, NotFoundPage (+ home/ previews, contact/ form)
+  components/     SiteHeader, SiteFooter, PageShell, DownloadChooser, Logo, Icons
+  site/           links.js (every destination), chooser lifecycle hook, same-page navigation
+  styles/         tokens, base, components, then one stylesheet per page
+brand/            sources for the favicon, touch icon and social cards (+ render script)
+public/           static files copied as-is (icons, social cards, robots.txt, sitemap.xml, CNAME, app/)
+scripts/          prerender.mjs
+tests/            regression suites (below)
+```
+
+Design tokens (colour, type, radii, shadows, layout, motion) live in `src/styles/tokens.css`. Fonts (Inter, STIX Two Text) are self-hosted through Fontsource; there are no third-party requests.
+
+Destinations (app, install, APK, teacher sign-in and sign-up) are defined once in `src/site/links.js`.
+
+## Tests
 
 ```bash
-npm run build
-npm run preview
+npm run test:classroom-entry         # teacher entry points, tiers, pricing, banned claims (on rendered HTML)
+npm run test:download-chooser-a11y   # chooser dialog + PWA install routing
+npm run test:site-quality            # contrast, font sizes, heads, landmarks, headings, ids, links, assets
+npm run test:deployment-gates        # the workflows run every gate, in the right order
+npm run build && npm run test:built-site   # the deployed artifact: prerender, asset paths, 404 depth, budgets
 ```
 
-Pull requests run the same production build with a 10-minute timeout.
+Source tests render the real components with esbuild (`tests/helpers/render.cjs`) and assert on the HTML visitors receive. `test:built-site` needs a fresh `dist/`.
 
 ## Deployment
 
-`.github/workflows/deploy-pages.yml` builds and deploys `dist/` to GitHub Pages after changes land on `main`.
+`.github/workflows/deploy-pages.yml` runs the source gates, builds, runs the artifact gate, then publishes `dist/` to GitHub Pages. It runs only on pushes to `main` (and manual dispatch). `.github/workflows/check.yml` runs the same gates on pull requests.
 
-If GitHub Pages is not already configured for the repository, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**.
+If Pages is not configured, set **Settings → Pages → Build and deployment → Source** to **GitHub Actions**.
 
-## Product placeholders still to connect
+## Brand assets
 
-The front end intentionally does **not** pretend that infrastructure exists yet. Before the site can accept real instructor customers, connect:
+`public/favicon.svg` is hand-authored. The PNG icons and the two 1200×630 social cards are rendered from `brand/` with Playwright, which is deliberately not a dependency of this site:
 
-1. a sales/pilot contact destination;
-2. instructor authentication;
-3. organization/class/seat backend;
-4. student progress synchronization from Calcura;
-5. payment/billing;
-6. production instructor portal data.
+```bash
+npm install --no-save playwright
+npx playwright install chromium
+node brand/render-assets.cjs
+```
 
-The dashboard shown on the marketing page uses clearly labeled demo data.
+Commit the regenerated files in `public/`.
 
-## Related project
+## Related
 
 Calcura application repository: https://github.com/Kajin-0/Calcura

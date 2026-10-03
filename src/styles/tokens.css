@@ -1,0 +1,78 @@
+/*
+ * Calcura site design tokens.
+ * Palette is unchanged from the original identity (ink navy, accent blue, cool greys);
+ * text greys were darkened so every text/background pair clears WCAG AA (4.5:1).
+ */
+:root {
+  color-scheme: light;
+
+  /* Colour */
+  --ink: #0b1730;
+  --ink-2: #1f2d44;
+  --text: #1f2d44;
+  --text-muted: #4f607a;
+  --text-subtle: #5d6e87;
+  --line: #dfe7f1;
+  --line-strong: #c7d3e3;
+  --surface: #ffffff;
+  --surface-alt: #f6f8fc;
+  --surface-sunken: #eef2f8;
+  --accent: #1769e0;
+  --accent-strong: #0f55bd;
+  --accent-soft: #e9f1fd;
+  --accent-line: #c6dbfa;
+  --navy: #071329;
+  --navy-2: #0d1d38;
+  --on-dark: #ffffff;
+  --on-dark-muted: #b9c7dd;
+  --positive: #0f7a55;
+  --negative: #b4382b;
+  --neutral: #5d6e87;
+
+  /* Type */
+  --font-sans: 'Inter Variable', Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-math: 'STIX Two Text', 'Cambria Math', Cambria, Georgia, serif;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.1875rem;
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+
+  /* Elevation */
+  --shadow-xs: 0 1px 2px rgba(11, 23, 48, 0.06);
+  --shadow-sm: 0 1px 2px rgba(11, 23, 48, 0.06), 0 4px 12px -2px rgba(11, 23, 48, 0.08);
+  --shadow-md: 0 2px 4px rgba(11, 23, 48, 0.05), 0 12px 32px -8px rgba(11, 23, 48, 0.14);
+  --shadow-lg: 0 4px 8px rgba(11, 23, 48, 0.05), 0 28px 64px -16px rgba(11, 23, 48, 0.22);
+  --shadow-focus: 0 0 0 3px rgba(23, 105, 224, 0.28);
+
+  /* Layout */
+  --container: 75rem;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --header-h: 4.5rem;
+  --section-y: clamp(4.5rem, 9vw, 8rem);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-fast: 150ms;
+}
+
+@media (max-width: 64rem) {
+  :root {
+    --header-h: 4rem;
+  }
+}
+
+/* 320-360px phones (WCAG reflow width): reclaim horizontal room without touching larger layouts. */
+@media (max-width: 22.5rem) {
+  :root {
+    --gutter: 1rem;
+  }
+}

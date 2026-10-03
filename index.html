@@ -3,20 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calcura: Learn integrals by doing them</title>
     <meta
       name="description"
       content="Calcura is a free calculus practice app with guided solutions, generated integral practice, graphs, references, and private learning progress."
     />
-    <meta name="theme-color" content="#f7f9fc" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="canonical" href="https://calcura.study/" />
-    <link rel="stylesheet" href="/src/unit-circle-fix.css" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <meta property="og:site_name" content="Calcura" />
+    <meta property="og:type" content="website" />
     <meta property="og:url" content="https://calcura.study/" />
     <meta property="og:title" content="Calcura: Learn integrals by doing them" />
     <meta property="og:description" content="Free calculus practice for students with a separate classroom layer for educators." />
-    <title>Calcura: Learn integrals by doing them</title>
+    <meta property="og:image" content="https://calcura.study/og-home.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Calcura: Practice integrals. Understand every step." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Calcura: Learn integrals by doing them" />
+    <meta name="twitter:description" content="Free calculus practice for students with a separate classroom layer for educators." />
+    <meta name="twitter:image" content="https://calcura.study/og-home.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://calcura.study/#organization",
+            "name": "Calcura",
+            "url": "https://calcura.study/",
+            "logo": "https://calcura.study/apple-touch-icon.png"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://calcura.study/#website",
+            "name": "Calcura",
+            "url": "https://calcura.study/",
+            "publisher": { "@id": "https://calcura.study/#organization" }
+          },
+          {
+            "@type": "SoftwareApplication",
+            "name": "Calcura",
+            "url": "https://calcura.study/",
+            "applicationCategory": "EducationalApplication",
+            "operatingSystem": "Web, Android",
+            "description": "A free calculus practice app with guided solutions, generated integral practice, graphs, references, and private learning progress.",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+            "publisher": { "@id": "https://calcura.study/#organization" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/entries/home.jsx"></script>
   </body>
 </html>

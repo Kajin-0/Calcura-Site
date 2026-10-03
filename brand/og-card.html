@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Calcura social card template</title>
+    <style>
+      /* Fonts come from the same Fontsource packages the site ships. */
+      @font-face {
+        font-family: 'Inter Variable';
+        font-weight: 100 900;
+        src: url('../node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2') format('woff2-variations');
+      }
+      * { box-sizing: border-box; margin: 0; }
+      html, body { width: 1200px; height: 630px; }
+      body {
+        position: relative;
+        overflow: hidden;
+        font-family: 'Inter Variable', system-ui, sans-serif;
+        color: #fff;
+        background:
+          radial-gradient(760px 520px at 8% 0%, rgba(23, 105, 224, 0.55), transparent 62%),
+          linear-gradient(150deg, #0b1c3e 0%, #071329 70%);
+      }
+      .grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(156, 194, 255, 0.07) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(156, 194, 255, 0.07) 1px, transparent 1px);
+        background-size: 48px 48px;
+        -webkit-mask-image: radial-gradient(70% 90% at 80% 40%, #000, transparent 75%);
+        mask-image: radial-gradient(70% 90% at 80% 40%, #000, transparent 75%);
+      }
+      .orbit {
+        position: absolute;
+        border: 2px solid rgba(156, 194, 255, 0.2);
+        border-radius: 50%;
+      }
+      .orbit.one { width: 520px; height: 520px; right: -90px; top: 55px; }
+      .orbit.two { width: 760px; height: 760px; right: -210px; top: -65px; border-color: rgba(156, 194, 255, 0.1); }
+      .glyph {
+        position: absolute;
+        right: 120px;
+        top: 120px;
+        width: 290px;
+        height: 400px;
+        color: rgba(156, 194, 255, 0.22);
+      }
+      main {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        padding: 72px 80px;
+      }
+      .brand { display: flex; align-items: center; gap: 18px; font-size: 44px; font-weight: 800; letter-spacing: -0.04em; }
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 64px;
+        height: 64px;
+        border-radius: 18px;
+        background: linear-gradient(145deg, #12264a, #060f21);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 12px 28px -8px rgba(0, 0, 0, 0.6);
+      }
+      .mark svg { height: 38px; width: auto; }
+      h1 { max-width: 760px; font-size: 88px; font-weight: 800; letter-spacing: -0.045em; line-height: 1.02; }
+      h1 span { color: #7db2ff; }
+      p { margin-top: 28px; max-width: 700px; color: #c3d2e9; font-size: 32px; font-weight: 500; letter-spacing: -0.01em; line-height: 1.4; }
+      .url { color: #9cc2ff; font-size: 26px; font-weight: 600; letter-spacing: 0.01em; }
+    </style>
+  </head>
+  <body>
+    <div class="grid"></div>
+    <div class="orbit one"></div>
+    <div class="orbit two"></div>
+    <svg class="glyph" viewBox="30 -727 624 953" aria-hidden="true">
+      <path transform="scale(1 -1)" fill="currentColor" d="M578 671L578 677Q578 677 570.5 680Q563 683 544 683Q516 683 496 659.5Q476 636 461 595.5Q446 555 434.5 504.5Q423 454 413.5 399Q404 344 395 292Q375 182 350 87.5Q325 -7 293 -77.5Q261 -148 220.5 -187Q180 -226 129 -226Q76 -226 53 -199Q30 -172 30 -141Q30 -106 47.5 -87.5Q65 -69 88 -69Q108 -69 117.5 -80.5Q127 -92 127 -111Q127 -132 120.5 -146Q114 -160 104 -174L104 -181Q104 -181 109.5 -184Q115 -187 128 -187Q161 -187 184 -150.5Q207 -114 223 -52Q239 10 253 87.5Q267 165 282 246Q294 310 309.5 378Q325 446 346.5 508Q368 570 397.5 619.5Q427 669 467.5 698Q508 727 562 727Q599 727 626.5 706Q654 685 654 642Q654 604 632 585Q610 566 587 566Q548 566 548 610Q548 644 578 671Z" />
+    </svg>
+    <main>
+      <div class="brand">
+        <span class="mark">
+          <svg viewBox="30 -727 624 953" aria-hidden="true"><path transform="scale(1 -1)" fill="#fff" stroke="#fff" stroke-width="14" stroke-linejoin="round" d="M578 671L578 677Q578 677 570.5 680Q563 683 544 683Q516 683 496 659.5Q476 636 461 595.5Q446 555 434.5 504.5Q423 454 413.5 399Q404 344 395 292Q375 182 350 87.5Q325 -7 293 -77.5Q261 -148 220.5 -187Q180 -226 129 -226Q76 -226 53 -199Q30 -172 30 -141Q30 -106 47.5 -87.5Q65 -69 88 -69Q108 -69 117.5 -80.5Q127 -92 127 -111Q127 -132 120.5 -146Q114 -160 104 -174L104 -181Q104 -181 109.5 -184Q115 -187 128 -187Q161 -187 184 -150.5Q207 -114 223 -52Q239 10 253 87.5Q267 165 282 246Q294 310 309.5 378Q325 446 346.5 508Q368 570 397.5 619.5Q427 669 467.5 698Q508 727 562 727Q599 727 626.5 706Q654 685 654 642Q654 604 632 585Q610 566 587 566Q548 566 548 610Q548 644 578 671Z" /></svg>
+        </span>
+        calcura
+      </div>
+      <div>
+        <h1 id="headline"></h1>
+        <p id="subline"></p>
+      </div>
+      <div class="url">calcura.study</div>
+    </main>
+    <script>
+      // Card copy is chosen by query string so one template produces every social image.
+      const cards = {
+        home: { head: 'Practice integrals.<br /><span>Understand every step.</span>', sub: 'Free calculus practice for students.' },
+        classroom: { head: 'Calcura <span>Classroom</span>', sub: 'Your classes. Their practice. A clearer view.' },
+      };
+      const card = cards[new URLSearchParams(location.search).get('card')] || cards.home;
+      document.getElementById('headline').innerHTML = card.head;
+      document.getElementById('subline').textContent = card.sub;
+    </script>
+  </body>
+</html>
