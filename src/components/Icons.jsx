@@ -144,9 +144,10 @@ export const PlusIcon = ({ className }) => (
   </svg>
 );
 
-// The brand's integral sign is the real STIX Two Math glyph (U+222B), embedded as an outline so it
-// renders identically on every platform (STIX Two Text on Google Fonts / Fontsource ships no U+222B,
-// so the previous text glyph silently fell back to a different system font per device).
+// Typeset-math integral (STIX Two Math U+222B) for the app previews, where it stands for math in an
+// equation. It is NOT the Calcura logo: the logo is CalcuraIntegralMark below. The glyph is embedded as an
+// outline so it renders identically on every platform (STIX Two Text on Google Fonts / Fontsource ships
+// no U+222B, so a text glyph would silently fall back to a different system font per device).
 const INTEGRAL_PATH =
   'M578 671L578 677Q578 677 570.5 680Q563 683 544 683Q516 683 496 659.5Q476 636 461 595.5Q446 555 434.5 504.5Q423 454 413.5 399Q404 344 395 292Q375 182 350 87.5Q325 -7 293 -77.5Q261 -148 220.5 -187Q180 -226 129 -226Q76 -226 53 -199Q30 -172 30 -141Q30 -106 47.5 -87.5Q65 -69 88 -69Q108 -69 117.5 -80.5Q127 -92 127 -111Q127 -132 120.5 -146Q114 -160 104 -174L104 -181Q104 -181 109.5 -184Q115 -187 128 -187Q161 -187 184 -150.5Q207 -114 223 -52Q239 10 253 87.5Q267 165 282 246Q294 310 309.5 378Q325 446 346.5 508Q368 570 397.5 619.5Q427 669 467.5 698Q508 727 562 727Q599 727 626.5 706Q654 685 654 642Q654 604 632 585Q610 566 587 566Q548 566 548 610Q548 644 578 671Z';
 
@@ -158,6 +159,31 @@ export const IntegralGlyph = ({ className }) => (
       fill="currentColor"
       stroke="currentColor"
       strokeWidth="14"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+// The Calcura logo: the exact integral outline of the app icon and the app menu,
+// copied from calcura/branding/calcura-integral-mark.svg (KaTeX Size1 \int).
+// Never substitute another integral for the logo. `weight` thickens the outline
+// (in path units) so the hairline tails stay visible at small sizes; the viewBox
+// grows with it so the stroke is never clipped.
+const CALCURA_MARK_PATH =
+  'M98.0 1000.0Q98.0 1030.0 74.0 1042.0Q73.0 1043.0 69.0 1044.5Q65.0 1046.0 61.0 1047.0L58.0 1049.0Q58.0 1050.0 63.5 1055.0Q69.0 1060.0 73.0 1062.0Q89.0 1074.0 112.0 1074.0Q131.0 1074.0 144.0 1065.0Q168.0 1051.0 180.0 1013.0Q197.0 965.0 212.0 758.0Q226.0 568.0 242.0 438.0Q268.0 235.0 272.0 214.0Q297.0 70.0 369.0 23.0Q394.0 7.0 424.0 1.0Q426.0 1.0 433.5 0.5Q441.0 0.0 446.0 0.0Q493.0 3.0 524.0 33.0Q555.0 63.0 555.0 110.0Q555.0 132.0 541.0 146.0Q527.0 160.0 506.0 160.0Q485.0 160.0 471.0 145.5Q457.0 131.0 457.0 111.0Q457.0 81.0 481.0 69.0Q482.0 68.0 486.0 66.5Q490.0 65.0 493.0 63.0L497.0 62.0Q497.0 57.0 482.0 49.0Q465.0 37.0 443.0 37.0Q399.0 37.0 379.0 89.0Q367.0 118.0 360.5 168.5Q354.0 219.0 344.0 353.0Q330.0 541.0 314.0 672.0Q294.0 844.0 284.0 896.0Q255.0 1056.0 170.0 1098.0Q144.0 1111.0 114.0 1111.0Q42.0 1111.0 12.0 1049.0Q0.0 1028.0 0.0 1001.0Q0.0 979.0 14.0 965.0Q28.0 951.0 49.0 951.0Q70.0 951.0 84.0 965.5Q98.0 980.0 98.0 1000.0Z';
+
+export const CalcuraIntegralMark = ({ className, weight = 0 }) => (
+  <svg
+    className={className}
+    viewBox={`${-weight / 2} ${-weight / 2} ${555 + weight} ${1111 + weight}`}
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      d={CALCURA_MARK_PATH}
+      fill="currentColor"
+      stroke="currentColor"
+      strokeWidth={weight}
       strokeLinejoin="round"
     />
   </svg>

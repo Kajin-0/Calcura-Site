@@ -76,6 +76,8 @@ node brand/render-assets.cjs
 
 Commit the regenerated files in `public/`.
 
+Every Calcura logo (header, footer, download tile, favicon, touch icon, social cards) uses the exact integral outline of the app icon, `calcura/branding/calcura-integral-mark.svg`, exposed as `CalcuraIntegralMark` in `src/components/Icons.jsx`. Colors may vary per surface; do not swap in a font glyph or another integral. `IntegralGlyph` is typeset math for the app previews, not the logo.
+
 ## Related
 
 Calcura application repository: https://github.com/Kajin-0/Calcura

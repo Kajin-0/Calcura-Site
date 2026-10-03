@@ -2,9 +2,9 @@ import DownloadChooser from '../components/DownloadChooser.jsx';
 import {
   Arrow,
   BookIcon,
+  CalcuraIntegralMark,
   Check,
   GraphIcon,
-  IntegralGlyph,
   ProgressIcon,
   ShuffleIcon,
   StepsIcon,
@@ -174,7 +174,7 @@ export default function HomePage() {
         <div className="shell">
           <div className="download-panel">
             <div className="download-mark" aria-hidden="true">
-              <span className="brand-mark"><IntegralGlyph /></span>
+              <span className="brand-mark"><CalcuraIntegralMark weight={16} /></span>
             </div>
             <div className="download-copy">
               <div className="eyebrow">Calcura for students</div>
