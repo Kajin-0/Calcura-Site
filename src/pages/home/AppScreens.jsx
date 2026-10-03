@@ -37,21 +37,6 @@ const ReferenceIcon = () => (
     <path d="M8 7h8M8 11h8M8 15h5" />
   </Svg>
 );
-const SavedWorkIcon = () => (
-  <Svg>
-    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-    <polyline points="14,2 14,8 20,8" />
-    <line x1="16" y1="13" x2="8" y2="13" />
-    <line x1="16" y1="17" x2="8" y2="17" />
-    <polyline points="10,9 9,9 8,9" />
-  </Svg>
-);
-const GraphIntegrandIcon = () => (
-  <Svg>
-    <path d="M4 5v14h16" />
-    <path d="M7 15l4-5 4 3 4-7" />
-  </Svg>
-);
 const RerollIcon = () => (
   <Svg>
     <path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.3" />
@@ -296,25 +281,9 @@ export function GraphPreview() {
     <div
       className="app-screen app-graph"
       role="img"
-      aria-label="Illustration of the Calcura integrand graph: a plot of one quarter x times sine x that can be panned and zoomed, opened over the Free Play workspace."
+      aria-label="Illustration of the Calcura integrand graph dialog: the original problem integrand, one quarter x times sine x, plotted on a grid that can be panned and zoomed."
     >
       <div className="app-screen-inner" aria-hidden="true">
-        <div className="app-header">
-          <div className="app-header-row">
-            <div className="app-title">
-              <span className="app-eyebrow">Free Play</span>
-              <span className="app-step"><b>Integration by Parts</b></span>
-            </div>
-            <div className="app-icons">
-              <IconButton><ReferenceIcon /></IconButton>
-              <IconButton><SavedWorkIcon /></IconButton>
-              <IconButton active><GraphIntegrandIcon /></IconButton>
-              <IconButton><RerollIcon /></IconButton>
-              <IconButton><CloseIcon /></IconButton>
-            </div>
-          </div>
-        </div>
-        <div className="app-backdrop" />
         <div className="app-modal">
           <DialogHeader title="Integrand graph" subtitle="Original problem integrand" />
           <div className="app-modal-body">

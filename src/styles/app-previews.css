@@ -4,7 +4,8 @@
    Faithful miniatures of four real Calcura screens. Dimensions, radii, type sizes, colours and icon
    paths are measured from the running app, so what a visitor sees here is what they get when they
    open it. Every selector is prefixed `app-`; these are illustrations (the wrapper is role="img" and
-   the inner markup is aria-hidden), which is why the app's own 10-12px type is reproduced as-is.
+   the inner markup is aria-hidden), which is why the app's own 10-12px type is reproduced as-is. The
+   screens are then scaled down with `zoom`, like a screenshot thumbnail, so a row fits in one window.
 
    Maths uses the same KaTeX faces the app bundles (MIT / SIL OFL), self-hosted like every other font.
    ========================================================================== */
@@ -45,8 +46,9 @@
   --a-math-i: 'KaTeX_Math', var(--font-math), 'Times New Roman', serif;
 
   position: relative;
-  width: min(100%, 24.375rem);
+  width: 390px;
   margin-inline: auto;
+  zoom: var(--app-zoom, 1);
   overflow: hidden;
   border-radius: 20px;
   background: #fff;
@@ -56,7 +58,6 @@
   font-size: 16px;
   line-height: 1.5;
   text-align: left;
-  container-type: inline-size;
 }
 
 .app-screen *,
@@ -499,51 +500,19 @@
 }
 
 /* ---------- Integrand graph ---------- */
-.app-backdrop {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: rgba(2, 6, 23, 0.5);
-}
-
-/* The dimmed Free Play header behaves as the app's does: the title wraps in the space left beside five
-   closely spaced buttons, and below a narrow width it drops underneath them. */
-.app-graph .app-header {
-  background: #fff;
-}
-
-.app-graph .app-icons {
-  gap: 2px;
-}
-
-.app-graph .app-title {
-  flex: 1 1 0;
-}
-
-.app-graph .app-step {
-  white-space: normal;
-  overflow-wrap: break-word;
-}
-
-@container (max-width: 340px) {
-  .app-graph .app-header-row {
-    flex-wrap: wrap;
-  }
-
-  .app-graph .app-title {
-    flex-basis: 100%;
-    order: 2;
-  }
+/* The dialog on its own, as the app draws it: no app screen or dimming behind it. */
+.app-graph {
+  overflow: visible;
+  background: transparent;
+  box-shadow: none;
 }
 
 .app-modal {
-  position: relative;
-  z-index: 2;
-  margin: 4px 12px 12px;
+  margin: 0 12px;
   overflow: hidden;
   border-radius: 16px;
   background: #fff;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 0 1px var(--a-line), 0 25px 50px -12px rgba(15, 23, 42, 0.35);
 }
 
 .app-graph .app-dialog-title span:first-child {
@@ -928,11 +897,11 @@
 
 /* The two scrolling dialogs are cropped, as they would be on screen, and fade out. */
 .app-reference {
-  max-height: 46rem;
+  max-height: 704px;
 }
 
 .app-progress-screen {
-  max-height: 41rem;
+  max-height: 656px;
 }
 
 .app-reference::after,
@@ -952,8 +921,39 @@
   text-align: center;
 }
 
-@media (max-width: 24rem) {
-  .app-identity-formula {
-    font-size: 13px;
+/* ---------- Scale ----------
+   Desktop two-column rows show the screen at 70% so text and preview sit side by side in one window.
+   Stacked rows grow it, and it steps down so it never outgrows a phone. */
+.feature-stage {
+  --app-zoom: 0.7;
+}
+
+@media (max-width: 64rem) {
+  .feature-stage {
+    --app-zoom: 0.9;
+  }
+}
+
+@media (max-width: 26.8125rem) {
+  .feature-stage {
+    --app-zoom: 0.8;
+  }
+}
+
+@media (max-width: 24.3125rem) {
+  .feature-stage {
+    --app-zoom: 0.72;
+  }
+}
+
+@media (max-width: 22.4375rem) {
+  .feature-stage {
+    --app-zoom: 0.68;
+  }
+}
+
+@media (max-width: 21.1875rem) {
+  .feature-stage {
+    --app-zoom: 0.62;
   }
 }

@@ -558,7 +558,7 @@
   position: relative;
   display: grid;
   place-items: center;
-  padding: clamp(1.25rem, 4vw, 3rem);
+  padding: clamp(1rem, 2.4vw, 1.75rem);
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius-2xl);
