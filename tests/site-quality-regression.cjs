@@ -285,6 +285,15 @@ for (const [key, html] of Object.entries(rendered)) {
       check(/\srole="img"/.test(root) && attr(root, 'aria-label'), 'home: an .app-screen must be one labelled role="img"');
       check(/\saria-hidden="true"/.test(inner), 'home: an .app-screen-inner is a text-size-exempt replica and must be aria-hidden');
     }
+
+    // The screens are drawn at the width of the phone the reference screenshots came from (411px), in the
+    // app's own font stack, so line breaks match the app instead of drifting with a wider web font. The
+    // Learning Progress outcomes (Correct / Incorrect / Abandoned) are one line there, and must stay one line.
+    const previewCss = css['app-previews.css'];
+    check(/\.app-screen\s*\{[^}]*\bwidth:\s*411px/.test(previewCss), 'home: .app-screen must be drawn at 411px, the width of the reference screenshots');
+    check(/\.app-screen\s*\{[^}]*--a-sans:\s*ui-sans-serif,\s*system-ui,\s*sans-serif/.test(previewCss), "home: .app-screen must use the app's own system font stack");
+    check(/\.app-outcomes\s*\{[^}]*flex-wrap:\s*nowrap/.test(previewCss) && !/\.app-outcomes\s*\{[^}]*flex-wrap:\s*wrap/.test(previewCss), 'home: the outcomes row must not wrap');
+    check((html.match(/class="app-outcome-gap"/g) || []).length === 2, 'home: the outcomes row needs its two shrinkable gaps');
   }
 
   // Safe links.

@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import { buildAppGraph } from './plot.js';
 
 /* Faithful miniatures of four real Calcura screens: the Guided workspace with its math keyboard,
@@ -465,12 +466,15 @@ export function ProgressPreview() {
                 ))}
               </div>
               <div className="app-outcomes">
-                {OUTCOMES.map(([tone, label, count]) => (
-                  <div key={label}>
-                    <span className={`app-outcome-dot is-${tone}`}><OutcomeGlyph tone={tone} /></span>
-                    <span>{label}</span>
-                    <strong>{count}</strong>
-                  </div>
+                {OUTCOMES.map(([tone, label, count], index) => (
+                  <Fragment key={label}>
+                    {index > 0 && <span className="app-outcome-gap" />}
+                    <div>
+                      <span className={`app-outcome-dot is-${tone}`}><OutcomeGlyph tone={tone} /></span>
+                      <span>{label}</span>
+                      <strong>{count}</strong>
+                    </div>
+                  </Fragment>
                 ))}
               </div>
               <div className="app-details">

@@ -5,7 +5,9 @@
    paths are measured from the running app, so what a visitor sees here is what they get when they
    open it. Every selector is prefixed `app-`; these are illustrations (the wrapper is role="img" and
    the inner markup is aria-hidden), which is why the app's own 10-12px type is reproduced as-is. The
-   screens are then scaled down with `zoom`, like a screenshot thumbnail, so a row fits in one window.
+   screens are drawn at 411px (the width of the phone the reference screenshots were taken on, so line
+   breaks match) in the app's own system font stack, then scaled down with `zoom` like a screenshot
+   thumbnail so a row fits in one window.
 
    Maths uses the same KaTeX faces the app bundles (MIT / SIL OFL), self-hosted like every other font.
    ========================================================================== */
@@ -42,11 +44,12 @@
   --a-line: #e2e8f0;
   --a-subtle: #f8fafc;
   --a-sunken: #f1f5f9;
+  --a-sans: ui-sans-serif, system-ui, sans-serif;
   --a-math: 'KaTeX_Main', var(--font-math), 'Times New Roman', serif;
   --a-math-i: 'KaTeX_Math', var(--font-math), 'Times New Roman', serif;
 
   position: relative;
-  width: 390px;
+  width: 411px;
   margin-inline: auto;
   zoom: var(--app-zoom, 1);
   overflow: hidden;
@@ -54,7 +57,7 @@
   background: #fff;
   box-shadow: 0 0 0 1px var(--a-line), var(--shadow-lg);
   color: var(--a-ink);
-  font-family: var(--font-sans);
+  font-family: var(--a-sans);
   font-size: 16px;
   line-height: 1.5;
   text-align: left;
@@ -568,13 +571,13 @@
 
 .app-plot-tick {
   fill: #242936;
-  font-family: var(--font-sans);
+  font-family: var(--a-sans);
   font-size: 10px;
 }
 
 .app-plot-title {
   fill: #242936;
-  font-family: var(--font-sans);
+  font-family: var(--a-sans);
   font-size: 10px;
 }
 
@@ -775,8 +778,8 @@
 
 .app-outcomes {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 16px;
+  flex-wrap: nowrap;
+  align-items: center;
   margin-top: 8px;
   padding: 10px 12px;
   border: 1px solid var(--a-line);
@@ -786,11 +789,20 @@
 
 .app-outcomes > div {
   display: flex;
+  flex: none;
   align-items: center;
   gap: 8px;
+  white-space: nowrap;
 }
 
-.app-outcomes span:nth-child(2) {
+/* The app lays these out with a 16px gap. Here the gap is its own element so that, in a wider system
+   font, it gives way before the row would have to wrap. */
+.app-outcome-gap {
+  flex: 0 1 16px;
+  min-width: 0;
+}
+
+.app-outcomes > div > span:nth-child(2) {
   color: var(--a-2);
   font-size: 12px;
   font-weight: 500;
@@ -922,38 +934,38 @@
 }
 
 /* ---------- Scale ----------
-   Desktop two-column rows show the screen at 70% so text and preview sit side by side in one window.
+   Desktop two-column rows show the screen at about 66% so text and preview sit side by side in one window.
    Stacked rows grow it, and it steps down so it never outgrows a phone. */
 .feature-stage {
-  --app-zoom: 0.7;
+  --app-zoom: 0.664;
 }
 
 @media (max-width: 64rem) {
   .feature-stage {
-    --app-zoom: 0.9;
+    --app-zoom: 0.854;
   }
 }
 
 @media (max-width: 26.8125rem) {
   .feature-stage {
-    --app-zoom: 0.8;
+    --app-zoom: 0.759;
   }
 }
 
 @media (max-width: 24.3125rem) {
   .feature-stage {
-    --app-zoom: 0.72;
+    --app-zoom: 0.683;
   }
 }
 
 @media (max-width: 22.4375rem) {
   .feature-stage {
-    --app-zoom: 0.68;
+    --app-zoom: 0.645;
   }
 }
 
 @media (max-width: 21.1875rem) {
   .feature-stage {
-    --app-zoom: 0.62;
+    --app-zoom: 0.588;
   }
 }
