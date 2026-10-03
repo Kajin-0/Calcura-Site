@@ -11,7 +11,8 @@ import {
 } from '../components/Icons.jsx';
 import PageShell from '../components/PageShell.jsx';
 import { TEACHER_SIGN_IN_URL, WEB_APP_URL } from '../site/links.js';
-import { AppPreview, GraphPreview, GuidedPreview, ProgressPreview, ReferencePreview } from './home/Previews.jsx';
+import { GraphPreview, GuidedPreview, ProgressPreview, ReferencePreview } from './home/AppScreens.jsx';
+import { AppPreview } from './home/Previews.jsx';
 
 const CAPABILITIES = [
   { Icon: StepsIcon, title: 'Guided', detail: 'step-by-step practice' },

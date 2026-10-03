@@ -87,11 +87,12 @@ function toPx(value, depth = 0) {
   if (length) return Number(length[1]) * (length[2] === 'rem' ? 16 : 1);
   return null;
 }
-// The hero phone and its floating Learning Progress card are scaled replicas of the real app UI, so
-// their type is deliberately small. That is allowed only because they are aria-hidden illustration
-// described once by the wrapper's label (asserted against the rendered markup in section 5 below);
-// they still may not go under 9px. Every other rule keeps the 12px floor.
-const REPLICA_SELECTORS = [/^\.phone-/, /^\.floating-progress/, /^\.progress-metrics/];
+// The hero phone and its floating Learning Progress card, and the four feature screens (`.app-*`), are
+// replicas of the real app UI, so their type is the app's own small sizes. That is allowed only because
+// they are aria-hidden illustration described once by the wrapper's label (asserted against the
+// rendered markup in section 5 below); they still may not go under 9px. Every other rule keeps the
+// 12px floor.
+const REPLICA_SELECTORS = [/^\.phone-/, /^\.floating-progress/, /^\.progress-metrics/, /^\.app-/];
 const REPLICA_FLOOR_PX = 9;
 for (const [file, source] of Object.entries(css)) {
   for (const rule of source.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
@@ -273,6 +274,16 @@ for (const [key, html] of Object.entries(rendered)) {
     for (const cls of ['phone-shell', 'floating-progress']) {
       const open = (hero.match(new RegExp(`<div\\b[^>]*class="${cls}"[^>]*>`)) || [''])[0];
       check(/\saria-hidden="true"/.test(open), `home: .${cls} is a text-size-exempt replica and must be aria-hidden`);
+    }
+
+    // The four feature screens are replicas of real app screens. Each is one labelled image whose inner
+    // markup is hidden from assistive technology, which is what justifies their app-sized type.
+    const screens = [...html.matchAll(/<div\b[^>]*class="app-screen app-[a-z-]+"[^>]*>\s*<div\b[^>]*class="app-screen-inner"[^>]*>/g)];
+    check(screens.length === 4, `home: expected 4 .app-screen feature previews, found ${screens.length}`);
+    for (const screen of screens) {
+      const [root, inner] = screen[0].split(/(?=<div\b[^>]*app-screen-inner)/);
+      check(/\srole="img"/.test(root) && attr(root, 'aria-label'), 'home: an .app-screen must be one labelled role="img"');
+      check(/\saria-hidden="true"/.test(inner), 'home: an .app-screen-inner is a text-size-exempt replica and must be aria-hidden');
     }
   }
 

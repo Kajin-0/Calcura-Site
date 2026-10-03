@@ -1,0 +1,959 @@
+/* ==========================================================================
+   App screen previews (home page feature rows)
+
+   Faithful miniatures of four real Calcura screens. Dimensions, radii, type sizes, colours and icon
+   paths are measured from the running app, so what a visitor sees here is what they get when they
+   open it. Every selector is prefixed `app-`; these are illustrations (the wrapper is role="img" and
+   the inner markup is aria-hidden), which is why the app's own 10-12px type is reproduced as-is.
+
+   Maths uses the same KaTeX faces the app bundles (MIT / SIL OFL), self-hosted like every other font.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'KaTeX_Main';
+  src: url('../assets/fonts/katex-main-regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'KaTeX_Math';
+  src: url('../assets/fonts/katex-math-italic.woff2') format('woff2');
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'KaTeX_Size2';
+  src: url('../assets/fonts/katex-size2-regular.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* ---------- Screen shell ---------- */
+.app-screen {
+  --a-ink: #0f172a;
+  --a-2: #475569;
+  --a-3: #64748b;
+  --a-line: #e2e8f0;
+  --a-subtle: #f8fafc;
+  --a-sunken: #f1f5f9;
+  --a-math: 'KaTeX_Main', var(--font-math), 'Times New Roman', serif;
+  --a-math-i: 'KaTeX_Math', var(--font-math), 'Times New Roman', serif;
+
+  position: relative;
+  width: min(100%, 24.375rem);
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--a-line), var(--shadow-lg);
+  color: var(--a-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: left;
+  container-type: inline-size;
+}
+
+.app-screen *,
+.app-screen *::before,
+.app-screen *::after {
+  box-sizing: border-box;
+}
+
+.app-screen-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-svg {
+  display: block;
+  flex: none;
+}
+
+/* ---------- Typeset maths ---------- */
+.app-i {
+  font-family: var(--a-math-i);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.app-r {
+  font-family: var(--a-math);
+  font-style: normal;
+  font-weight: 400;
+}
+
+.app-op {
+  margin-inline: 0.2222em;
+  font-family: var(--a-math);
+}
+
+.app-fn {
+  margin-right: 0.1667em;
+}
+
+.app-frac {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-inline: 0.06em 0.12em;
+  font-family: var(--a-math);
+  line-height: 1.15;
+  vertical-align: middle;
+}
+
+.app-frac > span:first-child {
+  padding: 0 0.1em 0.04em;
+  border-bottom: 0.04em solid currentColor;
+}
+
+.app-frac > span:last-child {
+  padding-top: 0.04em;
+}
+
+/* Inline maths in UI text is 1.21em, as KaTeX sets it. */
+.app-keypad .app-i,
+.app-keypad .app-r,
+.app-instruction .app-i {
+  font-size: 1.21em;
+}
+
+.app-box {
+  display: inline-block;
+  width: 0.62em;
+  height: 0.62em;
+  margin-inline: 0.1em;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+  vertical-align: -0.04em;
+  opacity: 0.8;
+}
+
+/* ---------- Header (Guided + Free Play) ---------- */
+.app-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 60px;
+  padding: 8px 12px;
+}
+
+.app-title {
+  min-width: 0;
+}
+
+.app-eyebrow {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--a-3);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.app-step {
+  display: block;
+  color: #1e293b;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.app-step b {
+  font-weight: 600;
+}
+
+.app-step span {
+  color: var(--a-3);
+  font-weight: 400;
+}
+
+.app-icons {
+  display: flex;
+  flex: none;
+  gap: 4px;
+}
+
+.app-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--a-2);
+}
+
+.app-iconbtn.is-active {
+  border-color: #cbd5e1;
+  background: var(--a-sunken);
+  color: var(--a-ink);
+}
+
+.app-progress {
+  height: 4px;
+  background: var(--a-sunken);
+}
+
+.app-progress span {
+  display: block;
+  width: 20%;
+  height: 100%;
+  background: var(--a-ink);
+}
+
+/* ---------- Guided: problem, instruction, answer ---------- */
+.app-guided-main {
+  padding: 20px 16px 14px;
+}
+
+/* Laid out the way KaTeX lays out a display integral: plain inline text on a shared baseline, with
+   a strut that reserves the height and depth of the large integral sign. */
+.app-equation {
+  font-family: var(--a-math);
+  font-size: 29.77px;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.app-strut {
+  display: inline-block;
+  height: 2.22em;
+  vertical-align: -0.86em;
+}
+
+.app-int {
+  position: relative;
+  top: -0.0011em;
+  margin-right: 0.44445em;
+  font-family: 'KaTeX_Size2', var(--a-math);
+}
+
+.app-sup {
+  position: relative;
+  top: -0.44em;
+  margin-left: 0.04em;
+  color: #3b82f6;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+.app-sup > span {
+  font-size: max(0.7em, 9px);
+}
+
+.app-thin {
+  display: inline-block;
+  width: 0.1667em;
+}
+
+.app-instruction {
+  margin-top: 14px;
+  padding: 16px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: var(--a-subtle);
+  color: #334155;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  text-align: center;
+}
+
+.app-answer {
+  height: 120px;
+  margin: 12px 8px 0;
+  padding: 16px 12px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--a-3);
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+/* ---------- Keyboard ---------- */
+.app-keyboard {
+  border-top: 1px solid var(--a-line);
+  background: #fff;
+}
+
+.app-keyboard-handle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+}
+
+.app-keyboard-calc {
+  position: absolute;
+  top: 0;
+  left: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  color: var(--a-2);
+}
+
+.app-grabber {
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background: #cbd5e1;
+}
+
+.app-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding: 4px 8px 8px;
+}
+
+.app-toolbar-group {
+  display: flex;
+  flex: 0 1 auto;
+  gap: 2px;
+  min-width: 0;
+}
+
+.app-toolbtn {
+  display: inline-flex;
+  flex: 0 1 44px;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  width: 44px;
+  height: 44px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--a-2);
+  font-size: 18px;
+  line-height: 1;
+}
+
+.app-toolbtn.is-disabled {
+  opacity: 0.3;
+}
+
+.app-ac {
+  color: var(--a-ink);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.app-segmented {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border-radius: 8px;
+  background: var(--a-sunken);
+  box-shadow: inset 0 0 0 1px var(--a-line);
+}
+
+.app-segmented span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  height: 36px;
+  border-radius: 6px;
+  color: var(--a-3);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.app-segmented .is-active {
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: var(--a-ink);
+}
+
+.app-tabs {
+  flex: 0 1 132px;
+  min-width: 0;
+  width: 132px;
+  height: 44px;
+}
+
+.app-keypad {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  padding: 0 8px 8px;
+}
+
+.app-key {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.1);
+  color: var(--a-ink);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.app-key.is-var,
+.app-key.is-op {
+  background: var(--a-subtle);
+  color: var(--a-2);
+}
+
+.app-key.is-small {
+  font-size: 14px;
+}
+
+.app-key.is-delete {
+  color: #e11d48;
+}
+
+.app-key.is-submit {
+  background: var(--a-sunken);
+  color: var(--a-3);
+}
+
+/* Keys that open a menu carry a small corner marker. */
+.app-key.has-menu::after {
+  content: '';
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  width: 0;
+  height: 0;
+  border-bottom: 5px solid #94a3b8;
+  border-left: 5px solid transparent;
+}
+
+/* ---------- Dialogs (Integrand graph, Reference, Learning Progress) ---------- */
+.app-dialog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--a-line);
+}
+
+.app-dialog-title {
+  min-width: 0;
+}
+
+.app-dialog-title span:first-child {
+  display: block;
+  color: var(--a-ink);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.app-dialog-title span:last-child {
+  display: block;
+  color: var(--a-3);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.app-label {
+  color: var(--a-3);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.app-label.app-wide,
+.app-label.app-count {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.app-label.app-wide {
+  letter-spacing: 0.14em;
+}
+
+/* ---------- Integrand graph ---------- */
+.app-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(2, 6, 23, 0.5);
+}
+
+/* The dimmed Free Play header behaves as the app's does: the title wraps in the space left beside five
+   closely spaced buttons, and below a narrow width it drops underneath them. */
+.app-graph .app-header {
+  background: #fff;
+}
+
+.app-graph .app-icons {
+  gap: 2px;
+}
+
+.app-graph .app-title {
+  flex: 1 1 0;
+}
+
+.app-graph .app-step {
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+@container (max-width: 340px) {
+  .app-graph .app-header-row {
+    flex-wrap: wrap;
+  }
+
+  .app-graph .app-title {
+    flex-basis: 100%;
+    order: 2;
+  }
+}
+
+.app-modal {
+  position: relative;
+  z-index: 2;
+  margin: 4px 12px 12px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+}
+
+.app-graph .app-dialog-title span:first-child {
+  font-weight: 600;
+}
+
+.app-modal-body {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+
+.app-formula {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: var(--a-subtle);
+  font-size: 19.4px;
+  line-height: 1.5;
+}
+
+.app-plot-box {
+  padding: 8px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.app-plot {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.app-plot-frame {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: 0.1;
+}
+
+.app-plot-grid {
+  stroke: #000;
+  stroke-opacity: 0.1;
+}
+
+.app-plot-axis {
+  stroke: #000;
+  stroke-opacity: 0.2;
+}
+
+.app-plot-tick {
+  fill: #242936;
+  font-family: var(--font-sans);
+  font-size: 10px;
+}
+
+.app-plot-title {
+  fill: #242936;
+  font-family: var(--font-sans);
+  font-size: 10px;
+}
+
+.app-plot-curve {
+  fill: none;
+  stroke: #4682b4;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+
+.app-caption {
+  margin: 0;
+  color: var(--a-3);
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* ---------- Reference ---------- */
+.app-filters {
+  display: flex;
+  gap: 4px;
+  padding: 12px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--a-line);
+  white-space: nowrap;
+}
+
+.app-filters span {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: var(--a-2);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.app-filters .is-active {
+  background: var(--a-sunken);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: var(--a-ink);
+}
+
+.app-reference-body {
+  padding: 12px;
+}
+
+.app-description {
+  margin: 0 0 12px;
+  color: var(--a-3);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.app-card {
+  padding: 12px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: var(--a-subtle);
+}
+
+.app-unit-circle {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  margin: 4px auto 0;
+}
+
+.app-circle-notes {
+  display: grid;
+  gap: 2px;
+  margin-top: 4px;
+  color: var(--a-ink);
+  font-size: 12px;
+  text-align: center;
+}
+
+.app-circle-notes span:last-child {
+  color: var(--a-3);
+  font-size: 11px;
+}
+
+.app-values {
+  display: grid;
+  grid-template-columns: 3.4em repeat(5, minmax(0, 1fr));
+  margin-top: 10px;
+  border-top: 1px solid var(--a-line);
+  color: var(--a-ink);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.app-values span {
+  padding: 5px 2px;
+  border-bottom: 1px solid var(--a-line);
+}
+
+.app-values .is-head {
+  color: var(--a-3);
+  font-weight: 600;
+}
+
+.app-count {
+  margin: 16px 0 8px;
+}
+
+.app-identities {
+  display: grid;
+  gap: 10px;
+}
+
+.app-identity {
+  padding: 12px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: var(--a-subtle);
+}
+
+.app-identity-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--a-3);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.app-chip {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--a-2);
+  font-weight: 600;
+}
+
+.app-identity-formula {
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* ---------- Learning Progress ---------- */
+.app-progress-body {
+  display: grid;
+  gap: 20px;
+  padding: 16px 12px;
+}
+
+.app-ranges {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+  height: 44px;
+}
+
+.app-ranges span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.app-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.app-metrics > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+  min-height: 76px;
+  padding: 10px 12px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: var(--a-subtle);
+}
+
+.app-metrics span {
+  color: var(--a-2);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.app-metrics strong {
+  font-size: 18px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.app-outcomes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: #fff;
+}
+
+.app-outcomes > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-outcomes span:nth-child(2) {
+  color: var(--a-2);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.app-outcomes strong {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.app-outcome-dot {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.app-outcome-dot.is-correct {
+  background: #059669;
+}
+
+.app-outcome-dot.is-incorrect {
+  background: #e11d48;
+}
+
+.app-outcome-dot.is-abandoned {
+  background: #94a3b8;
+}
+
+.app-details {
+  margin-top: 8px;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+  background: var(--a-subtle);
+}
+
+.app-details > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+}
+
+.app-details > div + div {
+  border-top: 1px solid var(--a-line);
+}
+
+.app-details span {
+  color: var(--a-2);
+  font-size: 12px;
+}
+
+.app-details strong {
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.app-compare {
+  margin-top: 8px;
+  overflow: hidden;
+  border: 1px solid var(--a-line);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.app-compare > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 12px;
+}
+
+.app-compare > div + div {
+  border-top: 1px solid var(--a-line);
+}
+
+.app-compare > div > span:first-child {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.app-compare > div > span:last-child {
+  text-align: right;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.app-compare strong {
+  display: block;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.app-compare > div > span:last-child > span {
+  color: var(--a-2);
+}
+
+/* The two scrolling dialogs are cropped, as they would be on screen, and fade out. */
+.app-reference {
+  max-height: 46rem;
+}
+
+.app-progress-screen {
+  max-height: 41rem;
+}
+
+.app-reference::after,
+.app-progress-screen::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 72px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+  pointer-events: none;
+}
+
+.app-sample-note {
+  margin-top: 0.9rem;
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  text-align: center;
+}
+
+@media (max-width: 24rem) {
+  .app-identity-formula {
+    font-size: 13px;
+  }
+}
