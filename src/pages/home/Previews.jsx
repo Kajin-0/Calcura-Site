@@ -4,7 +4,6 @@ import { buildPlot } from './plot.js';
 /* All previews are illustrations of the Calcura app, not live product. They are described to
    assistive technology once (role="img" + label) and their inner markup is hidden from it. */
 
-const HERO_PLOT = buildPlot({ width: 236, height: 104 });
 const FEATURE_PLOT = buildPlot({ width: 360, height: 200 });
 
 function Plot({ plot, className = '' }) {
@@ -37,13 +36,17 @@ const Fraction = ({ top, bottom }) => (
   </span>
 );
 
-function TopbarIcon({ children }) {
+/* The hero phone is a scaled replica of the real app (Free Play screen + Integrand graph) with the
+   Learning Progress card floating over it. The curve is a hand-drawn stylisation of the integrand,
+   exactly as in the original page. */
+const PHONE_CURVE =
+  'M0,90 C25,22 47,105 72,76 C94,49 110,91 134,70 C155,52 178,88 198,66 C221,39 236,110 259,75 C279,40 296,21 320,94';
+
+function PhoneIcon({ children }) {
   return (
-    <span className="app-icon-button">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        {children}
-      </svg>
-    </span>
+    <svg className="phone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+      {children}
+    </svg>
   );
 }
 
@@ -54,46 +57,52 @@ export function AppPreview() {
       role="img"
       aria-label="Illustration of the Calcura app: a Free Play integration by parts problem with its integrand graph, and a Learning Progress summary. Private progress stays on the device unless a student joins a class."
     >
-      <div className="hero-orbit hero-orbit-1" aria-hidden="true" />
-      <div className="hero-orbit hero-orbit-2" aria-hidden="true" />
+      <div className="preview-orbit preview-orbit-one" aria-hidden="true" />
+      <div className="preview-orbit preview-orbit-two" aria-hidden="true" />
 
-      <div className="phone" aria-hidden="true">
-        <div className="phone-island" />
+      <div className="phone-shell" aria-hidden="true">
+        <div className="phone-camera" />
         <div className="phone-screen">
-          <div className="app-topbar">
-            <div className="app-title">
-              <span className="app-kicker">Free Play</span>
+          <div className="phone-topbar">
+            <div className="phone-title">
+              <span className="phone-eyebrow">FREE PLAY</span>
               <strong>Integration by Parts</strong>
             </div>
-            <div className="app-actions">
-              <TopbarIcon><path d="M5 5h14v14H5zM9 9h6M9 13h4" /></TopbarIcon>
-              <TopbarIcon><path d="M4 16c3-9 5-9 8-3s5 5 8-5" /></TopbarIcon>
-              <TopbarIcon><path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15m0 5v-5h5" /></TopbarIcon>
+            <div className="phone-actions">
+              <PhoneIcon><path d="M5 5h14v14H5zM9 9h6M9 13h4" /></PhoneIcon>
+              <PhoneIcon><path d="M4 16c3-9 5-9 8-3s5 5 8-5" /></PhoneIcon>
+              <PhoneIcon><path d="M4 12a8 8 0 0 1 14-5.3L20 9M20 4v5h-5M20 12a8 8 0 0 1-14 5.3L4 15m0 5v-5h5" /></PhoneIcon>
             </div>
           </div>
 
-          <div className="app-label">Expression</div>
-          <div className="app-math-card">
-            <IntegralGlyph className="integral-glyph" />
-            <span className="math-line">
+          <div className="phone-label">EXPRESSION</div>
+          <div className="phone-math-card">
+            <IntegralGlyph className="phone-integral" />
+            <span className="math-line phone-expression">
               <Fraction top="1" bottom="4" />
               <i>x</i> sin(<i>x</i>) <i>dx</i>
             </span>
           </div>
 
-          <div className="app-graph-card">
-            <div className="app-graph-head">
+          <div className="phone-graph-card">
+            <div className="phone-graph-head">
               <div>
                 <strong>Integrand graph</strong>
                 <span>Original problem integrand</span>
               </div>
-              <span className="app-close">×</span>
+              <span>×</span>
             </div>
-            <div className="app-formula">
+            <div className="phone-equation math-line">
               <Fraction top="1" bottom="4" />
               <i>x</i> sin(<i>x</i>)
             </div>
-            <Plot plot={HERO_PLOT} className="plot-hero" />
+            <div className="phone-graph">
+              <span className="phone-axis phone-axis-x" />
+              <span className="phone-axis phone-axis-y" />
+              <svg viewBox="0 0 320 130" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path d={PHONE_CURVE} fill="none" stroke="currentColor" strokeWidth="2.5" />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -112,12 +121,10 @@ export function AppPreview() {
         </div>
         <div className="progress-bar"><span /></div>
         <small>Private progress stays on the device unless a student joins a class.</small>
-        <small className="sample-note">Sample data for illustration.</small>
       </div>
     </div>
   );
 }
-
 export function GuidedPreview() {
   return (
     <div

@@ -87,13 +87,24 @@ function toPx(value, depth = 0) {
   if (length) return Number(length[1]) * (length[2] === 'rem' ? 16 : 1);
   return null;
 }
+// The hero phone and its floating Learning Progress card are scaled replicas of the real app UI, so
+// their type is deliberately small. That is allowed only because they are aria-hidden illustration
+// described once by the wrapper's label (asserted against the rendered markup in section 5 below);
+// they still may not go under 9px. Every other rule keeps the 12px floor.
+const REPLICA_SELECTORS = [/^\.phone-/, /^\.floating-progress/, /^\.progress-metrics/];
+const REPLICA_FLOOR_PX = 9;
 for (const [file, source] of Object.entries(css)) {
-  for (const decl of source.matchAll(/font-size:\s*([^;}]+)[;}]/g)) {
-    const value = decl[1].trim();
-    const px = toPx(value);
-    if (px !== null) check(px >= 12, `${file}: font-size ${value} resolves to ${px}px (minimum 12px)`);
-    const relative = value.match(/^([\d.]+)em$/);
-    if (relative) check(Number(relative[1]) >= 1, `${file}: font-size ${value} shrinks text with no rem floor (wrap in max(..., 0.75rem))`);
+  for (const rule of source.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+    const selectors = rule[1].split('*/').pop().split(',').map((selector) => selector.trim());
+    const replica = selectors.every((selector) => REPLICA_SELECTORS.some((pattern) => pattern.test(selector)));
+    const floor = replica ? REPLICA_FLOOR_PX : 12;
+    for (const decl of rule[2].matchAll(/font-size:\s*([^;]+)/g)) {
+      const value = decl[1].trim();
+      const px = toPx(value);
+      if (px !== null) check(px >= floor, `${file}: "${selectors[0]}" font-size ${value} resolves to ${px}px (minimum ${floor}px)`);
+      const relative = value.match(/^([\d.]+)em$/);
+      if (relative) check(Number(relative[1]) >= 1, `${file}: font-size ${value} shrinks text with no rem floor (wrap in max(..., 0.75rem))`);
+    }
   }
 }
 for (const [file, source] of Object.entries(css)) {
@@ -252,6 +263,18 @@ for (const [key, html] of Object.entries(rendered)) {
   }
   // role="img" containers must carry a label.
   for (const tag of html.matchAll(/<[a-z0-9]+\b[^>]*\srole="img"[^>]*>/g)) check(attr(tag[0], 'aria-label'), `${label}: role="img" needs aria-label`);
+
+  // The hero phone replica is exempt from the 12px text floor (see section 2) only while it is hidden
+  // from assistive technology and described once by its wrapper.
+  if (key === 'home') {
+    const hero = element(html, 'div', 'class="hero-visual"');
+    const heroOpen = (hero.match(/^<div\b[^>]*>/) || [''])[0];
+    check(/\srole="img"/.test(heroOpen) && attr(heroOpen, 'aria-label'), 'home: .hero-visual must be one labelled role="img"');
+    for (const cls of ['phone-shell', 'floating-progress']) {
+      const open = (hero.match(new RegExp(`<div\\b[^>]*class="${cls}"[^>]*>`)) || [''])[0];
+      check(/\saria-hidden="true"/.test(open), `home: .${cls} is a text-size-exempt replica and must be aria-hidden`);
+    }
+  }
 
   // Safe links.
   for (const a of anchors(html)) {
