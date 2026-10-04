@@ -26,6 +26,8 @@ const PAGES = [
   { file: 'index.html', url: '/', h1: /Practice integrals\./ },
   { file: 'classroom/index.html', url: '/classroom/', h1: /Classroom/ },
   { file: 'contact/index.html', url: '/contact/', h1: /Questions, support, or classroom inquiries\./ },
+  { file: 'privacy/index.html', url: '/privacy/', h1: /Privacy Policy/ },
+  { file: 'terms/index.html', url: '/terms/', h1: /Terms of Service/ },
   { file: '404.html', url: '/404.html', h1: /doesn.t exist/, absolute: true },
 ];
 
@@ -87,7 +89,7 @@ for (const page of PAGES) {
 
 // Prerendered markup must equal a fresh render of the same components (hydration safety).
 const { renderPage } = require('./helpers/render.cjs');
-for (const [file, key] of [['index.html', 'home'], ['classroom/index.html', 'classroom'], ['contact/index.html', 'contact'], ['404.html', 'notFound']]) {
+for (const [file, key] of [['index.html', 'home'], ['classroom/index.html', 'classroom'], ['contact/index.html', 'contact'], ['privacy/index.html', 'privacy'], ['terms/index.html', 'terms'], ['404.html', 'notFound']]) {
   check(read(file).includes(`<div id="root">${renderPage(key)}</div>`), `${file}: prerendered markup must match the components exactly`);
 }
 
@@ -109,5 +111,13 @@ check(!assets.some((name) => /\.map$/.test(name)), 'Source maps must not ship');
 // Only latin Inter is on the critical path; the other subsets must stay lazy (unicode-range).
 check(assets.some((name) => /^inter-latin-wght-normal-.+\.woff2$/.test(name)), 'Inter Latin must be bundled');
 check(assets.some((name) => /^stix-two-text-latin-500-normal-.+\.woff2$/.test(name)), 'STIX Two Text must be bundled for maths');
+
+const { assertLegalPage, assertLegalNavigation } = require('./helpers/legal.cjs');
+for (const key of ['privacy', 'terms']) {
+  const html = read(`${key}/index.html`);
+  assertLegalPage(html, key);
+  check(html.includes(`<link rel="canonical" href="https://calcura.study/${key}/"`), `${key}: built canonical`);
+}
+for (const page of PAGES) assertLegalNavigation(read(page.file), page.file);
 
 console.log(`built-site-regression passed (${checks} assertions)`);

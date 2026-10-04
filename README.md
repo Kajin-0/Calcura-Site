@@ -7,6 +7,8 @@ The public site for **Calcura**, served at [calcura.study](https://calcura.study
 | `/` | Free student app: what it does, how to get it |
 | `/classroom/` | Calcura Classroom for teachers (Teacher free, Pro $19/month or $149/year USD; Team, School, University planned) |
 | `/contact/` | Contact form (Formspree) |
+| `/privacy/` | Privacy Policy — Brooks Invest LLC |
+| `/terms/` | Terms of Service — Brooks Invest LLC |
 | `/404.html` | Not-found page (served by GitHub Pages at any depth) |
 | `/app/` | The student web app (PWA build artifact, copied in; not edited here) |
 

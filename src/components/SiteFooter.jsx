@@ -25,6 +25,8 @@ export default function SiteFooter() {
 
         <nav className="footer-column" aria-labelledby="footer-company">
           <h2 id="footer-company">Calcura</h2>
+          <a href="/privacy/">Privacy</a>
+          <a href="/terms/">Terms</a>
           <a href="/contact/">Contact</a>
         </nav>
       </div>

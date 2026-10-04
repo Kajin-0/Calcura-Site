@@ -14,6 +14,8 @@ const PAGES = [
   { file: 'index.html', key: 'home' },
   { file: 'classroom/index.html', key: 'classroom' },
   { file: 'contact/index.html', key: 'contact' },
+  { file: 'privacy/index.html', key: 'privacy' },
+  { file: 'terms/index.html', key: 'terms' },
   { file: '404.html', key: 'notFound', absoluteAssets: true },
 ];
 

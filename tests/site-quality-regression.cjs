@@ -127,7 +127,7 @@ for (const [file, source] of Object.entries(css)) {
 check(!/@import\s+url\(/.test(allCss), 'CSS must not import remote stylesheets');
 
 // --- 3. Self-hosted fonts -----------------------------------------------------------------------
-const htmlSources = { 'index.html': read('index.html'), 'classroom/index.html': read('classroom/index.html'), 'contact/index.html': read('contact/index.html'), '404.html': read('404.html') };
+const htmlSources = { 'index.html': read('index.html'), 'classroom/index.html': read('classroom/index.html'), 'contact/index.html': read('contact/index.html'), 'privacy/index.html': read('privacy/index.html'), 'terms/index.html': read('terms/index.html'), '404.html': read('404.html') };
 const srcFiles = [];
 (function walk(dir) {
   for (const entry of fs.readdirSync(path.join(root, dir), { withFileTypes: true })) {
@@ -151,6 +151,8 @@ const CANONICALS = {
   'index.html': 'https://calcura.study/',
   'classroom/index.html': 'https://calcura.study/classroom/',
   'contact/index.html': 'https://calcura.study/contact/',
+  'privacy/index.html': 'https://calcura.study/privacy/',
+  'terms/index.html': 'https://calcura.study/terms/',
 };
 const meta = (html, key, value) => {
   const match = html.match(new RegExp(`<meta\\s+${key}="${value}"\\s+content="([^"]*)"`, 's')) || html.match(new RegExp(`<meta\\s+content="([^"]*)"\\s+${key}="${value}"`, 's'));
@@ -185,7 +187,7 @@ const app = graph.find((n) => n['@type'] === 'SoftwareApplication');
 check(app && app.offers.price === '0' && app.offers.priceCurrency === 'USD', 'Structured data must state that the student app is free');
 
 // --- 5 & 6. Rendered markup ---------------------------------------------------------------------
-const PAGES = { home: '/', classroom: '/classroom/', contact: '/contact/', notFound: '/404.html' };
+const PAGES = { home: '/', classroom: '/classroom/', contact: '/contact/', privacy: '/privacy/', terms: '/terms/', notFound: '/404.html' };
 const rendered = Object.fromEntries(Object.keys(PAGES).map((key) => [key, renderPage(key)]));
 const idsOf = (html) => [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
 
@@ -215,7 +217,7 @@ function stripAriaHidden(html) {
 
 const idsByRoute = {};
 for (const [key, html] of Object.entries(rendered)) idsByRoute[PAGES[key]] = new Set(idsOf(html));
-const KNOWN_ROUTES = new Set(['/', '/classroom/', '/contact/', '/app/', '/404.html']);
+const KNOWN_ROUTES = new Set(['/', '/classroom/', '/contact/', '/privacy/', '/terms/', '/app/', '/404.html']);
 
 for (const [key, html] of Object.entries(rendered)) {
   const label = `${key} page`;
@@ -354,5 +356,10 @@ check(JSON.stringify(sitemap) === JSON.stringify(Object.values(CANONICALS).sort(
 
 // --- 8. Determinism -------------------------------------------------------------------------------
 for (const key of Object.keys(PAGES)) check(renderPage(key) === rendered[key], `${key}: prerender must be deterministic (hydration depends on it)`);
+
+// Legal publication is exercised through actual prerendered components, not source stubs.
+const { assertLegalPage, assertLegalNavigation } = require('./helpers/legal.cjs');
+for (const key of ['privacy', 'terms']) assertLegalPage(rendered[key], key);
+for (const [key, html] of Object.entries(rendered)) assertLegalNavigation(html, key);
 
 console.log(`site-quality-regression passed (${checks} assertions)`);

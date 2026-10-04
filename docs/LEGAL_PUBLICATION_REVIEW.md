@@ -1,33 +1,33 @@
-# Legal publication — factual draft and exact publication gate
+# Legal publication — factual source and approved publication facts
 
-Prepared 2026-10-04. **INTERNAL DRAFT, NOT A LIVE POLICY OR AGREEMENT.**
-No compliance certification or external legal review is claimed.
+Prepared and finalized 2026-10-04. The public policies are maintained in
+`src/pages/PrivacyPage.jsx` and `src/pages/TermsPage.jsx`; the outline below records
+the prepared source material, not a separate agreement. No compliance certification
+or external legal review is claimed.
 
-## Publication gate
+## Owner-approved facts and publication
 
-The public site identifies the brand as Calcura and provides a Formspree contact
-form, but repository/configuration/public pages do not establish the legal
-operator/controller's identity. Developer/commit names and the Supabase project
-owner's email are not authority to name the operator. The owner must provide the
-exact public operator name (individual, business or registered entity) and confirm
-that https://calcura.study/contact/ is the monitored support/privacy/billing request
-channel, or supply an already established replacement. Do not invent an address,
-email, jurisdiction, legal entity or inbox. No public placeholders are deployed.
+The owner explicitly approved these facts on 2026-10-04:
 
-Only legal publication and dependent Classroom legal links are held. Operator
-runbooks and tested server-only export/deletion preflight can ship independently.
-Once those exact facts are supplied, publish `/privacy/` and `/terms/` using the
-existing PageShell, CSP/meta/referrer policy, prerender pipeline and mobile tokens;
-add canonicals/sitemap/footer links; run all Site gates and Chromium mobile smoke;
-then add Classroom auth links after the Site pages are live. Do not invent a
-consent checkbox or recorded clickwrap. Calcura student source/APK need no change.
+- Operator/controller: **Brooks Invest LLC**.
+- Monitored support/privacy/billing/deletion/export channel:
+  https://calcura.study/contact/.
+- Refunds: “Fees are non-refundable except where required by law or where Calcura
+  expressly states otherwise at purchase.”
+
+The publication routes are `/privacy/` and `/terms/`, effective October 4, 2026.
+They use the existing PageShell, CSP/referrer policy, prerender pipeline and mobile
+tokens, with canonical metadata/sitemap/footer navigation and source/artifact
+regressions. Classroom links follow Site publication. No address, separate email,
+jurisdiction, price, compliance claim, checkbox or recorded clickwrap is invented.
+Calcura student source/APK and operator export/deletion tooling remain unchanged.
 
 ## Verified policy facts
 
 | Claim                                                                     | Authority                                                                                                                                              |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Public brand: Calcura                                                     | Site root metadata, Organization JSON-LD and shared branding                                                                                           |
-| Existing contact delivery provider                                        | `src/pages/contact/ContactForm.jsx`: Formspree endpoint `https://formspree.io/f/mjykvaky`; delivery/inbox monitoring still requires owner confirmation |
+| Existing contact delivery provider                                        | `src/pages/contact/ContactForm.jsx`: Formspree endpoint `https://formspree.io/f/mjykvaky`; owner confirmed the monitored request channel on 2026-10-04 |
 | Static hosting                                                            | Site/Classroom Pages workflows; current deployed domains                                                                                               |
 | Supabase Auth/email and learning/Classroom data                           | Classroom `docs/PRE_SALES_HARDENING_2026-10.md`, current migrations, Calcura `supabase/schemas/` and progress/auth contracts                           |
 | Remote attempt/result metadata, not generated equations/answers/solutions | Calcura progress/result payloads; Classroom activity/result contracts                                                                                  |
@@ -40,10 +40,10 @@ consent checkbox or recorded clickwrap. Calcura student source/APK need no chang
 | No universal automatic retention expiry established                       | Schema/provider inventory; receipts retained for reconciliation/deduplication                                                                          |
 | No advertising/behavioral tracking integration found                      | Prior hardening inventory and current Site/Classroom/student dependency/import review                                                                  |
 
-## Privacy Policy — proposed content
+## Privacy Policy — prepared factual outline
 
-Effective date: set to the actual publication date. Identify the verified operator
-in “Who operates Calcura” before publishing. The remaining proposed sections follow.
+The published page identifies Brooks Invest LLC and uses October 4, 2026 as its
+effective date. The prepared factual outline follows for implementation provenance.
 
 ### What information we collect
 
@@ -127,12 +127,13 @@ no worldwide data residency or regulatory-compliance guarantee is made.
 
 Updates will be published on this page with an updated effective date. For
 support, privacy questions, deletion or export, use the owner-confirmed contact
-channel. The operator identity and actual publication date must be inserted as
-verified facts, not placeholders.
+channel. The published page uses the owner-approved operator identity and actual
+publication date recorded above.
 
-## Terms of Service — proposed content
+## Terms of Service — prepared factual outline
 
-Effective date and verified operator identification must be set at publication.
+The published page identifies Brooks Invest LLC and uses October 4, 2026 as its
+effective date.
 
 ### Agreement, eligibility and accounts
 
@@ -167,11 +168,9 @@ through the verified channel for billing assistance.
 
 ### Refunds
 
-Proposed wording for owner confirmation: fees are non-refundable except where
-required by law or where Calcura expressly states otherwise at purchase. No
-existing refund promise was found in public pages/repository billing contracts;
-this must not override a promise made elsewhere. No price or refund amount is
-invented in this draft.
+Owner-approved wording: “Fees are non-refundable except where required by law or
+where Calcura expressly states otherwise at purchase.” This preserves any promise
+made at purchase. No price or refund amount is invented.
 
 ### Acceptable use, intellectual property and user data
 

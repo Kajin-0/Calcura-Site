@@ -31,7 +31,7 @@ function load() {
   return bundle;
 }
 
-/** Rendered markup for a page key: home | classroom | contact | notFound. */
+/** Rendered markup for a page key: home | classroom | contact | privacy | terms | notFound. */
 function renderPage(key) {
   return load().render(key);
 }
