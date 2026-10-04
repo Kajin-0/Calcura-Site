@@ -9,6 +9,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const { assertSecurityPolicy } = require('./helpers/security.cjs');
 
 const root = path.join(__dirname, '..');
 const dist = path.join(root, 'dist');
@@ -40,6 +41,7 @@ function resolveReference(pageUrl, ref) {
 for (const page of PAGES) {
   const html = read(page.file);
   const label = page.file;
+  assertSecurityPolicy(html, label);
 
   // Prerendered content, not an empty shell.
   const rootMarkup = html.match(/<div id="root">([\s\S]*)<\/div>\s*(?:<\/body>)/);

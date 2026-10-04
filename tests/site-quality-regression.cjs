@@ -14,6 +14,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const { renderPage, anchors, element, textOf, attr } = require('./helpers/render.cjs');
+const { assertSecurityPolicy } = require('./helpers/security.cjs');
 
 const root = path.join(__dirname, '..');
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
@@ -136,6 +137,7 @@ const srcFiles = [];
   }
 })('src');
 for (const [name, html] of Object.entries(htmlSources)) {
+  assertSecurityPolicy(html, name);
   check(!/fonts\.googleapis\.com|fonts\.gstatic\.com/.test(html), `${name} must not request Google Fonts`);
 }
 for (const file of srcFiles.filter((f) => /\.(css|jsx?)$/.test(f))) {
