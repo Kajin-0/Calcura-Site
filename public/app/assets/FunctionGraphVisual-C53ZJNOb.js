@@ -1,4 +1,4 @@
-import{aQ as Zu,aR as fh,aS as hh,aT as ph,aU as dh,aV as mh,aW as gh,aX as yh,aY as _h,aZ as vh,a_ as wh,a$ as xh,b0 as Wt,aM as Vu,b1 as ti,r as it,j as ce,ao as bh,ap as Mh,R as Nh,b2 as Th}from"./index-DiprJpp1.js";var Qu=function(e){if(e)throw new Error(`The global config is readonly. 
+import{aQ as Zu,aR as fh,aS as hh,aT as ph,aU as dh,aV as mh,aW as gh,aX as yh,aY as _h,aZ as vh,a_ as wh,a$ as xh,b0 as Wt,aM as Vu,b1 as ti,r as it,j as ce,ao as bh,ap as Mh,R as Nh,b2 as Th}from"./index-BhsTCyfP.js";var Qu=function(e){if(e)throw new Error(`The global config is readonly. 
 Please create a mathjs instance if you want to change the default configuration. 
 Example:
 
