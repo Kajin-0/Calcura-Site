@@ -1,4 +1,4 @@
-import{aY as Zu,aZ as fh,a_ as hh,a$ as ph,b0 as dh,b1 as mh,b2 as gh,b3 as yh,b4 as _h,b5 as vh,b6 as wh,b7 as xh,b8 as Wt,aU as Vu,b9 as ti,r as it,j as ce,ao as bh,ap as Mh,R as Nh,ba as Th}from"./index-CylMywa3.js";var Qu=function(e){if(e)throw new Error(`The global config is readonly. 
+import{aY as Zu,aZ as fh,a_ as hh,a$ as ph,b0 as dh,b1 as mh,b2 as gh,b3 as yh,b4 as _h,b5 as vh,b6 as wh,b7 as xh,b8 as Wt,aU as Vu,b9 as ti,r as it,j as ce,ao as bh,ap as Mh,R as Nh,ba as Th}from"./index-D8jAvk8o.js";var Qu=function(e){if(e)throw new Error(`The global config is readonly. 
 Please create a mathjs instance if you want to change the default configuration. 
 Example:
 
