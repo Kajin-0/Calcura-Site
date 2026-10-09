@@ -11,15 +11,18 @@
   --text-subtle: #6c6577;
   --line: #e5e2e9;
   --line-strong: #cec9d5;
+  --line-dark: #39363f;
   --surface: #fefdfb;
   --surface-raised: #ffffff;
   --surface-alt: #f7f5f8;
   --surface-sunken: #eeecf1;
   --surface-neutral: #f6f5f3;
+  --surface-dark: #1b1a1f;
   --accent: #5c2bdc;
   --accent-strong: #4921b5;
   --accent-soft: #f4effc;
   --accent-line: #dfd3f6;
+  --accent-on-dark: #c7b4ff;
   --navy: #171b2d;
   --navy-2: #23273b;
   --on-dark: #ffffff;

@@ -335,9 +335,24 @@
 }
 
 .classroom-tier.is-featured {
-  border-color: #bda3ed;
-  background: var(--accent-soft);
+  border-color: #544366;
+  background: var(--surface-dark);
   box-shadow: var(--shadow-sm);
+  color: var(--on-dark);
+}
+
+.classroom-tier.is-featured .tier-heading h3,
+.classroom-tier.is-featured .classroom-tier-price {
+  color: var(--on-dark);
+}
+
+.classroom-tier.is-featured .classroom-tier-price span,
+.classroom-tier.is-featured .tier-detail {
+  color: var(--on-dark-muted);
+}
+
+.classroom-tier.is-featured .button:focus-visible {
+  outline-color: var(--accent-on-dark);
 }
 
 .tier-heading {
