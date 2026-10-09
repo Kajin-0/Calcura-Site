@@ -1,8 +1,10 @@
 /* ==========================================================================
    App screen previews (home page feature rows)
 
-   Illustrations of four real Calcura screens. Existing content and geometry are retained;
-   paper surfaces, purple highlights and rounded cards follow the current app identity. Every selector is prefixed `app-`; these are illustrations (the wrapper is role="img" and
+   Illustrations of four real Calcura screens. Each palette follows its corresponding app surface:
+   Guided, Graph and Progress retain the current slate/blue colours; Reference uses its redesigned
+   purple/white styling. Existing content and geometry are retained.
+   Every selector is prefixed `app-`; these are illustrations (the wrapper is role="img" and
    the inner markup is aria-hidden), which is why the app's own 10-12px type is reproduced as-is. The
    screens are drawn at 411px (the width of the phone the reference screenshots were taken on, so line
    breaks match) in the app's own system font stack, then scaled down with `zoom` like a screenshot
@@ -935,6 +937,107 @@
   color: var(--text-muted);
   font-size: var(--text-xs);
   text-align: center;
+}
+
+/* ---------- Current slate/blue app surfaces ----------
+   Colours from the app-faithful previews on origin/main. Keep these scoped to the three surfaces
+   that still use this palette; Reference and the surrounding site retain their refreshed styling. */
+:is(.app-guided, .app-graph, .app-progress-screen) {
+  --a-ink: #0f172a;
+  --a-2: #475569;
+  --a-3: #64748b;
+  --a-line: #e2e8f0;
+  --a-subtle: #f8fafc;
+  --a-sunken: #f1f5f9;
+}
+
+.app-guided,
+.app-progress-screen {
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--a-line), 0 4px 8px rgba(11, 23, 48, 0.05),
+    0 28px 64px -16px rgba(11, 23, 48, 0.22);
+}
+
+:is(.app-guided, .app-graph, .app-progress-screen) .app-iconbtn,
+.app-guided .app-answer,
+.app-guided .app-keyboard,
+.app-guided .app-key,
+.app-graph .app-plot-box,
+.app-progress-screen .app-outcomes,
+.app-progress-screen .app-compare {
+  background: #fff;
+}
+
+:is(.app-guided, .app-graph, .app-progress-screen) .app-iconbtn.is-active {
+  border-color: #cbd5e1;
+  background: var(--a-sunken);
+  color: var(--a-ink);
+}
+
+.app-guided .app-step {
+  color: #1e293b;
+}
+
+.app-guided .app-progress span {
+  background: var(--a-ink);
+}
+
+.app-guided .app-sup {
+  color: #3b82f6;
+}
+
+.app-guided .app-instruction {
+  color: #334155;
+}
+
+.app-guided .app-grabber {
+  background: #cbd5e1;
+}
+
+:is(.app-guided, .app-progress-screen) .app-segmented .is-active {
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: var(--a-ink);
+}
+
+.app-guided .app-key {
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.1);
+}
+
+.app-guided .app-key.is-var,
+.app-guided .app-key.is-op {
+  background: var(--a-subtle);
+}
+
+.app-guided .app-key.is-submit {
+  background: var(--a-sunken);
+}
+
+.app-guided .app-key.has-menu::after {
+  border-bottom-color: #94a3b8;
+}
+
+:is(.app-graph, .app-progress-screen) .app-dialog-head {
+  background: transparent;
+}
+
+.app-graph .app-modal {
+  background: #fff;
+  box-shadow: 0 0 0 1px var(--a-line), 0 25px 50px -12px rgba(15, 23, 42, 0.35);
+}
+
+.app-graph .app-formula,
+.app-progress-screen .app-metrics > div,
+.app-progress-screen .app-details {
+  background: var(--a-subtle);
+}
+
+.app-graph .app-plot-curve {
+  stroke: #4682b4;
+}
+
+.app-progress-screen .app-outcome-dot.is-abandoned {
+  background: #94a3b8;
 }
 
 /* ---------- Scale ----------

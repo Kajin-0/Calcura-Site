@@ -59,7 +59,8 @@ check(mainAnchors.filter((a) => a.href === SIGN_UP).length >= 3, 'Rendered Class
 check(mainAnchors.filter((a) => a.href === SIGN_IN).length >= 3, 'Rendered Classroom must retain teacher sign-in at least three times');
 check(mainAnchors.filter((a) => a.href === '/app/').length === 2, 'Rendered Classroom must route students to the free app exactly twice');
 
-check(classroomText.includes('Live now'), 'The page must identify the current live product');
+check(classroomText.includes('Teacher and Pro are available now.'), 'The page must explain current Teacher and Pro availability');
+check(!/Live now|Available now/.test(classroomText), 'Redundant live and availability badges must stay removed');
 check(/six-digit code/.test(classroomText) && /created when you verify the code/.test(classroomText), 'New teachers must understand the existing email-code account creation flow');
 
 // --- Site chrome: header, Classroom promotion, footer -----------------------------------------

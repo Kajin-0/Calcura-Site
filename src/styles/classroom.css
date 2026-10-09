@@ -7,10 +7,6 @@
 }
 
 .classroom-overline {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem;
   margin-bottom: 1.25rem;
 }
 
@@ -345,10 +341,7 @@
 }
 
 .tier-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  display: block;
 }
 
 .tier-heading h3 {

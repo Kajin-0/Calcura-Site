@@ -2,9 +2,10 @@ import { Fragment } from 'react';
 import { buildAppGraph } from './plot.js';
 
 /* Faithful miniatures of four real Calcura screens: the Guided workspace with its math keyboard,
-   the Integrand graph dialog, the Reference dialog and the Learning Progress report. Existing geometry,
-   mathematical examples, icons and copy are retained, with surfaces and accents styled to
-   match the current Calcura app.
+   the Integrand graph dialog, the Reference dialog and the Learning Progress report. Each preview
+   follows its corresponding real app surface: Guided, Graph and Progress retain the current
+   slate/blue palette; Reference uses its redesigned purple/white styling. Existing geometry,
+   mathematical examples, icons and copy are retained.
 
    They are illustrations, so each is described to assistive technology once (role="img" + label)
    and its inner markup is hidden from it. Class names are prefixed `app-` (see app-previews.css). */

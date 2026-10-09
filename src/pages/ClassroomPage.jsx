@@ -65,7 +65,6 @@ export default function ClassroomPage() {
           <div className="page-hero-copy">
             <div className="classroom-overline">
               <span className="eyebrow">Calcura Classroom</span>
-              <span className="status-chip live">Live now</span>
             </div>
             <h1 id="classroom-title">Calcura Classroom</h1>
             <p className="classroom-hero-lead">Your classes. Their practice. A clearer view.</p>
@@ -96,7 +95,7 @@ export default function ClassroomPage() {
           <ol className="flow-steps">
             {FLOW_STEPS.map((step, index) => (
               <li key={step.title}>
-                <span className="flow-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <span className="flow-number" aria-hidden="true">{index + 1}</span>
                 <h3>{step.title}</h3>
                 <p>{step.body}</p>
               </li>
@@ -143,13 +142,13 @@ export default function ClassroomPage() {
 
           <div className="tier-grid">
             <article className="classroom-tier" data-tier="Teacher" aria-labelledby="teacher-tier-title">
-              <div className="tier-heading"><h3 id="teacher-tier-title">Teacher</h3><span className="status-chip live">Available now</span></div>
+              <div className="tier-heading"><h3 id="teacher-tier-title">Teacher</h3></div>
               <p className="classroom-tier-price">Free</p>
               <p className="tier-detail">Classes, join codes, assignment creation and publication, student progress, and basic analytics.</p>
               <a className="button button-secondary" href={TEACHER_SIGN_UP_URL}>Create free teacher account</a>
             </article>
             <article className="classroom-tier is-featured" data-tier="Pro" aria-labelledby="pro-tier-title">
-              <div className="tier-heading"><h3 id="pro-tier-title">Pro</h3><span className="status-chip live">Available now</span></div>
+              <div className="tier-heading"><h3 id="pro-tier-title">Pro</h3></div>
               <p className="classroom-tier-price">$19<span> / month</span><span className="classroom-annual-price">or $149 / year · USD</span></p>
               <p className="tier-detail">Everything in Teacher, plus problem-level assignment editing: regenerate, lock, and reorder problems before publishing.</p>
               <a className="button" href={TEACHER_SIGN_IN_URL}>Explore Pro in your workspace <Arrow /></a>
