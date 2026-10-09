@@ -8,7 +8,7 @@ import {
   UsersIcon,
 } from '../components/Icons.jsx';
 import PageShell from '../components/PageShell.jsx';
-import { TEACHER_SIGN_IN_URL, TEACHER_SIGN_UP_URL, WEB_APP_URL } from '../site/links.js';
+import { PRO_BILLING_URL, TEACHER_SIGN_IN_URL, TEACHER_SIGN_UP_URL, WEB_APP_URL } from '../site/links.js';
 
 const FLOW_STEPS = [
   {
@@ -151,7 +151,7 @@ export default function ClassroomPage() {
               <div className="tier-heading"><h3 id="pro-tier-title">Pro</h3></div>
               <p className="classroom-tier-price">$19<span> / month</span><span className="classroom-annual-price">or $149 / year · USD</span></p>
               <p className="tier-detail">Everything in Teacher, plus problem-level assignment editing: regenerate, lock, and reorder problems before publishing.</p>
-              <a className="button" href={TEACHER_SIGN_IN_URL}>Explore Pro in your workspace <Arrow /></a>
+              <a className="button" href={PRO_BILLING_URL}>Get Calcura Pro <Arrow /></a>
             </article>
           </div>
 

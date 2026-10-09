@@ -25,6 +25,7 @@ const metadata = read('classroom/index.html');
 
 const SIGN_IN = 'https://classroom.calcura.study/signin';
 const SIGN_UP = 'https://classroom.calcura.study/signup';
+const PRO_BILLING = 'https://classroom.calcura.study/app/billing';
 
 const home = renderPage('home');
 const classroom = renderPage('classroom');
@@ -41,6 +42,7 @@ function check(condition, message) {
 // --- Destinations -----------------------------------------------------------------------------
 check(links.includes(`TEACHER_SIGN_IN_URL = '${SIGN_IN}'`), 'Teacher entry must use the real OTP sign-in endpoint');
 check(links.includes(`TEACHER_SIGN_UP_URL = '${SIGN_UP}'`), 'Classroom page signup must use the real production signup endpoint');
+check(links.includes(`PRO_BILLING_URL = '${PRO_BILLING}'`), 'Pro purchase CTA must deep-link to authenticated billing');
 check(links.includes("WEB_APP_URL = '/app/'"), 'Free student app must retain its correct mount path');
 check(
   /import \{[^}]*TEACHER_SIGN_IN_URL[^}]*WEB_APP_URL[^}]*\} from '\.\.\/site\/links\.js'/.test(page) ||
@@ -50,13 +52,23 @@ check(
 
 // Source-level call counts for the page body itself (chrome is asserted separately below).
 check((page.match(/href=\{TEACHER_SIGN_UP_URL\}/g) || []).length >= 3, 'Hero, Teacher tier, and final CTA must expose teacher signup');
-check((page.match(/href=\{TEACHER_SIGN_IN_URL\}/g) || []).length >= 3, 'Hero, Pro, and final CTA must retain teacher sign-in');
+check((page.match(/href=\{TEACHER_SIGN_IN_URL\}/g) || []).length >= 2, 'Hero and final CTA must retain teacher sign-in');
+check((page.match(/href=\{PRO_BILLING_URL\}/g) || []).length === 1, 'Pro tier must have exactly one direct billing deep-link');
 check((page.match(/href=\{WEB_APP_URL\}/g) || []).length === 2, 'Students must have direct routes to the free app');
 
 // Rendered body: the same guarantees must hold in what visitors actually get.
 const mainAnchors = anchors(classroomMain);
 check(mainAnchors.filter((a) => a.href === SIGN_UP).length >= 3, 'Rendered Classroom must expose teacher signup at least three times');
-check(mainAnchors.filter((a) => a.href === SIGN_IN).length >= 3, 'Rendered Classroom must retain teacher sign-in at least three times');
+check(mainAnchors.filter((a) => a.href === SIGN_IN).length >= 2, 'Rendered Classroom must retain teacher sign-in at least twice');
+check(mainAnchors.filter((a) => a.href === PRO_BILLING).length === 1, 'Rendered Classroom must expose billing only for the Pro purchase CTA');
+check(
+  anchors(element(classroom, 'article', 'data-tier="Pro"')).some((a) => a.href === PRO_BILLING && a.text === 'Get Calcura Pro' && a.className === 'button'),
+  'Pro CTA must say Get Calcura Pro and link directly to workspace billing'
+);
+check(
+  anchors(element(classroom, 'article', 'data-tier="Teacher"')).some((a) => a.href === SIGN_UP && a.text === 'Create free teacher account'),
+  'Teacher tier CTA must retain free teacher signup'
+);
 check(mainAnchors.filter((a) => a.href === '/app/').length === 2, 'Rendered Classroom must route students to the free app exactly twice');
 
 check(classroomText.includes('Teacher and Pro are available now.'), 'The page must explain current Teacher and Pro availability');
