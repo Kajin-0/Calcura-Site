@@ -260,7 +260,7 @@
 /* ───────────── Tools ───────────── */
 .classroom-tools {
   border-block: 1px solid var(--line);
-  background: var(--surface-alt);
+  background: var(--surface-neutral);
 }
 
 .tools-layout {
@@ -488,7 +488,7 @@
 /* ───────────── FAQ ───────────── */
 .classroom-faq {
   border-top: 1px solid var(--line);
-  background: var(--surface-alt);
+  background: var(--surface-neutral);
 }
 
 .faq-layout {
@@ -569,10 +569,10 @@
   gap: 2rem;
   padding: clamp(2rem, 5vw, 3.75rem);
   border-radius: var(--radius-2xl);
-  background: var(--accent-soft);
+  background: var(--surface-neutral);
   box-shadow: none;
   color: var(--ink);
-  border: 1px solid var(--accent-line);
+  border: 1px solid var(--line);
 }
 
 .start-panel h2 {

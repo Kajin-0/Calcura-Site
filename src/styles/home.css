@@ -103,17 +103,6 @@
   isolation: isolate;
 }
 
-.hero-visual::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: 3rem 0 3rem 1.5rem;
-  border: 1px solid var(--accent-line);
-  border-radius: 2.5rem;
-  background: var(--accent-soft);
-  pointer-events: none;
-}
-
 .phone-shell {
   position: relative;
   width: min(340px, 76%);
@@ -553,11 +542,10 @@
   position: relative;
   display: grid;
   place-items: center;
-  padding: clamp(1rem, 2.4vw, 1.75rem);
+  /* Preserve the preview inset and row height after removing the 1px stage border. */
+  padding: calc(clamp(1rem, 2.4vw, 1.75rem) + 1px);
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-2xl);
-  background: var(--surface-sunken);
+  background: transparent;
 }
 
 .dot {
@@ -591,9 +579,9 @@
   position: relative;
   padding-block: var(--section-y);
   overflow: hidden;
-  background: var(--accent-soft);
+  background: var(--surface-neutral);
   color: var(--ink);
-  border-block: 1px solid var(--accent-line);
+  border-block: 1px solid var(--line);
 }
 
 .free-layout {
@@ -652,7 +640,7 @@
   padding: clamp(1.75rem, 5vw, 3.75rem);
   overflow: hidden;
   border-radius: var(--radius-2xl);
-  background: var(--surface-alt);
+  background: var(--surface-neutral);
   box-shadow: none;
   color: var(--ink);
   border: 1px solid var(--line);
@@ -703,8 +691,6 @@
   height: 4.5rem;
   border-radius: 1.25rem;
   border: 0;
-  background: var(--accent-soft);
-  color: var(--accent-strong);
 }
 
 .download-mark .brand-mark svg {
@@ -877,10 +863,6 @@
     margin-top: 2px;
     padding: 0;
     overflow: visible;
-  }
-
-  .hero-visual::before {
-    display: none;
   }
 
   .phone-camera {
