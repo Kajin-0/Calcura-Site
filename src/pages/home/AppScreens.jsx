@@ -2,9 +2,9 @@ import { Fragment } from 'react';
 import { buildAppGraph } from './plot.js';
 
 /* Faithful miniatures of four real Calcura screens: the Guided workspace with its math keyboard,
-   the Integrand graph dialog, the Reference dialog and the Learning Progress report. Geometry,
-   spacing, type sizes, colours, icons and copy are taken from the running app so the page never
-   shows a product that looks different from the one a visitor will open.
+   the Integrand graph dialog, the Reference dialog and the Learning Progress report. Existing geometry,
+   mathematical examples, icons and copy are retained, with surfaces and accents styled to
+   match the current Calcura app.
 
    They are illustrations, so each is described to assistive technology once (role="img" + label)
    and its inner markup is hidden from it. Class names are prefixed `app-` (see app-previews.css). */
@@ -325,16 +325,16 @@ function UnitCircle() {
   return (
     <svg className="app-unit-circle" viewBox="0 0 400 400" aria-hidden="true" focusable="false">
       {UNIT_POINTS.map(([x, y]) => (
-        <line key={`r${x}-${y}`} x1="200" y1="200" x2={x} y2={y} stroke="#e2e8f0" strokeWidth="0.9" />
+        <line key={`r${x}-${y}`} x1="200" y1="200" x2={x} y2={y} stroke="var(--a-line)" strokeWidth="0.9" />
       ))}
-      <line x1="64" y1="200" x2="336" y2="200" stroke="#94a3b8" strokeWidth="1.15" />
-      <line x1="200" y1="64" x2="200" y2="336" stroke="#94a3b8" strokeWidth="1.15" />
-      <circle cx="200" cy="200" r="118" fill="none" stroke="#0f172a" strokeWidth="1.75" />
+      <line x1="64" y1="200" x2="336" y2="200" stroke="var(--neutral)" strokeWidth="1.15" />
+      <line x1="200" y1="64" x2="200" y2="336" stroke="var(--neutral)" strokeWidth="1.15" />
+      <circle cx="200" cy="200" r="118" fill="none" stroke="var(--a-ink)" strokeWidth="1.75" />
       {UNIT_POINTS.map(([x, y]) => (
-        <circle key={`d${x}-${y}`} cx={x} cy={y} r="3.4" fill="#0f172a" />
+        <circle key={`d${x}-${y}`} cx={x} cy={y} r="3.4" fill="var(--a-ink)" />
       ))}
       {UNIT_LABELS.map(([text, x, y, anchor]) => (
-        <text key={text} x={x} y={y} textAnchor={anchor} fontSize="19" fontWeight="500" fill="#475569">
+        <text key={text} x={x} y={y} textAnchor={anchor} fontSize="19" fontWeight="500" fill="var(--a-2)">
           {text}
         </text>
       ))}

@@ -31,9 +31,6 @@ export function AppPreview() {
       role="img"
       aria-label="Illustration of the Calcura app: a Free Play integration by parts problem with its integrand graph, and a Learning Progress summary. Private progress stays on the device unless a student joins a class."
     >
-      <div className="preview-orbit preview-orbit-one" aria-hidden="true" />
-      <div className="preview-orbit preview-orbit-two" aria-hidden="true" />
-
       <div className="phone-shell" aria-hidden="true">
         <div className="phone-camera" />
         <div className="phone-screen">

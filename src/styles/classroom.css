@@ -61,10 +61,10 @@
 
 .workspace-window {
   overflow: hidden;
-  border: 1px solid var(--line-strong);
-  border-radius: 20px;
-  background: #fff;
-  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-md);
 }
 
 .workspace-bar {
@@ -94,7 +94,7 @@
   gap: 0.25rem;
   padding: 1rem 0.75rem;
   border-right: 1px solid var(--line);
-  background: var(--surface-alt);
+  background: var(--surface);
 }
 
 .ws-nav {
@@ -115,9 +115,9 @@
 }
 
 .ws-nav.is-active {
-  background: #fff;
-  color: var(--ink);
-  box-shadow: var(--shadow-xs);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  box-shadow: none;
 }
 
 .workspace-main {
@@ -141,7 +141,7 @@
 .ws-line-title {
   width: 50%;
   height: 0.9rem;
-  background: #d9e3f1;
+  background: var(--line-strong);
 }
 
 .ws-line-short {
@@ -160,7 +160,8 @@
   gap: 0.75rem;
   padding: 0.75rem;
   border: 1px solid var(--line);
-  border-radius: 12px;
+  border-radius: 16px;
+  background: var(--surface);
 }
 
 .ws-avatar {
@@ -184,10 +185,10 @@
   display: grid;
   gap: 0.1rem;
   padding: 0.85rem 1.2rem;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: var(--shadow-md);
+  border: 1px solid var(--accent-line);
+  border-radius: 20px;
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-sm);
 }
 
 .workspace-code span {
@@ -197,7 +198,7 @@
 }
 
 .workspace-code strong {
-  color: var(--ink);
+  color: var(--accent-strong);
   font-size: 1.4rem;
   letter-spacing: 0.22em;
   line-height: 1.2;
@@ -216,8 +217,8 @@
   padding: 1.75rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
-  background: #fff;
-  box-shadow: var(--shadow-xs);
+  background: var(--surface-raised);
+  box-shadow: none;
 }
 
 .flow-steps li:not(:last-child)::after {
@@ -236,9 +237,9 @@
   width: 2.5rem;
   height: 2.5rem;
   margin-bottom: 1.25rem;
-  border-radius: 50%;
-  background: var(--ink);
-  color: #fff;
+  border-radius: 14px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
   font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -282,7 +283,7 @@
 
 .tools-grid > div {
   padding: 1.75rem;
-  background: #fff;
+  background: var(--surface-raised);
 }
 
 .tools-grid dt {
@@ -303,7 +304,7 @@
   place-items: center;
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 10px;
+  border-radius: 14px;
   background: var(--accent-soft);
   color: var(--accent-strong);
 }
@@ -333,14 +334,14 @@
   padding: clamp(1.5rem, 3vw, 2.25rem);
   border: 1px solid var(--line);
   border-radius: var(--radius-xl);
-  background: #fff;
-  box-shadow: var(--shadow-sm);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-xs);
 }
 
 .classroom-tier.is-featured {
-  border-color: var(--accent);
-  background: linear-gradient(180deg, #fff, #f4f8ff);
-  box-shadow: 0 0 0 1px var(--accent), var(--shadow-md);
+  border-color: #bda3ed;
+  background: var(--accent-soft);
+  box-shadow: var(--shadow-sm);
 }
 
 .tier-heading {
@@ -444,7 +445,8 @@
   padding: clamp(1.75rem, 4vw, 3rem);
   border: 1px solid var(--accent-line);
   border-radius: var(--radius-2xl);
-  background: linear-gradient(135deg, var(--accent-soft), #f6faff);
+  background: var(--surface-raised);
+  box-shadow: var(--shadow-sm);
 }
 
 .students-mark {
@@ -452,10 +454,10 @@
   place-items: center;
   width: 3.5rem;
   height: 3.5rem;
-  border-radius: 50%;
-  background: var(--accent);
-  color: #fff;
-  box-shadow: 0 10px 24px -10px rgba(23, 105, 224, 0.7);
+  border-radius: 18px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  box-shadow: none;
 }
 
 .students-mark svg {
@@ -504,13 +506,13 @@
 .faq-list details {
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  background: #fff;
+  background: var(--surface-raised);
   transition: box-shadow var(--t-fast), border-color var(--t-fast);
 }
 
 .faq-list details[open] {
-  border-color: var(--line-strong);
-  box-shadow: var(--shadow-sm);
+  border-color: var(--accent-line);
+  box-shadow: none;
 }
 
 .faq-list summary {
@@ -541,7 +543,7 @@
   flex: none;
   width: 1.25rem;
   height: 1.25rem;
-  color: var(--text-subtle);
+  color: var(--accent-strong);
   transition: transform var(--t-fast) var(--ease);
 }
 
@@ -567,15 +569,14 @@
   gap: 2rem;
   padding: clamp(2rem, 5vw, 3.75rem);
   border-radius: var(--radius-2xl);
-  background:
-    radial-gradient(40rem 22rem at 0% 0%, rgba(23, 105, 224, 0.42), transparent 62%),
-    linear-gradient(160deg, #0b1c3e, var(--navy));
-  box-shadow: var(--shadow-lg);
-  color: #fff;
+  background: var(--accent-soft);
+  box-shadow: none;
+  color: var(--ink);
+  border: 1px solid var(--accent-line);
 }
 
 .start-panel h2 {
-  color: #fff;
+  color: var(--ink);
   font-size: clamp(1.9rem, 1.3rem + 2.6vw, 3rem);
   font-weight: 790;
   letter-spacing: -0.04em;
@@ -583,7 +584,7 @@
 
 .start-panel p {
   margin-top: 0.9rem;
-  color: var(--on-dark-muted);
+  color: var(--text-muted);
   font-size: var(--text-lg);
 }
 
@@ -598,15 +599,15 @@
   align-items: center;
   gap: 0.4rem;
   min-height: 2.75rem;
-  color: #fff;
+  color: var(--accent-strong);
   font-weight: 620;
   text-decoration: underline;
-  text-decoration-color: rgba(255, 255, 255, 0.4);
+  text-decoration-color: var(--accent-line);
   text-underline-offset: 0.25em;
 }
 
 .start-signin:hover {
-  text-decoration-color: #fff;
+  text-decoration-color: currentColor;
 }
 
 .start-signin svg {

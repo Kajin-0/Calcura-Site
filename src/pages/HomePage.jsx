@@ -131,10 +131,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="free-section on-dark" id="free" aria-labelledby="free-title">
+      <section className="free-section" id="free" aria-labelledby="free-title">
         <div className="shell free-layout">
           <div>
-            <div className="eyebrow light">The student app stays free</div>
+            <div className="eyebrow">The student app stays free</div>
             <h2 id="free-title">Calcura is free.</h2>
           </div>
           <div className="free-copy">
@@ -153,9 +153,9 @@ export default function HomePage() {
 
       <section className="section classroom-promo" aria-labelledby="classroom-promo-title">
         <div className="shell">
-          <div className="promo-panel on-dark">
+          <div className="promo-panel">
             <div className="promo-copy">
-              <div className="eyebrow light">Calcura Classroom</div>
+              <div className="eyebrow">Calcura Classroom</div>
               <h2 id="classroom-promo-title">Instructor tools now have their own space.</h2>
               <p>
                 Create classes, publish assignments, and see student progress in the live teacher workspace.
@@ -182,7 +182,7 @@ export default function HomePage() {
               <p>Free calculus practice on desktop, phone, and tablet.</p>
             </div>
             <div className="download-actions">
-              <DownloadChooser align="end" />
+              <DownloadChooser variant="primary" align="end" />
               <a className="button button-secondary" href={WEB_APP_URL}>Login to Calcura</a>
             </div>
           </div>

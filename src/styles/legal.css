@@ -7,16 +7,18 @@
   max-width: 72ch;
   padding-block: 1rem var(--section-y);
   overflow-wrap: anywhere;
+  color: var(--ink-2);
 }
 
 .legal-content section + section {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 .legal-content h2 {
   margin-bottom: 0.75rem;
   font-size: clamp(1.25rem, 1rem + 1vw, 1.5rem);
   line-height: 1.3;
+  letter-spacing: -0.025em;
 }
 
 .legal-content p {

@@ -2,24 +2,9 @@
 .page-hero {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(3rem, 7vw, 6rem) clamp(3rem, 6vw, 5rem);
+  padding-block: clamp(3.5rem, 7vw, 6rem) clamp(3rem, 6vw, 5rem);
   border-bottom: 1px solid var(--line);
-  background:
-    radial-gradient(56rem 30rem at 88% 0%, rgba(23, 105, 224, 0.09), transparent 62%),
-    linear-gradient(180deg, #fff 0%, var(--surface-alt) 100%);
-}
-
-.page-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(23, 105, 224, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(23, 105, 224, 0.06) 1px, transparent 1px);
-  background-size: 3rem 3rem;
-  -webkit-mask-image: radial-gradient(60% 90% at 85% 20%, #000, transparent 72%);
-  mask-image: radial-gradient(60% 90% at 85% 20%, #000, transparent 72%);
-  pointer-events: none;
+  background: var(--surface);
 }
 
 .page-hero > .shell {
@@ -29,8 +14,8 @@
 .page-hero h1 {
   font-size: clamp(2.5rem, 1.4rem + 4vw, 4.25rem);
   font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 1.04;
+  letter-spacing: -0.05em;
+  line-height: 1.08;
 }
 
 .page-hero-text {
@@ -53,19 +38,17 @@
 
 .not-found {
   padding-block: clamp(4rem, 12vw, 9rem);
-  background:
-    radial-gradient(50rem 26rem at 50% 0%, rgba(23, 105, 224, 0.09), transparent 64%),
-    linear-gradient(180deg, #fff, var(--surface-alt));
+  background: var(--surface);
   text-align: center;
 }
 
 .not-found-code {
-  color: var(--accent);
+  color: var(--accent-strong);
   font-family: var(--font-math);
   font-size: clamp(5rem, 3rem + 10vw, 10rem);
   font-weight: 500;
   line-height: 1;
-  opacity: 0.22;
+  opacity: 1;
 }
 
 .not-found h1 {

@@ -216,9 +216,9 @@ export default function ClassroomPage() {
 
       <section className="classroom-start" aria-labelledby="classroom-start-title">
         <div className="shell">
-          <div className="start-panel on-dark">
+          <div className="start-panel">
             <div>
-              <div className="eyebrow light">Calcura Classroom</div>
+              <div className="eyebrow">Calcura Classroom</div>
               <h2 id="classroom-start-title">Your next class starts here.</h2>
               <p>Create your free Teacher workspace. No credit card required.</p>
             </div>
