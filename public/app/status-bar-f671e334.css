@@ -1,1 +1,0 @@
-:root{--calcura-system-bar:27 26 31}html:before{content:"";position:fixed;z-index:2147483647;top:0;right:0;left:0;height:env(safe-area-inset-top,0px);background:rgb(var(--calcura-system-bar));pointer-events:none}
