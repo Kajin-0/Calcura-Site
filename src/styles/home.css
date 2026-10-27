@@ -635,6 +635,15 @@
 }
 
 /* ───────────── Classroom promo ───────────── */
+.classroom-promo {
+  --accent-on-dark: #d5d0dc;
+}
+
+.classroom-promo .promo-panel {
+  background: #12131e;
+  border-color: #2c2c3c;
+}
+
 .promo-panel {
   position: relative;
   display: grid;

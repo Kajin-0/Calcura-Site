@@ -1,3 +1,39 @@
+/* Calcura Classroom teacher app: near-black ink and cool gray (not site purple). */
+.page-classroom {
+  --accent: #1e2130;
+  --accent-strong: #12131e;
+  --accent-soft: #f3f1f6;
+  --accent-line: #d5d0dc;
+  --accent-on-dark: #d5d0dc;
+  --surface-dark: #12131e;
+  --line-dark: #2c2c3c;
+  --shadow-focus: 0 0 0 3px rgb(30 33 48 / 24%);
+}
+
+.page-classroom .workspace-side {
+  border-right-color: var(--line-dark);
+  background: var(--surface-dark);
+}
+
+.page-classroom .ws-nav {
+  color: var(--on-dark-muted);
+}
+
+.page-classroom .ws-nav.is-active {
+  background: #1e2130;
+  box-shadow: inset 3px 0 0 var(--line);
+  color: var(--on-dark);
+}
+
+.page-classroom .ws-nav.is-active svg {
+  color: var(--on-dark);
+  opacity: 1;
+}
+
+.page-classroom .workspace-main {
+  background: var(--surface-alt);
+}
+
 /* ───────────── Hero ───────────── */
 .page-hero-inner {
   display: grid;
@@ -335,7 +371,7 @@
 }
 
 .classroom-tier.is-featured {
-  border-color: #544366;
+  border-color: var(--line-dark);
   background: var(--surface-dark);
   box-shadow: var(--shadow-sm);
   color: var(--on-dark);
