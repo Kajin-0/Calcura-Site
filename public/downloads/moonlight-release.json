@@ -1,7 +1,7 @@
 {
   "source": {
     "repository": "Kajin-0/Calcura",
-    "commit": "a80de7d91f70f5cfff862492122aa3b54dd1f9c4",
+    "commit": "adcd177ecefb68ec60cb52d12d9f06d8bbed1e35",
     "target": "web",
     "classroomAssignmentsEnabled": true,
     "appearance": "day-auto-night"
@@ -14,10 +14,19 @@
     "label": "Calcura Preview",
     "signing": "Android Debug; NOT the permanent production identity",
     "signedProductionUpdate": false,
-    "sha256": "085c0d83ddfb32111ab439718fca01012426de9040817baa16e0df8694fcd647",
-    "bytes": 12508843
+    "sha256": "092ab803fc72e45aeb6df0d24373ba80293d3ed289ddc64911fad527da5f3f2a",
+    "bytes": 12509136
   },
   "nightMedia": "static full-resolution Blender stills; daytime wind preserved",
   "auto": "browser local 19:00\u201307:00; no geolocation",
-  "productionAndroid": "Existing signed 1.0.65 remains unchanged; no Play Store update"
+  "productionAndroid": "Existing signed 1.0.65 remains unchanged; no Play Store update",
+  "buildEnvironment": {
+    "dependencyInstall": "npm ci --no-audit --no-fund",
+    "packageLockSha256": "509fa0c125384fcae3683c32ab622a920042ca1b57fb9b3fbd201c67ff9d94cf",
+    "node": "v22.22.2",
+    "vite": "6.4.3",
+    "androidSdk": 36,
+    "androidBuildTools": "36.0.0",
+    "jdk": 21
+  }
 }
