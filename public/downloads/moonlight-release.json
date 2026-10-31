@@ -1,25 +1,25 @@
 {
   "source": {
     "repository": "Kajin-0/Calcura",
-    "commit": "adcd177ecefb68ec60cb52d12d9f06d8bbed1e35",
+    "commit": "8751d2c2b31e8f5c823ea00e21fb7e9a75f2e24b",
     "target": "web",
     "classroomAssignmentsEnabled": true,
     "appearance": "day-auto-night"
   },
   "apk": {
-    "path": "/downloads/Calcura-moonlight-1.0.66-preview.apk",
-    "versionName": "1.0.66",
-    "versionCode": 56,
+    "path": "/downloads/Calcura-moonlight-1.0.68-preview.apk",
+    "versionName": "1.0.68",
+    "versionCode": 58,
     "package": "study.calcura.app.preview",
     "label": "Calcura Preview",
     "signing": "Android Debug; NOT the permanent production identity",
     "signedProductionUpdate": false,
-    "sha256": "092ab803fc72e45aeb6df0d24373ba80293d3ed289ddc64911fad527da5f3f2a",
-    "bytes": 12509136
+    "sha256": "4712cc5b20a1d4f46a299ed766c7e43eb2d4a16a88622b787e39f874db90a9c6",
+    "bytes": 15214995
   },
-  "nightMedia": "static full-resolution Blender stills; daytime wind preserved",
+  "nightMedia": "four 12-second moonlit Blender wind loops; original daytime wind preserved",
   "auto": "browser local 19:00\u201307:00; no geolocation",
-  "productionAndroid": "Existing signed 1.0.65 remains unchanged; no Play Store update",
+  "productionAndroid": "Existing signed production release unchanged; permanent signing key unavailable on VPS",
   "buildEnvironment": {
     "dependencyInstall": "npm ci --no-audit --no-fund",
     "packageLockSha256": "509fa0c125384fcae3683c32ab622a920042ca1b57fb9b3fbd201c67ff9d94cf",
