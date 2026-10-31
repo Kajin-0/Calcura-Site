@@ -1,0 +1,23 @@
+{
+  "source": {
+    "repository": "Kajin-0/Calcura",
+    "commit": "a80de7d91f70f5cfff862492122aa3b54dd1f9c4",
+    "target": "web",
+    "classroomAssignmentsEnabled": true,
+    "appearance": "day-auto-night"
+  },
+  "apk": {
+    "path": "/downloads/Calcura-moonlight-1.0.66-preview.apk",
+    "versionName": "1.0.66",
+    "versionCode": 56,
+    "package": "study.calcura.app.preview",
+    "label": "Calcura Preview",
+    "signing": "Android Debug; NOT the permanent production identity",
+    "signedProductionUpdate": false,
+    "sha256": "085c0d83ddfb32111ab439718fca01012426de9040817baa16e0df8694fcd647",
+    "bytes": 12508843
+  },
+  "nightMedia": "static full-resolution Blender stills; daytime wind preserved",
+  "auto": "browser local 19:00\u201307:00; no geolocation",
+  "productionAndroid": "Existing signed 1.0.65 remains unchanged; no Play Store update"
+}

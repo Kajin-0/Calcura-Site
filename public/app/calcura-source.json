@@ -1,4 +1,7 @@
 {
-  "commit": "530e9f77c58e7d718625177c77505b3f3fc204a1",
-  "repository": "Kajin-0/Calcura"
+  "repository": "Kajin-0/Calcura",
+  "commit": "a80de7d91f70f5cfff862492122aa3b54dd1f9c4",
+  "target": "web",
+  "classroomAssignmentsEnabled": true,
+  "appearance": "day-auto-night"
 }
