@@ -12,13 +12,24 @@
     var now = new Date();
     var hour = now.getHours();
     var resolved = preference === 'auto' ? (hour >= 19 || hour < 7 ? 'night' : 'day') : preference;
-    var changed = root.dataset.appearance !== resolved || root.dataset.appearancePreference !== preference;
-    root.dataset.appearance = resolved;
-    root.dataset.appearancePreference = preference;
-    root.style.colorScheme = resolved === 'night' ? 'dark' : 'light';
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = resolved === 'night' ? '#111827' : '#1b1a1f';
-    if (changed) window.dispatchEvent(new Event('calcura:appearance'));
+    var requested = preference;
+    var apply = function () {
+      // A decoded poster/transition must never commit an obsolete selection.
+      var h = new Date().getHours();
+      var latest = preference === 'auto' ? (h >= 19 || h < 7 ? 'night' : 'day') : preference;
+      if (requested !== preference || resolved !== latest) return;
+      var changed = root.dataset.appearance !== resolved || root.dataset.appearancePreference !== requested;
+      root.dataset.appearance = resolved;
+      root.dataset.appearancePreference = requested;
+      root.style.colorScheme = resolved === 'night' ? 'dark' : 'light';
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.content = resolved === 'night' ? '#111827' : '#1b1a1f';
+      if (changed) window.dispatchEvent(new Event('calcura:appearance'));
+    };
+    // Only the mounted menu installs this optional presentation bridge. Boot,
+    // other screens and unsupported environments retain synchronous semantics.
+    if (window.calcuraTransitionAppearance) window.calcuraTransitionAppearance(resolved, apply);
+    else apply();
     clearTimeout(timer);
     // One foreground timer also catches clock, date and timezone changes.
     // Always read the actual local clock after suspension.
